@@ -220,8 +220,8 @@ input,select,textarea{font:inherit;color:inherit}
 /* 底部导航 */
 .nav{position:fixed;left:0;right:0;bottom:0;z-index:50;background:rgba(255,250,245,.95);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid var(--line);padding:8px 0 calc(6px + var(--sab))}
 .nav-in{max-width:560px;margin:0 auto;display:flex}
-.nav button{flex:1;display:flex;flex-direction:column;align-items:center;gap:1px;font-size:12.5px;color:var(--sub);position:relative;padding:2px 0}
-.nav .ic{font-size:27px;line-height:1.15;opacity:.82;filter:saturate(.75)}
+.nav button{flex:1;display:flex;flex-direction:column;align-items:center;gap:1px;font-size:12px;color:var(--sub);position:relative;padding:2px 0}
+.nav .ic{font-size:25px;line-height:1.15;opacity:.82;filter:saturate(.75)}
 .nav button.on{color:var(--primary-d);font-weight:800}
 .nav button.on .ic{opacity:1;filter:none}
 .nav .badge{position:absolute;top:-2px;left:calc(50% + 9px);background:var(--red);color:#fff;font-size:10.5px;min-width:18px;height:18px;border-radius:9px;padding:0 5px;display:flex;align-items:center;justify-content:center;font-weight:800}
@@ -261,6 +261,62 @@ input[type=date].in::-webkit-date-and-time-value{text-align:left}
 .code{font-family:ui-monospace,Menlo,monospace;font-size:12px;word-break:break-all;min-height:120px}
 .hint{font-size:13px;color:var(--sub);line-height:1.6;margin-top:-4px;margin-bottom:12px}
 
+.hint-line{font-size:13.5px;color:#7a5a2a;background:#fff4df;border-radius:12px;padding:8px 12px;margin:-6px 0 14px;line-height:1.5}
+.units{display:flex;gap:6px;overflow-x:auto;margin:-4px -20px 16px;padding:0 20px 2px;scrollbar-width:none}
+.units::-webkit-scrollbar{display:none}
+.units button{flex-shrink:0;height:34px;padding:0 13px;border-radius:999px;background:#f3ebe2;font-size:14.5px;font-weight:600;color:#6d5a4b}
+.units button.on{background:#3a2a1f;color:#fff}
+.lbl-row{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-bottom:8px}
+.lbl-row label{margin-bottom:0!important;white-space:nowrap}
+.mode{font-size:12.5px;font-weight:800;border-radius:999px;padding:4px 10px;background:var(--blue-bg);color:var(--blue);white-space:nowrap}
+.mode.manual{background:#f1e9e0;color:#8c7a6b}
+.usage{background:#fff;border:1px solid var(--line);border-radius:18px;padding:12px 16px;margin-bottom:16px;font-size:14px;line-height:1.75}
+.usage h4{font-size:15px;margin-bottom:2px;display:flex;justify-content:space-between;align-items:center}
+.usage .ev{display:flex;justify-content:space-between;gap:10px;color:var(--sub);font-size:13px;border-top:1px dashed var(--line);padding-top:4px;margin-top:4px}
+.conf{font-size:12px;font-weight:700;padding:2px 9px;border-radius:999px;background:#f3ebe2;color:#7d6a5a}
+.conf.m{background:var(--yellow-bg);color:#8a6c0c} .conf.h{background:var(--green-bg);color:var(--green)}
+.pen{width:40px;height:40px;border-radius:12px;background:#f3ebe2;font-size:16px}
+.period{display:flex;align-items:center;justify-content:space-between}
+.period button{width:46px;height:40px;border-radius:12px;background:#f3ebe2;font-size:22px;color:#6d5a4b}
+.period button:disabled{opacity:.3}
+.period b{font-size:18px}
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.kpi{background:var(--card);border-radius:20px;box-shadow:var(--shadow);padding:14px 16px}
+.kpi .l{font-size:13.5px;color:var(--sub);font-weight:700;display:flex;align-items:center;gap:6px}
+.kpi .n{font-size:30px;font-weight:800;line-height:1.2;margin-top:4px}
+.kpi .n small{font-size:14px;color:var(--sub);font-weight:600;margin-left:2px}
+.kpi .dl{font-size:12.5px;color:var(--sub);margin-top:2px}
+.chart svg{display:block;width:100%;height:auto}
+.readout{font-size:13.5px;color:var(--sub);min-height:22px;margin-bottom:4px}
+.readout b{color:var(--text)}
+.legend{display:flex;gap:16px;font-size:13px;color:var(--sub);margin-bottom:4px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.hbar{display:grid;grid-template-columns:92px minmax(0,1fr) auto;align-items:center;gap:10px;padding:7px 0;font-size:14.5px}
+.hbar .nm{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600}
+.hbar .tr{height:10px;background:#f3ece4;border-radius:0 5px 5px 0}
+.hbar .tr i{display:block;height:100%;border-radius:0 4px 4px 0}
+.hbar .v{font-size:13px;color:var(--sub);white-space:nowrap;text-align:right}
+.rank{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+.rank:last-child{border-bottom:none}
+.rank .no{width:26px;height:26px;border-radius:8px;background:#f3ebe2;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#7d6a5a}
+.rank .nm{flex:1;min-width:0;font-weight:700}
+.rank .nm small{display:block;color:var(--sub);font-weight:500;font-size:12.5px}
+.rank .v{font-weight:800;white-space:nowrap}
+.chips{display:flex;gap:8px;overflow-x:auto;margin:0 -18px 6px;padding:0 18px 4px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chips button{flex-shrink:0;height:34px;padding:0 14px;border-radius:999px;background:#f3ebe2;font-size:14px;font-weight:600;color:#6d5a4b}
+.chips button.on{background:#3a2a1f;color:#fff}
+.day-h{font-size:13px;font-weight:800;color:var(--sub);margin:12px 0 2px}
+.ev-row{display:flex;align-items:center;gap:10px;padding:7px 0;font-size:14.5px}
+.ev-row .ic{width:34px;height:34px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;background:#f3ebe2}
+.ev-row .tx{flex:1;min-width:0}
+.ev-row .tx small{display:block;font-size:12.5px;color:var(--sub)}
+.ev-row .d{font-weight:800;white-space:nowrap}
+.si-row{background:#fff;border:1px solid var(--line);border-radius:18px;padding:12px 14px;margin-bottom:10px}
+.si-row .top{display:flex;align-items:center;gap:10px}
+.si-row .nm{flex:1;min-width:0;font-weight:800;font-size:16px}
+.si-row .exp{display:flex;align-items:center;gap:10px;margin-top:10px;font-size:13.5px;color:var(--sub)}
+.si-row .exp input{flex:1;min-width:0;height:42px;border:1.5px solid var(--line2);border-radius:13px;padding:0 12px;background:#fff;font-size:15px;-webkit-appearance:none;appearance:none}
 .sync-chip{display:inline-flex;align-items:center;gap:4px;margin-top:10px;padding:5px 12px;border-radius:999px;background:rgba(255,255,255,.2);color:#fff;font-size:13px;font-weight:700;box-shadow:inset 0 0 0 1px rgba(255,255,255,.25)}
 .sync-chip.err{background:#fff3dc;color:#9a5512}
 .btn:disabled{opacity:.6}
@@ -343,6 +399,21 @@ input[type=date].in::-webkit-date-and-time-value{text-align:left}
   </section>
 
   <!-- 设置 -->
+  <section class="view" id="v-stat">
+    <div class="hero">
+      <h1>统计</h1>
+      <div class="msg" id="sa-msg"></div>
+      <div class="date js-date"></div>
+    </div>
+    <div class="wrap">
+      <div class="card" style="padding:12px 14px">
+        <div class="seg" style="margin:0 0 10px"><button data-act="sa-mode" data-m="month">按月</button><button data-act="sa-mode" data-m="year">按年</button></div>
+        <div class="period"><button data-act="sa-prev" aria-label="上一个">‹</button><b id="sa-label"></b><button data-act="sa-next" id="sa-next" aria-label="下一个">›</button></div>
+      </div>
+      <div id="sa-body"></div>
+    </div>
+  </section>
+
   <section class="view" id="v-set">
     <div class="hero">
       <h1>设置</h1>
@@ -364,6 +435,7 @@ input[type=date].in::-webkit-date-and-time-value{text-align:left}
         </div>
         <div class="data-note" id="data-note"></div>
         <div id="undo-row"></div>
+        <div id="pre-row"></div>
       </div>
 
       <div class="card">
@@ -376,7 +448,14 @@ input[type=date].in::-webkit-date-and-time-value{text-align:left}
       </div>
 
       <div class="card">
+        <div class="sec-head"><h2>🧮 补货习惯</h2><span class="muted">用于推算</span></div>
+        <div class="set-row" style="display:block"><div class="k">多久去采购一次<small>建议购买量 ≈ 日均用量 × 这个天数 + 水位 − 现有</small></div><div class="seg" id="pf-cycle"></div></div>
+        <div class="set-row" style="display:block"><div class="k">提前几天补货（安全天数）<small>自动水位 ≈ 日均用量 × 安全天数；手动设过水位的物品不受影响</small></div><div class="seg" id="pf-safe"></div></div>
+      </div>
+
+      <div class="card">
         <div class="sec-head"><h2>🏷️ 分类管理</h2><button class="link" data-act="cat-new">＋ 新增分类</button></div>
+        <div class="muted" style="margin:-4px 0 4px">点 ✏️ 改名称、图标和颜色</div>
         <div id="cat-list"></div>
       </div>
 
@@ -410,6 +489,7 @@ input[type=date].in::-webkit-date-and-time-value{text-align:left}
   <button data-tab="inv"><span class="ic">📦</span>库存</button>
   <button data-tab="list"><span class="ic">🛒</span>清单<i class="badge hidden" id="nav-badge"></i></button>
   <button data-tab="st"><span class="ic">📋</span>盘点</button>
+  <button data-tab="stat"><span class="ic">📊</span>统计</button>
   <button data-tab="set"><span class="ic">⚙️</span>设置</button>
 </div></nav>
 
@@ -418,18 +498,21 @@ input[type=date].in::-webkit-date-and-time-value{text-align:left}
   <div class="grab"></div>
   <div class="sheet-h"><h3 id="mi-title">🆕 添加物品</h3><button class="x-btn" data-act="close">✕</button></div>
   <div class="muted hidden" id="mi-meta" style="margin:-10px 0 14px"></div>
-  <div class="f"><label>物品名称 <i>*</i></label><input class="in" id="mi-name" placeholder="如：抽纸 / 大米 / 面霜" maxlength="30" list="dl-names" autocomplete="off"></div>
+  <div id="mi-usage"></div>
+  <div class="f"><label>物品名称 <i>*</i></label><input class="in" id="mi-name" placeholder="如：抽纸 / 大米 / 面霜" maxlength="30" autocomplete="off" autocorrect="off" spellcheck="false"></div>
+  <div class="hint-line hidden" id="mi-hint"></div>
   <div class="row">
     <div class="f"><label>分类</label><select class="in" id="mi-cat"></select></div>
     <div class="f"><label>存放位置</label><select class="in" id="mi-loc"></select></div>
   </div>
   <div class="row">
     <div class="f"><label>当前数量</label><input class="in" id="mi-qty" type="number" inputmode="decimal" min="0" step="1" value="1"></div>
-    <div class="f"><label>单位</label><input class="in" id="mi-unit" value="件" maxlength="4" list="dl-units"></div>
+    <div class="f"><label>单位</label><input class="in" id="mi-unit" value="件" maxlength="4" autocomplete="off"></div>
   </div>
+  <div class="units" id="mi-units"></div>
   <div class="row">
     <div class="f"><label>保质期（最近一批）</label><input class="in" id="mi-exp" type="date"></div>
-    <div class="f"><label>安全库存水位</label><input class="in" id="mi-min" type="number" inputmode="decimal" min="0" step="1" value="1"></div>
+    <div class="f"><div class="lbl-row"><label>安全水位</label><button class="mode" id="mi-mode" data-act="min-mode">🤖 自动</button></div><input class="in" id="mi-min" type="number" inputmode="decimal" min="0" step="1" value="1"></div>
   </div>
   <div class="f"><label>备注</label><textarea class="in" id="mi-note" rows="2" placeholder="品牌、规格、开封提醒…" maxlength="120"></textarea></div>
   <div class="btns" id="mi-btns">
@@ -456,10 +539,10 @@ input[type=date].in::-webkit-date-and-time-value{text-align:left}
 <div class="mask" id="m-list"><div class="sheet">
   <div class="grab"></div>
   <div class="sheet-h"><h3>🛒 加到购物清单</h3><button class="x-btn" data-act="close">✕</button></div>
-  <div class="f"><label>要买什么 <i>*</i></label><input class="in" id="ml-name" maxlength="30" list="dl-names" placeholder="如：洗衣液" autocomplete="off"></div>
+  <div class="f"><label>要买什么 <i>*</i></label><input class="in" id="ml-name" maxlength="30" placeholder="如：洗衣液" autocomplete="off" autocorrect="off" spellcheck="false"></div>
   <div class="row">
     <div class="f"><label>数量</label><input class="in" id="ml-qty" type="number" inputmode="decimal" min="1" value="1"></div>
-    <div class="f"><label>单位</label><input class="in" id="ml-unit" value="件" maxlength="4" list="dl-units"></div>
+    <div class="f"><label>单位</label><input class="in" id="ml-unit" value="件" maxlength="4" autocomplete="off"></div>
   </div>
   <div class="btns"><button class="btn ghost" data-act="close">取消</button><button class="btn main" data-act="list-save">加入清单</button></div>
 </div></div>
@@ -513,16 +596,23 @@ input[type=date].in::-webkit-date-and-time-value{text-align:left}
   <div class="btns" id="mch-btns" style="flex-direction:column"></div>
 </div></div>
 
-<datalist id="dl-names"></datalist>
-<datalist id="dl-units"></datalist>
+<!-- 入库确认 -->
+<div class="mask" id="m-stock"><div class="sheet">
+  <div class="grab"></div>
+  <div class="sheet-h"><h3>📦 确认入库</h3><button class="x-btn" data-act="close">✕</button></div>
+  <div class="hint">核对买到的数量；有保质期的顺手填上<b>这一批的到期日</b>（不填就保持原来的）。</div>
+  <div id="si-list"></div>
+  <div class="btns"><button class="btn ghost" data-act="close">取消</button><button class="btn main" data-act="si-confirm">✓ 确认入库</button></div>
+</div></div>
+
 <input type="file" id="file-json" accept=".json,.txt,application/json,text/plain" hidden>
 <input type="file" id="file-csv" accept=".csv,text/csv,text/comma-separated-values,application/vnd.ms-excel" hidden>
 <div class="toast" id="toast"></div>
 
 <script>
 'use strict';
-const APP_VERSION = '2.1.0';
-const KEY = 'hs_data_v2', UNDO_KEY = 'hs_undo', DRAFT_KEY = 'hs_st_draft', UI_KEY = 'hs_ui';
+const APP_VERSION = '3.0.0';
+const KEY = 'hs_data_v2', UNDO_KEY = 'hs_undo', DRAFT_KEY = 'hs_st_draft', UI_KEY = 'hs_ui', PRE_KEY = 'hs_pre_v3';
 const DEFAULT_CATS = [
   {id:'food',  name:'食品粮油', emoji:'🍚', color:'#e8894f', builtin:true},
   {id:'daily', name:'日用消耗', emoji:'🧻', color:'#4fa89b', builtin:true},
@@ -533,8 +623,55 @@ const DEFAULT_CATS = [
 ];
 const DEFAULT_LOCS = ['橱柜','冰箱','壁橱','电视机柜','餐桌抽屉','办公桌','梳妆台','药品箱'];
 const PALETTE = ['#e8894f','#4fa89b','#e0607e','#b07ad6','#5b8fd6','#7aa84f','#d4a21c','#8d6e63','#ef6c57','#26a0c4'];
-const EMOJIS = ['🍚','🥫','🧂','🍜','🥛','🍪','🧻','🧴','🧼','🪥','💊','🩹','💄','🧴','👕','🧦','⚽','🔋','🐱','🍼','🧹','📦'];
-const UNITS = ['件','个','袋','包','盒','瓶','罐','卷','支','片','板','节','箱','桶','斤','升','双','套','提','块'];
+const EMOJIS = ['🍚','🥫','🧂','🍜','🥛','🥚','🍪','🍎','🥩','🧊','🧻','🧴','🧼','🪥','🧽','🧹','💊','🩹','😷','💄','👕','🧦','👟','⚽','🎮','📚','✏️','🔋','💡','🔧','🐱','🐶','🍼','🌱','🎁','📦'];
+const UNITS = ['个','袋','包','盒','瓶','支','卷','片','节','罐','桶','提','杯','斤','块','条','双','件','箱','套'];
+// 按名称推荐单位 / 分类 / 初始水位：[关键词, 单位, 分类id, 初始水位]（越靠前越优先）
+const UNIT_RULES = [
+  [/卷纸|卫生纸|厕纸|手纸/, '提', 'daily', 1],
+  [/厨房纸|保鲜膜|锡纸|铝箔|垃圾袋/, '卷', 'daily', 1],
+  [/抽纸|纸巾|面巾纸|湿巾|擦手纸/, '包', 'daily', 2],
+  [/保鲜袋|密封袋|自封袋|一次性手套|牙线/, '盒', 'daily', 1],
+  [/电池/, '节', 'daily', 2],
+  [/灯泡|灯管/, '个', 'daily', 1],
+  [/鸡蛋|鸭蛋|鹅蛋|皮蛋|咸蛋|鹌鹑蛋/, '个', 'food', 6],
+  [/牛肉干|猪肉脯|肉松|肉干|饼干|薯片|零食|坚果|瓜子|紫菜|海苔|挂面|面条|方便面|泡面|意面|粉丝|米粉|河粉|螺蛳粉|酵母|淀粉|调料|底料|鸡精|味精/, '包', 'food', 1],
+  [/大米|小米|糯米|黑米|燕麦|面粉|白糖|红糖|冰糖|砂糖|食盐|^盐$|杂粮|绿豆|红豆|黄豆|速冻|饺子|汤圆|馄饨|面包|吐司|馒头|包子/, '袋', 'food', 1],
+  [/食用油|花生油|菜籽油|调和油|玉米油|葵花籽油|大豆油/, '桶', 'food', 1],
+  [/橄榄油|香油|麻油|酱油|生抽|老抽|醋|料酒|蚝油|鱼露|番茄酱|沙拉酱|辣椒酱|豆瓣酱|芝麻酱|蜂蜜|矿泉水|饮用水|可乐|雪碧|啤酒|红酒|白酒|果汁|饮料/, '瓶', 'food', 1],
+  [/酸奶/, '杯', 'food', 2],
+  [/牛奶|豆奶|椰奶/, '盒', 'food', 4],
+  [/罐头|午餐肉|奶粉|咖啡粉|茶叶|蛋白粉/, '罐', 'food', 1],
+  [/咖啡|茶包|麦片|月饼/, '盒', 'food', 1],
+  [/泡腾片|维生素|钙片|鱼油|益生菌|褪黑素/, '瓶', 'med', 1],
+  [/酒精|碘伏|双氧水|消毒液|眼药水|滴眼液/, '瓶', 'med', 1],
+  [/创可贴|膏药|暖宝宝/, '片', 'med', 5],
+  [/面膜/, '片', 'beauty', 3],
+  [/口罩/, '个', 'med', 10],
+  [/体温计|温度计/, '支', 'med', 1],
+  [/药|胶囊|颗粒|冲剂|口服液|布洛芬|对乙酰氨基酚|阿莫西林|感冒|退烧|止咳|消炎|蒙脱石/, '盒', 'med', 1],
+  [/牙膏|牙刷|剃须刀/, '支', 'daily', 1],
+  [/洗面奶|护手霜|唇膏|口红|防晒|眉笔|睫毛膏/, '支', 'beauty', 1],
+  [/洗发水|洗发露|护发素|沐浴露|洗手液|洗衣液|洗洁精|柔顺剂|漱口水|花露水|驱蚊/, '瓶', 'daily', 1],
+  [/爽肤水|化妆水|乳液|精华|面霜|眼霜|卸妆|香水|身体乳|粉底/, '瓶', 'beauty', 1],
+  [/洗衣粉|猫砂/, '袋', 'daily', 1],
+  [/洗衣凝珠|洗碗块|除湿/, '盒', 'daily', 1],
+  [/香皂|肥皂|洗衣皂|海绵|抹布|百洁布/, '块', 'daily', 1],
+  [/棉签|化妆棉|卫生巾|护垫|尿不湿|纸尿裤|拉拉裤/, '包', 'daily', 1],
+  [/袜|鞋/, '双', 'cloth', 1],
+  [/毛巾|内裤|围巾|领带|裤/, '条', 'cloth', 1],
+  [/衣|T恤|衬衫|外套|帽/, '件', 'cloth', 1],
+  [/羽毛球|乒乓球|网球|足球|篮球|排球/, '个', 'fun', 1],
+  [/猫粮|狗粮|宠物粮|冻干/, '袋', null, 1],
+  [/打印纸|A4|笔记本|便利贴/, '包', null, 1],
+  [/猪肉|牛肉|羊肉|排骨|五花|里脊|鸡翅|鸡腿|鸡胸|鸭|鱼|虾|蔬菜|青菜|白菜|土豆|番茄|西红柿|黄瓜|胡萝卜|洋葱|苹果|香蕉|橙子|水果/, '斤', 'food', 1],
+  [/笔/, '支', null, 1],
+];
+// 历史记录的动作类型
+const KIND = {use:['➖', '用掉'], buy:['🛒', '买入'], waste:['🗑️', '过期处理'], st:['📋', '盘点调整'], edit:['✏️', '改数量'], init:['🆕', '新登记'], del:['❌', '删除物品']};
+// 统计口径：用掉 = 用掉 + 盘亏 + 手动调少；买入 = 买入 / ＋ / 入库；浪费 = 过期处理
+const consumedOf = e => e.k === 'use' ? -e.d : ((e.k === 'st' || e.k === 'edit') && e.d < 0 ? -e.d : 0);
+const boughtOf = e => e.k === 'buy' ? e.d : 0;
+const wastedOf = e => e.k === 'waste' ? -e.d : 0;
 
 /* ---------- 工具 ---------- */
 const $ = s => document.querySelector(s);
@@ -564,10 +701,10 @@ const vibrate = () => { try { navigator.vibrate && navigator.vibrate(8); } catch
 
 /* ---------- 数据 ---------- */
 let S;
-const blank = () => ({version:3, items:[], categories:DEFAULT_CATS.map(c => ({...c, updatedAt:0, updatedBy:''})), locations:[...DEFAULT_LOCS], locTs:{}, shopping:[], deleted:{}, meta:{lastStocktake:null, lastBackup:null}});
+const blank = () => ({version:4, items:[], categories:DEFAULT_CATS.map(c => ({...c, updatedAt:0, updatedBy:''})), locations:[...DEFAULT_LOCS], locTs:{}, shopping:[], deleted:{}, log:[], prefs:{id:'prefs', cycleDays:14, safeDays:7, updatedAt:0, updatedBy:''}, meta:{lastStocktake:null, lastBackup:null, logSince:Date.now()}});
 
 function normalize(d){
-  const b = blank(), out = {version:3}, ts = v => +v || 0;
+  const b = blank(), out = {version:4}, ts = v => +v || 0;
   const tsMap = o => { const r = {}; if (o && typeof o === 'object') Object.keys(o).sort().forEach(k => { const v = +o[k]; if (v > 0) r[k] = v; }); return r; };
   out.categories = (Array.isArray(d.categories) && d.categories.length ? d.categories : b.categories)
     .filter(c => c && c.name).map(c => ({id:String(c.id || uid()), name:String(c.name).trim(), emoji:String(c.emoji || '📦'), color:String(c.color || '#a89888'), builtin:!!c.builtin, updatedAt:ts(c.updatedAt), updatedBy:String(c.updatedBy || '')}));
@@ -576,7 +713,7 @@ function normalize(d){
   out.items = (Array.isArray(d.items) ? d.items : []).filter(i => i && String(i.name || '').trim()).map(i => ({
     id:String(i.id || uid()), name:String(i.name).trim(), category:catIds.has(String(i.category)) ? String(i.category) : '',
     location:String(i.location || '').trim(), qty:num(i.qty), unit:String(i.unit || '件').trim() || '件', minQty:num(i.minQty),
-    expiry:normDate(i.expiry), note:String(i.note || ''), createdAt:+i.createdAt || Date.now(), updatedAt:ts(i.updatedAt), updatedBy:String(i.updatedBy || '')
+    expiry:normDate(i.expiry), note:String(i.note || ''), minAuto:i.minAuto !== false, createdAt:+i.createdAt || Date.now(), updatedAt:ts(i.updatedAt), updatedBy:String(i.updatedBy || '')
   }));
   out.items.forEach(i => { if (i.location && !out.locations.includes(i.location)) out.locations.push(i.location); });
   out.locations = [...new Set(out.locations)];
@@ -585,7 +722,12 @@ function normalize(d){
     id:String(s.id || uid()), name:String(s.name).trim(), qty:num(s.qty) || 1, unit:String(s.unit || '件'), location:String(s.location || ''), itemId:s.itemId ? String(s.itemId) : '', checked:!!s.checked, updatedAt:ts(s.updatedAt), updatedBy:String(s.updatedBy || '')
   }));
   out.deleted = tsMap(d.deleted);
-  out.meta = {lastStocktake:normDate(d.meta && d.meta.lastStocktake), lastBackup:normDate(d.meta && d.meta.lastBackup)};
+  out.meta = {lastStocktake:normDate(d.meta && d.meta.lastStocktake), lastBackup:normDate(d.meta && d.meta.lastBackup), logSince:+(d.meta && d.meta.logSince) || 0};
+  const pf = d.prefs || {}, clamp = (v, def, lo, hi) => { v = Math.round(+v); return v >= lo && v <= hi ? v : def; };
+  out.prefs = {id:'prefs', cycleDays:clamp(pf.cycleDays, 14, 1, 90), safeDays:clamp(pf.safeDays, 7, 1, 60), updatedAt:ts(pf.updatedAt), updatedBy:String(pf.updatedBy || '')};
+  out.log = (Array.isArray(d.log) ? d.log : []).filter(e => e && e.id && e.i && +e.t > 0 && isFinite(+e.d)).map(e => ({
+    id:String(e.id), t:+e.t, i:String(e.i), n:String(e.n || ''), c:String(e.c || ''), k:KIND[e.k] ? e.k : 'edit', d:Math.round(+e.d * 100) / 100, q:isFinite(+e.q) ? +e.q : 0, b:String(e.b || ''), v:+e.v || 1
+  })).sort((x, y) => x.t - y.t || (x.id < y.id ? -1 : 1));
   return out;
 }
 // 兼容上一版（v1.x）的数据：{inventory:[], shoppingList:[]}，分类存的是中文名
@@ -609,7 +751,12 @@ function parseBackup(o){
 }
 function load(){
   const raw = lsGet(KEY);
-  if (raw) { try { S = normalize(JSON.parse(raw)); return; } catch (e) {} }
+  if (raw) { try {
+    const o = JSON.parse(raw);
+    // 第一次升级到新版：先在本机留一份升级前的原样数据，设置里可一键恢复
+    if ((o.version || 0) < 4 && Array.isArray(o.items) && o.items.length && !lsGet(PRE_KEY)) lsSet(PRE_KEY, JSON.stringify({at:Date.now(), from:o.version || 0, data:o}));
+    S = normalize(o); if (!S.meta.logSince) S.meta.logSince = Date.now(); dataVer++; return;
+  } catch (e) {} }
   const v1 = lsGet('homeInventory');
   if (v1) { try { S = fromV1({inventory:JSON.parse(v1), shoppingList:JSON.parse(lsGet('homeShoppingList') || '[]')}); save(); return; } catch (e) {} }
   S = blank();
@@ -620,18 +767,20 @@ const sigOf = x => JSON.stringify(x, (k, v) => (k === 'updatedAt' || k === 'upda
 function track(bump){
   const now = Date.now(), me = cloudName(), next = {};
   const col = (arr, p) => arr.forEach(x => { const k = p + x.id, sg = sigOf(x); next[k] = sg; if (bump && sigs[k] !== sg) { x.updatedAt = now; x.updatedBy = me; } });
-  col(S.items, 'i:'); col(S.shopping, 's:'); col(S.categories, 'c:');
+  col(S.items, 'i:'); col(S.shopping, 's:'); col(S.categories, 'c:'); col([S.prefs], 'p:');
+  S.log.forEach(e => { next['e:' + e.id] = '1'; });
   S.locations.forEach(l => { const k = 'l:' + l; next[k] = '1'; if (bump && !sigs[k]) S.locTs[l] = now; });
   if (bump) Object.keys(sigs).forEach(k => { if (!(k in next)) S.deleted[k] = now; });
   sigs = next;
 }
+let dataVer = 0;
 function save(){
-  track(!!sigs);
+  dataVer++; track(!!sigs);
   if (!lsSet(KEY, JSON.stringify(S))) toast('⚠️ 保存失败：浏览器存储不可用或已满');
   askPersist(); syncSoon();
 }
 // 合并别人的数据后保存：保留对方的时间戳，不当成自己的修改
-function commitQuiet(){ sigs = null; track(false); lsSet(KEY, JSON.stringify(S)); }
+function commitQuiet(){ dataVer++; sigs = null; track(false); lsSet(KEY, JSON.stringify(S)); }
 let persistAsked = false;
 function askPersist(){
   if (persistAsked || !navigator.storage || !navigator.storage.persist) return;
@@ -647,11 +796,90 @@ function undo(){
 const getItem = id => S.items.find(i => i.id === id);
 const catOf = id => S.categories.find(c => c.id === id) || {id:'', name:'未分类', emoji:'📦', color:'#c2b2a3'};
 function stat(i){
-  const dl = i.qty > 0 ? daysLeft(i.expiry) : null;
-  return {dl, expired:dl !== null && dl < 0, soon:dl !== null && dl >= 0 && dl <= 7, month:dl !== null && dl > 7 && dl <= 30, low:i.minQty > 0 && i.qty <= i.minQty};
+  const dl = i.qty > 0 ? daysLeft(i.expiry) : null, m = effMin(i);
+  return {dl, expired:dl !== null && dl < 0, soon:dl !== null && dl >= 0 && dl <= 7, month:dl !== null && dl > 7 && dl <= 30, low:m > 0 && i.qty <= m};
 }
 const inList = i => S.shopping.some(s => s.itemId === i.id || s.name === i.name);
-const suggestQty = i => Math.max(1, Math.ceil(i.minQty * 2 - i.qty));
+
+/* ---------- 消耗推算 ---------- */
+// 每件物品最近 90 天的消耗（缓存，数据一变就重算）
+let usageCache = {key:'', map:null};
+function usageMap(){
+  const key = dataVer + '|' + todayStr();
+  if (usageCache.key === key) return usageCache.map;
+  const now = Date.now(), m = new Map();
+  for (const e of S.log) {
+    let u = m.get(e.i); if (!u) m.set(e.i, u = {cons:0, n:0});
+    if (now - e.t > 90 * 864e5) continue;
+    const c = consumedOf(e); if (c > 0) { u.cons += c; u.n++; }
+  }
+  usageCache = {key, map:m}; return m;
+}
+// rate = 日均用量；conf = 参考性 0~1：记录天数越长、次数越多越高
+function usage(i){
+  const now = Date.now(), u = usageMap().get(i.id);
+  const since = Math.max(i.createdAt || 0, S.meta.logSince || now, now - 90 * 864e5);
+  const days = Math.max(0, (now - since) / 864e5);
+  if (!u || !u.cons) return {rate:0, days, n:0, conf:0, cons:0};
+  const rate = u.cons / Math.max(days, 7);
+  const conf = Math.min(1, days / 45) * Math.min(1, u.n / 5);
+  return {rate, days, n:u.n, conf, cons:u.cons};
+}
+const sugMinOf = i => { const u = usage(i); return u.rate ? Math.max(1, Math.ceil(u.rate * S.prefs.safeDays - 0.05)) : null; };
+// 实际生效的安全水位：手动 = 你填的；自动 = 你填的初值和按用量算的建议按参考性加权，数据越多越接近建议值
+function effMin(i){
+  if (i.minAuto === false) return i.minQty;
+  const u = usage(i); if (!u.rate || !u.conf) return i.minQty;
+  return Math.max(1, Math.round(i.minQty * (1 - u.conf) + sugMinOf(i) * u.conf));
+}
+function forecast(i){
+  const u = usage(i), m = effMin(i), f = {u, m, daysOut:null, daysToMin:null};
+  if (u.rate > 0 && u.n >= 2 && u.days >= 3) { f.daysOut = i.qty / u.rate; f.daysToMin = Math.max(0, (i.qty - m) / u.rate); }
+  return f;
+}
+// 下次采购前（采购周期内）会低于水位
+const needSoon = i => { const f = forecast(i); return f.daysToMin !== null && f.daysToMin <= S.prefs.cycleDays; };
+// 建议购买量：够用到下一次采购，并补回水位
+function suggestQty(i){
+  const f = forecast(i);
+  const q = f.daysOut !== null ? f.u.rate * S.prefs.cycleDays + f.m - i.qty : f.m * 2 - i.qty;
+  return Math.max(1, Math.ceil(q - 0.05));
+}
+const r1 = n => Math.round(n * 10) / 10;
+function rateText(rate, unit){
+  unit = esc(unit || '');
+  if (rate >= 1) return `每天约 ${fmt(r1(rate))}${unit}`;
+  if (rate * 7 >= 1) return `每周约 ${fmt(r1(rate * 7))}${unit}`;
+  return `每月约 ${fmt(r1(rate * 30))}${unit}`;
+}
+const daysText = d => d < 1 ? '1 天内' : `${Math.round(d)} 天`;
+const md = t => { const x = new Date(t); return `${x.getMonth() + 1}/${x.getDate()}`; };
+const hm = t => new Date(t).toLocaleTimeString('zh-CN', {hour:'2-digit', minute:'2-digit'});
+
+/* ---------- 历史记录 ---------- */
+const myEvents = new Set();   // 本机这次打开后新记的，可与紧接着的同类操作合并（长按不会刷屏）
+function pushEvent(it, k, d){
+  const e = {id:uid(), t:Date.now(), i:it.id, n:it.name, c:it.category, k, d, q:it.qty, b:cloudName(), v:1};
+  S.log.push(e); myEvents.add(e.id); return e;
+}
+function logQty(it, k, d){
+  d = Math.round(d * 100) / 100; if (!d || !it) return;
+  const last = S.log[S.log.length - 1], now = Date.now();
+  if (last && myEvents.has(last.id) && last.i === it.id && last.k === k && now - last.t < 90000 && Math.sign(last.d) === Math.sign(d)) {
+    last.d = Math.round((last.d + d) * 100) / 100; last.q = it.qty; last.t = now; last.v++; return;
+  }
+  pushEvent(it, k, d);
+}
+// 库存页 +/−：90 秒内对同一件的连续加减算净变化（按错了再按回去不会留下记录）
+function logStep(it, d){
+  const last = S.log[S.log.length - 1], now = Date.now();
+  if (last && myEvents.has(last.id) && last.i === it.id && (last.k === 'use' || last.k === 'buy') && now - last.t < 90000) {
+    const nd = Math.round((last.d + d) * 100) / 100;
+    if (!nd) { S.log.pop(); myEvents.delete(last.id); return; }
+    last.d = nd; last.k = nd > 0 ? 'buy' : 'use'; last.q = it.qty; last.t = now; last.v++; return;
+  }
+  pushEvent(it, d > 0 ? 'buy' : 'use', d);
+}
 
 /* ---------- UI 状态（仅本机偏好） ---------- */
 let UI = {tab:'home', cat:'', loc:'', sort:'name', only:'', lastCat:'food', lastLoc:''};
@@ -670,7 +898,7 @@ function go(tab){
 }
 function render(tab = UI.tab){
   document.querySelectorAll('.js-date').forEach(e => e.textContent = cnDate());
-  ({home:renderHome, inv:renderInv, list:renderList, st:renderSt, set:renderSet})[tab]();
+  ({home:renderHome, inv:renderInv, list:renderList, st:renderSt, stat:renderStat, set:renderSet})[tab]();
   updateBadge();
 }
 const refresh = () => render();
@@ -683,15 +911,16 @@ function updateBadge(){
 function renderHome(){
   const h = new Date().getHours();
   $('#h-greet').textContent = h < 5 ? '夜深了 🌙' : h < 11 ? '早上好 ☀️' : h < 13 ? '中午好 🌤️' : h < 18 ? '下午好 ☕' : '晚上好 🌙';
-  const stm = new Map(); let total = 0; const ex = [], soon = [], month = [], low = [];
+  const stm = new Map(); let total = 0; const ex = [], soon = [], month = [], low = [], soonOut = [];
   S.items.forEach(i => { total += i.qty; const st = stat(i); stm.set(i, st);
     if (st.expired) ex.push(i); else if (st.soon) soon.push(i); else if (st.month) month.push(i);
-    if (st.low) low.push(i); });
+    if (st.low) low.push(i); else if (i.qty > 0 && needSoon(i)) soonOut.push(i); });
+  soonOut.sort((a, b) => forecast(a).daysToMin - forecast(b).daysToMin);
   const byDl = (a, b) => stm.get(a).dl - stm.get(b).dl; ex.sort(byDl); soon.sort(byDl); month.sort(byDl);
   $('#h-msg').textContent = !S.items.length ? '从记下第一件囤货开始吧～'
     : ex.length ? `家里的囤货还好吗？有 ${ex.length} 件已过期，记得处理～`
     : soon.length ? `有 ${soon.length} 件 7 天内到期，优先用掉哦～`
-    : low.length ? `有 ${low.length} 样快用完了，记得补货～` : '一切井井有条，继续保持 ✨';
+    : low.length ? `有 ${low.length} 样低于安全水位，记得补货～` : soonOut.length ? `有 ${soonOut.length} 样这几天会用完，下次采购带上～` : '一切井井有条，继续保持 ✨';
 
   if (!S.items.length) {
     $('#home-body').innerHTML = `<div class="card welcome"><div class="big">🏡</div><h3>欢迎使用家庭囤货</h3>
@@ -707,8 +936,8 @@ function renderHome(){
     <button class="stat total" data-act="goto" data-to="inv" data-only=""><div class="n">${S.items.length}</div><div class="l">📦 在管物品</div><div class="s">共计 ${fmt(total)} 件</div></button>
     <button class="stat expired" data-act="goto" data-to="inv" data-only="expired"><div class="n">${ex.length}</div><div class="l">🔴 已过期</div><div class="s">${ex.length ? '尽快处理' : '没有过期的'}</div></button>
     <button class="stat soon" data-act="goto" data-to="inv" data-only="soon"><div class="n">${soon.length}</div><div class="l">🟠 7天内到期</div><div class="s">优先吃掉</div></button>
-    <button class="stat low" data-act="goto" data-to="list"><div class="n">${low.length}</div><div class="l">📦 待补货</div><div class="s">${lowNeed ? lowNeed + ' 样还没进清单' : '看看清单'}</div></button></div>`;
-  const pending = ex.length + soon.length + month.length + low.length;
+    <button class="stat low" data-act="goto" data-to="list"><div class="n">${low.length}</div><div class="l">📦 待补货</div><div class="s">${lowNeed ? lowNeed + ' 样还没进清单' : soonOut.length ? '另有 ' + soonOut.length + ' 样快用完' : '看看清单'}</div></button></div>`;
+  const pending = ex.length + soon.length + month.length + low.length + soonOut.length;
   html += `<div class="card"><div class="sec-head"><h2>⚠️ 预警中心</h2>${pending ? `<span class="pill red">${pending} 项待处理</span>` : '<span class="pill green">全部正常</span>'}</div>`;
   if (!pending) html += `<div class="empty"><div class="big">🎉</div>没有需要处理的，家里状态很好</div>`;
   const group = (title, list, cls, text, btn) => list.length ? `<div class="group-t">${title} <span class="c">(${list.length})</span></div>` + list.map(i => `
@@ -717,8 +946,9 @@ function renderHome(){
   html += group('🔴 已过期', ex, 'red', i => `已过期 <b>${-stm.get(i).dl} 天</b>`, useBtn('处理'));
   html += group('🟠 7天内到期', soon, 'orange', i => stm.get(i).dl === 0 ? '<b>今天到期</b>' : `还剩 <b>${stm.get(i).dl} 天</b>`, useBtn('用掉'));
   html += group('🟡 30天内到期', month, 'yellow', i => `还剩 <b>${stm.get(i).dl} 天</b>`, useBtn('用掉'));
-  html += group('📦 低于安全水位', low, 'blue', i => `仅剩 <b>${fmt(i.qty)} ${esc(i.unit)}</b>（水位 ${fmt(i.minQty)}）`,
-    i => inList(i) ? `<button class="act done" data-act="goto" data-to="list">已在清单</button>` : `<button class="act" data-act="to-list" data-id="${i.id}">加入清单</button>`);
+  const listBtn = i => inList(i) ? `<button class="act done" data-act="goto" data-to="list">已在清单</button>` : `<button class="act" data-act="to-list" data-id="${i.id}">买 ${fmt(suggestQty(i))}${esc(i.unit)}</button>`;
+  html += group('📦 低于安全水位', low, 'blue', i => { const f = forecast(i); return `仅剩 <b>${fmt(i.qty)} ${esc(i.unit)}</b>（水位 ${fmt(f.m)}）${f.daysOut !== null && i.qty > 0 ? ' · 约' + daysText(f.daysOut) + '用完' : ''}`; }, listBtn);
+  html += group(`⏳ ${S.prefs.cycleDays} 天内会用完`, soonOut, 'blue', i => { const f = forecast(i); return `约 <b>${daysText(f.daysToMin)}</b>后到水位 · ${daysText(f.daysOut)}左右用完`; }, listBtn);
   html += `</div>`;
   if (backupDays === null || backupDays >= 30) html += `<div class="tip-card" style="background:#fff3e6;color:#8a5520"><div class="t">💾 ${backupDays === null ? '还没导出过备份' : `已经 ${backupDays} 天没备份了`}，换手机或清缓存会丢数据</div><button data-act="exp-json" style="color:#c46f1b">立即备份</button></div>`;
   $('#home-body').innerHTML = html;
@@ -749,7 +979,7 @@ function renderInvList(){
   const sorters = {
     name: byName,
     expiry: (a, b) => (a.expiry && a.qty > 0 ? daysLeft(a.expiry) : 1e9) - (b.expiry && b.qty > 0 ? daysLeft(b.expiry) : 1e9) || byName(a, b),
-    stock: (a, b) => ((a.minQty ? a.qty / a.minQty : 99) - (b.minQty ? b.qty / b.minQty : 99)) || byName(a, b),
+    stock: (a, b) => { const k = i => { const f = forecast(i); return f.daysOut !== null ? f.daysOut : (f.m ? i.qty / f.m * 30 : 9999); }; return k(a) - k(b) || byName(a, b); },
     recent: (a, b) => b.createdAt - a.createdAt,
   };
   list.sort(sorters[UI.sort] || byName);
@@ -762,15 +992,16 @@ function renderInvList(){
     : `<div class="empty"><div class="big">🔍</div>${S.items.length ? '没有符合条件的物品' : '还没有物品，点右下角 ＋ 添加'}</div>`;
 }
 function itemMain(i){
-  const c = catOf(i.category), st = stat(i);
+  const c = catOf(i.category), st = stat(i), f = forecast(i), m = f.m;
   let tags = i.location ? `<span class="tg">📍${esc(i.location)}</span>` : '';
   if (st.low) tags += `<span class="tg blue">待补货</span>`;
   if (st.expired) tags += `<span class="tg red">已过期${-st.dl}天</span>`;
   else if (st.dl !== null) tags += `<span class="tg ${st.soon ? 'orange' : st.month ? 'yellow' : 'green'}">${st.dl === 0 ? '今天到期' : '剩' + st.dl + '天'}</span>`;
+  if (f.daysOut !== null && i.qty > 0) tags += `<span class="tg ${f.daysOut <= S.prefs.safeDays ? 'orange' : ''}">≈${daysText(f.daysOut)}用完</span>`;
   let bar = '';
-  if (i.minQty > 0) {
-    const pct = Math.min(100, i.qty / (i.minQty * 2) * 100);
-    bar = `<div class="bar"><i class="${st.low ? 'red' : ''}" style="width:${Math.max(pct, i.qty > 0 ? 6 : 0)}%"></i></div><span class="wl">水位 ${fmt(i.minQty)}${esc(i.unit)}</span>`;
+  if (m > 0) {
+    const pct = Math.min(100, i.qty / (m * 2) * 100), auto = i.minAuto !== false && f.u.rate > 0;
+    bar = `<div class="bar"><i class="${st.low ? 'red' : ''}" style="width:${Math.max(pct, i.qty > 0 ? 6 : 0)}%"></i></div><span class="wl">水位 ${fmt(m)}${esc(i.unit)}${auto ? ' 🤖' : ''}</span>`;
   }
   return `<div class="item-top"><span class="dot" style="background:${esc(c.color)}" title="${esc(c.name)}"></span><span class="nm">${esc(i.name)}</span>${tags}</div>
     <div class="item-bot"><span class="q ${i.qty ? '' : 'zero'}">${fmt(i.qty)}<small>${esc(i.unit)}</small></span>${bar}</div>${i.note ? `<div class="note">📝 ${esc(i.note)}</div>` : ''}`;
@@ -779,7 +1010,7 @@ function invStep(id, d){
   const i = getItem(id); if (!i) return;
   const nq = Math.max(0, Math.round((i.qty + d) * 100) / 100);
   if (nq === i.qty) return;
-  i.qty = nq; i.updatedAt = Date.now(); save(); vibrate();
+  const dd = Math.round((nq - i.qty) * 100) / 100; i.qty = nq; i.updatedAt = Date.now(); logStep(i, dd); save(); vibrate();
   const el = document.getElementById('im-' + id); if (el) el.innerHTML = itemMain(i);
 }
 
@@ -814,20 +1045,25 @@ document.addEventListener('contextmenu', e => { if (e.target.closest('[data-step
 /* ---------- 清单 ---------- */
 function renderList(){
   const todo = S.shopping.filter(s => !s.checked), done = S.shopping.filter(s => s.checked);
-  const lowOut = S.items.filter(i => stat(i).low && !inList(i));
+  const lowOut = S.items.filter(i => (stat(i).low || (i.qty > 0 && needSoon(i))) && !inList(i));
   $('#l-msg').textContent = todo.length ? `还有 ${todo.length} 样要买` + (done.length ? `，${done.length} 样已买到待入库` : '') : done.length ? `${done.length} 样已买到，记得一键入库` : '清单是空的，去逛逛也不怕漏买';
   const row = s => `<div class="li ${s.checked ? 'on' : ''}">
     <button class="ck" data-act="sl-toggle" data-id="${s.id}" aria-label="勾选">${s.checked ? '✓' : ''}</button>
-    <div class="info"><div class="nm">${esc(s.name)}</div><div class="sub">${s.checked ? '已买到 · 待入库' : '要买'} ${fmt(s.qty)} ${esc(s.unit)}${s.location ? ' · 放' + esc(s.location) : ''}</div></div>
+    <div class="info"><div class="nm">${esc(s.name)}</div><div class="sub">${s.checked ? '已买到 · 待入库' : '要买'} ${fmt(s.qty)} ${esc(s.unit)}${s.location ? ' · 放' + esc(s.location) : ''}${s.checked ? '' : listNote(s)}</div></div>
     <div class="mini"><button data-act="sl-dec" data-id="${s.id}">−</button><span>${fmt(s.qty)}</span><button data-act="sl-inc" data-id="${s.id}">+</button></div>
     <button class="del" data-act="sl-del" data-id="${s.id}" aria-label="删除">✕</button></div>`;
   let html = '';
-  if (lowOut.length) html += `<div class="tip-card"><div class="t">📦 有 ${lowOut.length} 样低于安全水位：${lowOut.slice(0, 3).map(i => esc(i.name)).join('、')}${lowOut.length > 3 ? '…' : ''}</div><button data-act="list-all-low">一键加入</button></div>`;
+  if (lowOut.length) html += `<div class="tip-card"><div class="t">📦 有 ${lowOut.length} 样低于水位或这几天会用完：${lowOut.slice(0, 3).map(i => esc(i.name)).join('、')}${lowOut.length > 3 ? '…' : ''}</div><button data-act="list-all-low">一键加入</button></div>`;
   html += todo.length ? todo.map(row).join('') : (done.length ? '' : `<div class="card empty"><div class="big">🛒</div>购物清单是空的<br><span style="font-size:13px">首页「加入清单」或右上角 ＋ 手动添加</span></div>`);
   if (done.length) html += `<div class="sub-head">✅ 已买到（${done.length}）</div>` + done.map(row).join('') +
     `<div class="btns" style="margin-top:6px"><button class="btn main" data-act="sl-stock">✓ 已买的 ${done.length} 样一键入库</button></div>`;
   html += `<div class="btns" style="margin-top:${done.length ? 10 : 4}px"><button class="btn ghost" style="flex:1" data-act="list-add">＋ 手动添加</button>${S.shopping.length ? `<button class="btn ghost" data-act="sl-copy">复制清单</button>` : ''}</div>`;
   $('#list-body').innerHTML = html;
+}
+function listNote(s){
+  const it = (s.itemId && getItem(s.itemId)) || S.items.find(i => i.name === s.name); if (!it) return '';
+  const f = forecast(it);
+  return ` · 现有 ${fmt(it.qty)}${f.daysOut !== null && it.qty > 0 ? '，约' + daysText(f.daysOut) + '用完' : ''}`;
 }
 function addToList(i, silent){
   if (inList(i)) { if (!silent) toast(i.name + ' 已经在清单里啦'); return false; }
@@ -835,16 +1071,36 @@ function addToList(i, silent){
   if (!silent) { save(); toast('🛒 ' + i.name + ' 已加入清单'); }
   return true;
 }
+function openStockIn(){
+  const done = S.shopping.filter(s => s.checked); if (!done.length) return;
+  $('#si-list').innerHTML = done.map(s => {
+    const it = (s.itemId && getItem(s.itemId)) || S.items.find(i => i.name === s.name);
+    return `<div class="si-row"><div class="top"><div class="nm">${esc(s.name)}</div>
+      <div class="mini"><button data-act="si-dec" data-id="${s.id}">−</button><span id="siq-${s.id}">${fmt(s.qty)}</span><button data-act="si-inc" data-id="${s.id}">+</button></div><span class="st-unit">${esc(s.unit)}</span></div>
+      <div class="exp"><span>到期日</span><input type="date" class="si-exp" data-sid="${s.id}"><span>${it ? (it.expiry ? '原 ' + it.expiry.slice(5).replace('-', '/') : '') : '新物品'}</span></div></div>`;
+  }).join('');
+  openSheet('m-stock');
+}
 function stockIn(){
   const done = S.shopping.filter(s => s.checked); if (!done.length) return;
+  const exps = {}; document.querySelectorAll('#si-list .si-exp').forEach(inp => { const v = normDate(inp.value); if (v) exps[inp.dataset.sid] = v; });
   snapshot('入库'); let created = 0;
   done.forEach(s => {
     let it = (s.itemId && getItem(s.itemId)) || S.items.find(i => i.name === s.name);
-    if (it) { it.qty = Math.round((it.qty + s.qty) * 100) / 100; it.updatedAt = Date.now(); }
-    else { created++; S.items.push({id:uid(), name:s.name, category:'', location:s.location || '', qty:s.qty, unit:s.unit, minQty:0, expiry:null, note:'', createdAt:Date.now(), updatedAt:Date.now()}); }
+    const ne = exps[s.id] || null;
+    if (it) {
+      const before = it.qty; it.qty = Math.round((it.qty + s.qty) * 100) / 100; it.updatedAt = Date.now();
+      // 保质期记「最近一批」：原来的已用完或已过期就换成新批次，否则取更早的那个
+      if (ne) it.expiry = (!it.expiry || before <= 0 || daysLeft(it.expiry) < 0 || ne < it.expiry) ? ne : it.expiry;
+    } else {
+      created++; const g = guessFor(s.name) || {};
+      it = {id:uid(), name:s.name, category:g.cat && S.categories.some(c => c.id === g.cat) ? g.cat : '', location:s.location || '', qty:s.qty, unit:s.unit, minQty:g.min || 1, minAuto:true, expiry:ne, note:'', createdAt:Date.now(), updatedAt:Date.now()};
+      S.items.push(it);
+    }
+    logQty(it, 'buy', s.qty);
   });
-  S.shopping = S.shopping.filter(s => !s.checked); save(); refresh();
-  toast(`📦 ${done.length} 样已入库${created ? `（新建 ${created} 样）` : ''}，有保质期的记得更新`, true);
+  S.shopping = S.shopping.filter(s => !s.checked); save(); closeSheet(); refresh();
+  toast(`📦 ${done.length} 样已入库${created ? `（新建 ${created} 样）` : ''}`, true);
 }
 
 /* ---------- 盘点 ---------- */
@@ -905,7 +1161,7 @@ function calibrate(items){
     return;
   }
   snapshot('盘点校准');
-  diffs.forEach(i => { i.qty = draft[i.id]; i.updatedAt = Date.now(); });
+  diffs.forEach(i => { const d = draft[i.id] - i.qty; i.qty = draft[i.id]; i.updatedAt = Date.now(); logQty(i, 'st', d); });
   items.forEach(i => delete draft[i.id]); saveDraft();
   S.meta.lastStocktake = todayStr(); save(); renderSt(); updateBadge();
   toast(`✅ 校准完成，修正了 ${diffs.length} 项`, true);
@@ -921,9 +1177,13 @@ function renderSet(){
   $('#cat-list').innerHTML = S.categories.map(c => { const n = S.items.filter(i => i.category === c.id).length;
     return `<div class="cat-row"><span class="dot" style="background:${esc(c.color)};width:14px;height:14px;border-radius:4px"></span>
       <div class="main" data-act="cat-edit" data-id="${c.id}"><div class="nm"><span class="e">${esc(c.emoji)}</span>${esc(c.name)}</div><div class="s">${n} 样物品 · ${c.builtin ? '内置分类' : '自定义'}</div></div>
-      <button class="trash" data-act="cat-del" data-id="${c.id}" aria-label="删除">🗑️</button></div>`; }).join('') || '<div class="empty">还没有分类</div>';
+      <button class="pen" data-act="cat-edit" data-id="${c.id}" aria-label="编辑">✏️</button><button class="trash" data-act="cat-del" data-id="${c.id}" aria-label="删除">🗑️</button></div>`; }).join('') || '<div class="empty">还没有分类</div>';
   $('#loc-list').innerHTML = S.locations.map((l, idx) => `<span class="loc"><span data-act="loc-ren" data-idx="${idx}">${esc(l)} <span class="c">${S.items.filter(i => i.location === l).length}</span></span><button class="x" data-act="loc-del" data-idx="${idx}" aria-label="删除">✕</button></span>`).join('') || '<span class="muted">还没有位置</span>';
-  renderCloud(); renderInstall(); updatePersist(); $('#ver').textContent = 'v' + APP_VERSION + ' · 单机版';
+  const seg = (k, opts) => opts.map(v => `<button class="${S.prefs[k] === v ? 'on' : ''}" data-act="pref" data-k="${k}" data-v="${v}">${v} 天</button>`).join('');
+  $('#pf-cycle').innerHTML = seg('cycleDays', [7, 14, 30]); $('#pf-safe').innerHTML = seg('safeDays', [3, 7, 14]);
+  let pre = null; try { pre = JSON.parse(lsGet(PRE_KEY) || 'null'); } catch (e) {}
+  $('#pre-row').innerHTML = pre ? `<div class="set-row btnrow" style="margin-top:6px" data-act="pre-restore"><div class="k">♻️ 恢复升级前的数据<small>升级到 v3 时自动留的原样备份（${fmtTime(pre.at)}，${(pre.data.items || []).length} 样物品）</small></div><div class="v">›</div></div>` : '';
+  renderCloud(); renderInstall(); updatePersist(); $('#ver').textContent = 'v' + APP_VERSION + ' · 家庭版';
 }
 const isStandalone = () => matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
 const isIOS = () => /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
@@ -982,7 +1242,6 @@ function fillSelects(catId, loc){
   $('#mi-cat').value = S.categories.some(c => c.id === catId) ? catId : (S.categories[0] ? S.categories[0].id : '');
   $('#mi-loc').innerHTML = S.locations.map(l => `<option value="${esc(l)}">${esc(l)}</option>`).join('') + `<option value="">（不设置）</option><option value="__new">＋ 新增位置…</option>`;
   $('#mi-loc').value = loc && S.locations.includes(loc) ? loc : (S.locations[0] || '');
-  $('#dl-names').innerHTML = [...new Set(S.items.map(i => i.name))].map(n => `<option value="${esc(n)}">`).join('');
 }
 function openItem(id){
   const i = id ? getItem(id) : null; editId = i ? i.id : null;
@@ -995,15 +1254,56 @@ function openItem(id){
   $('#mi-del').classList.toggle('hidden', !i);
   const mm = $('#mi-meta'); mm.classList.toggle('hidden', !(i && i.updatedAt));
   if (i && i.updatedAt) mm.textContent = '🕘 最后修改：' + (i.updatedBy ? i.updatedBy + ' · ' : '') + fmtTime(i.updatedAt);
+  miTouched = {}; miAuto = i ? i.minAuto !== false : true;
+  if (i && miAuto) $('#mi-min').value = fmt(effMin(i));
+  $('#mi-usage').innerHTML = i ? usageBox(i) : '';
+  $('#mi-hint').classList.add('hidden'); updateMode(); markUnits();
   openSheet('m-item');
   if (!i) setTimeout(() => $('#mi-name').focus(), 320);
 }
-$('#mi-name').addEventListener('change', () => {
-  if (editId) return;
-  const ex = S.items.find(i => i.name === $('#mi-name').value.trim()); if (!ex) return;
-  $('#mi-unit').value = ex.unit; $('#mi-min').value = fmt(ex.minQty);
-  if (ex.category) $('#mi-cat').value = ex.category; if (ex.location) $('#mi-loc').value = ex.location;
-});
+// 按名称猜单位/分类/水位：先看家里已有的同名或相近物品（越用越懂你家），再看常见用法词库
+function guessFor(raw){
+  const name = String(raw || '').trim(); if (!name) return null;
+  let ex = S.items.find(i => i.name === name)
+    || S.items.filter(i => i.name.length >= 2 && name.includes(i.name)).sort((a, b) => b.name.length - a.name.length)[0]
+    || (name.length >= 2 ? S.items.find(i => i.name.startsWith(name)) : null);
+  if (ex) return {unit:ex.unit, cat:ex.category, loc:name === ex.name ? ex.location : '', min:effMin(ex) || 1, src:'家里已有的「' + ex.name + '」'};
+  const r = UNIT_RULES.find(r => r[0].test(name));
+  return r ? {unit:r[1], cat:r[2], min:r[3] || 1, src:'常见用法'} : null;
+}
+let miTouched = {}, miAuto = true, guessT = null, mlTouched = false;
+function applyGuess(){
+  const g = guessFor($('#mi-name').value), hint = $('#mi-hint'), parts = [];
+  if (g) {
+    if (!miTouched.unit && g.unit && $('#mi-unit').value !== g.unit) { $('#mi-unit').value = g.unit; markUnits(); parts.push(`单位「${g.unit}」`); }
+    if (!miTouched.cat && g.cat && S.categories.some(c => c.id === g.cat) && $('#mi-cat').value !== g.cat) { $('#mi-cat').value = g.cat; parts.push(`分类「${catOf(g.cat).name}」`); }
+    if (!miTouched.loc && g.loc && S.locations.includes(g.loc) && $('#mi-loc').value !== g.loc) { $('#mi-loc').value = g.loc; parts.push(`位置「${g.loc}」`); }
+    if (miAuto && !miTouched.min && g.min) $('#mi-min').value = fmt(g.min);
+  }
+  if (parts.length) { hint.textContent = `💡 参考${g.src}，填好了${parts.join('、')}，不对直接改`; hint.classList.remove('hidden'); }
+  else if (!g) hint.classList.add('hidden');
+}
+$('#mi-name').addEventListener('input', () => { if (editId) return; clearTimeout(guessT); guessT = setTimeout(applyGuess, 250); });
+$('#mi-unit').addEventListener('input', () => { miTouched.unit = true; markUnits(); });
+$('#mi-cat').addEventListener('change', () => { miTouched.cat = true; });
+$('#mi-loc').addEventListener('change', () => { miTouched.loc = true; });
+$('#mi-min').addEventListener('input', () => { miTouched.min = true; if (miAuto) { miAuto = false; updateMode(); } });
+$('#ml-name').addEventListener('input', () => { if (mlTouched) return; const g = guessFor($('#ml-name').value); if (g && g.unit) $('#ml-unit').value = g.unit; });
+$('#ml-unit').addEventListener('input', () => { mlTouched = true; });
+function updateMode(){ const b = $('#mi-mode'); b.textContent = miAuto ? '🤖 自动' : '✋ 手动'; b.classList.toggle('manual', !miAuto); }
+function markUnits(){ const cur = $('#mi-unit').value.trim(); $('#mi-units').innerHTML = UNITS.map(u => `<button class="${u === cur ? 'on' : ''}" data-act="unit-pick" data-u="${u}">${u}</button>`).join(''); }
+function usageBox(i){
+  const f = forecast(i), u = f.u, recent = S.log.filter(e => e.i === i.id).slice(-4).reverse();
+  if (!u.rate && !recent.length) return `<div class="usage"><h4>📈 用量参考</h4><div class="muted">还没有使用记录。之后每次 +/−、用掉、入库、盘点都会记下来，用得越久推算越准。</div></div>`;
+  const cf = u.conf < 0.34 ? ['低', ''] : u.conf < 0.67 ? ['中', 'm'] : ['高', 'h'];
+  let h = `<div class="usage"><h4>📈 用量参考 ${u.rate ? `<span class="conf ${cf[1]}">参考性 ${cf[0]}</span>` : ''}</h4>`;
+  if (u.rate) {
+    h += `<div>${rateText(u.rate, i.unit)}${f.daysOut !== null ? `，现有约够 <b>${daysText(f.daysOut)}</b>（${md(Date.now() + f.daysOut * 864e5)} 左右）` : '，记录再多几次就能预测用完时间'}</div>`;
+    h += `<div>按 ${S.prefs.safeDays} 天安全期，建议水位 <b>${sugMinOf(i)}${esc(i.unit)}</b>${i.minAuto === false ? '（你设的是手动，不会自动改）' : u.conf < 1 ? '，正逐步向它靠拢' : ''}</div>`;
+  } else h += `<div class="muted">最近 90 天没有消耗记录</div>`;
+  h += recent.map(e => `<div class="ev"><span>${md(e.t)} ${hm(e.t)} ${e.b ? esc(e.b) + ' ' : ''}${KIND[e.k][1]} ${e.d > 0 ? '+' : '−'}${fmt(Math.abs(e.d))}</span><span>剩 ${fmt(e.q)}</span></div>`).join('');
+  return h + '</div>';
+}
 let prevCat = '', prevLoc = '';
 $('#mi-cat').addEventListener('focus', e => prevCat = e.target.value);
 $('#mi-loc').addEventListener('focus', e => prevLoc = e.target.value);
@@ -1027,16 +1327,16 @@ function saveItem(){
   if (!name) { toast('请填写物品名称'); $('#mi-name').focus(); return; }
   let category = $('#mi-cat').value; if (category === '__new') category = '';
   let location = $('#mi-loc').value; if (location === '__new') location = '';
-  const data = {name, category, location, qty:num($('#mi-qty').value), unit:$('#mi-unit').value.trim() || '件', expiry:normDate($('#mi-exp').value), minQty:num($('#mi-min').value), note:$('#mi-note').value.trim()};
+  const data = {name, category, location, qty:num($('#mi-qty').value), unit:$('#mi-unit').value.trim() || '件', expiry:normDate($('#mi-exp').value), minQty:num($('#mi-min').value), minAuto:miAuto, note:$('#mi-note').value.trim()};
   if (editId && getItem(editId)) {
-    Object.assign(getItem(editId), data, {updatedAt:Date.now()}); toast('✅ 已保存');
+    const it = getItem(editId), before = it.qty; Object.assign(it, data, {updatedAt:Date.now()}); if (it.qty !== before) logQty(it, 'edit', it.qty - before); toast('✅ 已保存');
   } else {
     const dup = S.items.find(i => i.name === name && i.location === location);
     if (dup && confirm(`「${location || '未设置位置'}」里已经有「${name}」（${fmt(dup.qty)}${dup.unit}）。\n\n确定：直接给它加上 ${fmt(data.qty)}${data.unit}${data.expiry ? '，并更新保质期' : ''}\n取消：另建一条`)) {
-      dup.qty = Math.round((dup.qty + data.qty) * 100) / 100; if (data.expiry) dup.expiry = data.expiry; dup.updatedAt = Date.now();
+      dup.qty = Math.round((dup.qty + data.qty) * 100) / 100; if (data.expiry) dup.expiry = data.expiry; dup.updatedAt = Date.now(); logQty(dup, 'buy', data.qty);
       toast(`✅ ${name} +${fmt(data.qty)}`);
     } else {
-      S.items.push({id:uid(), ...data, createdAt:Date.now(), updatedAt:Date.now()}); toast('✅ 已添加 ' + name);
+      const ni = {id:uid(), ...data, createdAt:Date.now(), updatedAt:Date.now()}; S.items.push(ni); logQty(ni, 'init', ni.qty); toast('✅ 已添加 ' + name);
     }
     UI.lastCat = category; UI.lastLoc = location; saveUI();
   }
@@ -1045,6 +1345,7 @@ function saveItem(){
 function delItem(){
   const i = getItem(editId); if (!i || !confirm(`确定删除「${i.name}」吗？`)) return;
   snapshot('删除 ' + i.name);
+  if (i.qty > 0) logQty(i, 'del', -i.qty);
   S.items = S.items.filter(x => x.id !== i.id); delete draft[i.id]; saveDraft();
   save(); closeSheet(); refresh(); toast('🗑️ 已删除 ' + i.name, true);
 }
@@ -1070,7 +1371,7 @@ function saveCat(){
 }
 
 /* ---------- 导入导出 ---------- */
-const backupObj = () => ({app:'home-stock', version:3, exportedAt:new Date().toISOString(), data:S});
+const backupObj = () => ({app:'home-stock', version:4, exportedAt:new Date().toISOString(), data:S});
 function deliver(name, text, mime){
   const blob = new Blob([text], {type:mime});
   if (matchMedia('(pointer:coarse)').matches && navigator.canShare) {
@@ -1095,10 +1396,13 @@ function exportJSON(){
   deliver(`家庭囤货备份_${todayStr()}.json`, JSON.stringify(backupObj(), null, 1), 'application/json');
   if (UI.tab === 'set') renderSet();
 }
-const CSV_COLS = [['name','名称'],['category','分类'],['location','存放位置'],['qty','数量'],['unit','单位'],['minQty','安全水位'],['expiry','保质期'],['note','备注']];
+const CSV_COLS = [['name','名称'],['category','分类'],['location','存放位置'],['qty','数量'],['unit','单位'],['minQty','安全水位'],['minMode','水位模式'],['expiry','保质期'],['note','备注'],['rate','日均用量'],['daysOut','预计可用天数']];
 function exportCSV(){
   const cell = v => { v = String(v ?? ''); return /[",\n\r]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; };
-  const rows = [CSV_COLS.map(c => c[1]).join(',')].concat(S.items.map(i => CSV_COLS.map(([k]) => cell(k === 'category' ? (i.category ? catOf(i.category).name : '') : k === 'qty' || k === 'minQty' ? fmt(i[k]) : i[k])).join(',')));
+  const val = (i, k) => { const f = forecast(i);
+    return k === 'category' ? (i.category ? catOf(i.category).name : '') : k === 'qty' ? fmt(i.qty) : k === 'minQty' ? fmt(f.m) : k === 'minMode' ? (i.minAuto === false ? '手动' : '自动')
+      : k === 'rate' ? (f.u.rate ? fmt(Math.round(f.u.rate * 100) / 100) : '') : k === 'daysOut' ? (f.daysOut !== null ? Math.round(f.daysOut) : '') : i[k]; };
+  const rows = [CSV_COLS.map(c => c[1]).join(',')].concat(S.items.map(i => CSV_COLS.map(([k]) => cell(val(i, k))).join(',')));
   deliver(`家庭囤货清单_${todayStr()}.csv`, '﻿' + rows.join('\r\n'), 'text/csv');
 }
 function parseCSV(t){
@@ -1122,7 +1426,7 @@ async function readText(file){
 }
 function importCSV(text){
   const rows = parseCSV(text); if (rows.length < 2) throw new Error('CSV 里没有数据行');
-  const alias = {name:['名称','物品名称','物品','name'], category:['分类','类别','category'], location:['存放位置','位置','location'], qty:['数量','当前数量','qty'], unit:['单位','unit'], minQty:['安全水位','安全库存水位','水位','minqty'], expiry:['保质期','到期日','过期日期','expiry'], note:['备注','note']};
+  const alias = {name:['名称','物品名称','物品','name'], category:['分类','类别','category'], location:['存放位置','位置','location'], qty:['数量','当前数量','qty'], unit:['单位','unit'], minQty:['安全水位','安全库存水位','水位','minqty'], minMode:['水位模式'], expiry:['保质期','到期日','过期日期','expiry'], note:['备注','note']};
   const head = rows[0].map(h => h.trim().toLowerCase()), idx = {};
   Object.entries(alias).forEach(([k, names]) => { idx[k] = head.findIndex(h => names.includes(h)); });
   if (idx.name < 0) throw new Error('找不到「名称」列');
@@ -1136,13 +1440,17 @@ function importCSV(text){
     const cn = g('category');
     if (cn) { let c = S.categories.find(c => c.name === cn); if (!c) { c = {id:uid(), name:cn, emoji:'📦', color:PALETTE[S.categories.length % PALETTE.length], builtin:false}; S.categories.push(c); } category = c.id; }
     let it = S.items.find(i => i.name === name && i.location === location);
-    if (!it) { it = {id:uid(), name, category:'', location, qty:0, unit:'件', minQty:0, expiry:null, note:'', createdAt:Date.now()}; S.items.push(it); added++; } else updated++;
+    const isNew = !it;
+    if (!it) { it = {id:uid(), name, category:'', location, qty:0, unit:'件', minQty:0, minAuto:true, expiry:null, note:'', createdAt:Date.now()}; S.items.push(it); added++; } else updated++;
+    const before = it.qty;
     if (category !== undefined) it.category = category;
     if (g('qty') !== '') it.qty = num(g('qty'));
     if (g('unit')) it.unit = g('unit');
     if (g('minQty') !== '') it.minQty = num(g('minQty'));
     if (idx.expiry >= 0) it.expiry = normDate(g('expiry'));
     if (g('note')) it.note = g('note');
+    if (g('minMode')) it.minAuto = g('minMode') !== '手动';
+    if (isNew) logQty(it, 'init', it.qty); else if (it.qty !== before) logQty(it, 'edit', it.qty - before);
     it.updatedAt = Date.now();
   });
   save(); refresh(); toast(`✅ CSV 导入：新增 ${added}，更新 ${updated}`, true);
@@ -1157,7 +1465,8 @@ function applyBackup(newS, label){
 const b64 = u8 => { let s = ''; for (let i = 0; i < u8.length; i += 0x8000) s += String.fromCharCode.apply(null, u8.subarray(i, i + 0x8000)); return btoa(s); };
 const unb64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
 async function makeSyncCode(){
-  const json = JSON.stringify(backupObj());
+  // 同步码只带最近 30 天的历史，保证能在微信里发得出去；完整历史靠自动同步或备份文件（合并时不会删掉对方更早的历史）
+  const json = JSON.stringify({...backupObj(), data:{...S, log:S.log.filter(e => e.t > Date.now() - 30 * 864e5)}});
   if (window.CompressionStream) {
     try { const buf = await new Response(new Blob([json]).stream().pipeThrough(new CompressionStream('gzip'))).arrayBuffer(); return 'HSYNC1:' + b64(new Uint8Array(buf)); } catch (e) {}
   }
@@ -1226,7 +1535,7 @@ function safeRender(){
 // 与顺序无关的规范形式，用来判断两边是否真的不同
 function canon(x){
   const n = normalize(x), by = (a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
-  return JSON.stringify([n.items.sort(by), n.categories.sort(by), n.shopping.sort(by), n.locations.sort(), n.locTs, n.deleted, n.meta.lastStocktake]);
+  return JSON.stringify([n.items.sort(by), n.categories.sort(by), n.shopping.sort(by), n.locations.sort(), n.locTs, n.deleted, n.meta.lastStocktake, n.meta.logSince, n.prefs, n.log.sort(by)]);
 }
 // 三方合并单条记录：o = 上次同步时的版本，x = 本机，y = 云端
 // 只有一边改了的字段取改的那边；两边都改了数量就把两边的增减都算上；其他字段两边都改了取较新的
@@ -1261,8 +1570,12 @@ function mergeState(a, b, base){
   const locations = [...new Set([...a.locations, ...b.locations])].filter(l => !(del['l:' + l] >= (locTs[l] || 0)));
   Object.keys(locTs).forEach(l => { if (!locations.includes(l)) delete locTs[l]; });
   const st = [a.meta.lastStocktake, b.meta.lastStocktake].filter(Boolean).sort().pop() || null;
+  const prefs = b.prefs.updatedAt > a.prefs.updatedAt ? b.prefs : a.prefs;
+  const lm = new Map(); a.log.forEach(e => lm.set(e.id, e)); b.log.forEach(e => { const x = lm.get(e.id); if (!x || e.v > x.v) lm.set(e.id, e); });
+  const log = [...lm.values()].filter(e => !del['e:' + e.id]);
+  const ls = Math.min(a.meta.logSince || Infinity, b.meta.logSince || Infinity);
   return normalize({items:list(a.items, b.items, 'i:', base && base.items), categories:list(a.categories, b.categories, 'c:', base && base.categories), shopping:list(a.shopping, b.shopping, 's:', base && base.shopping),
-    locations, locTs, deleted:del, meta:{lastStocktake:st, lastBackup:a.meta.lastBackup}});
+    locations, locTs, deleted:del, prefs, log, meta:{lastStocktake:st, lastBackup:a.meta.lastBackup, logSince:isFinite(ls) ? ls : 0}});
 }
 function mergeIn(ns){
   snapshot('合并同步码');
@@ -1296,7 +1609,7 @@ async function pullRemote(useEtag){
 }
 async function pushRemote(sha){
   const snap = JSON.parse(JSON.stringify(S));   // 推送的正是这一刻的数据；之后的改动下一轮再推
-  const body = {message:'更新 · ' + (cloudName() || '家人') + ' · ' + new Date().toLocaleString('zh-CN'), content:utf8b64(JSON.stringify({app:'home-stock', version:3, at:Date.now(), by:cloudName(), data:snap}))};
+  const body = {message:'更新 · ' + (cloudName() || '家人') + ' · ' + new Date().toLocaleString('zh-CN'), content:utf8b64(JSON.stringify({app:'home-stock', version:4, at:Date.now(), by:cloudName(), data:snap}))};
   if (sha) body.sha = sha;
   const res = await gh('PUT', '/contents/' + DATA_PATH, body);
   if (res.status === 409 || res.status === 422) return {conflict:true};
@@ -1442,24 +1755,150 @@ async function cloudConnect(){
   toast(ok ? (r.data ? '☁️ 已连接，和家人的数据同步好了' : '☁️ 家庭同步已开启，去邀请家人吧') : '⚠️ ' + ((cloud && cloud.lastError) || '连接失败'));
 }
 
+/* ---------- 统计 ---------- */
+const C_USE = '#d4623e', C_BUY = '#4a7cc0';   // 已验证：色盲可区分、对背景对比度 ≥ 3:1
+let SA = {mode:'month', y:null, m:null, kind:'all', more:40, sel:null};
+function saRange(off = 0){
+  return SA.mode === 'month' ? [new Date(SA.y, SA.m + off, 1), new Date(SA.y, SA.m + off + 1, 1)] : [new Date(SA.y + off, 0, 1), new Date(SA.y + off + 1, 0, 1)];
+}
+function niceMax(v){ if (v <= 0) return 4; const p = 10 ** Math.floor(Math.log10(v)); for (const k of [1, 2, 2.5, 5, 10]) if (k * p >= v) return k * p; return 10 * p; }
+function barPath(x, y, w, h, r){ if (h <= 0) return ''; r = Math.min(r, w / 2, h); return `M${x},${y + h}V${y + r}Q${x},${y} ${x + r},${y}H${x + w - r}Q${x + w},${y} ${x + w},${y + r}V${y + h}Z`; }
+let saGroups = [], saSeries = [];
+function chartSVG(groups, series, every){
+  const W = 340, H = 170, pl = 30, pr = 4, pt = 10, pb = 22, iw = W - pl - pr, ih = H - pt - pb;
+  const max = niceMax(Math.max(0, ...groups.flatMap(g => g.vals))), band = iw / groups.length, ns = series.length, gap = 2;
+  const bw = Math.min(24, Math.max(3, (band * 0.7 - gap * (ns - 1)) / ns));
+  let h = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(series.map(x => x.name).join('、'))}柱状图">`;
+  [0, 0.5, 1].forEach(f => { const y = pt + ih - ih * f;
+    h += `<line x1="${pl}" x2="${W - pr}" y1="${y}" y2="${y}" stroke="#ece2d6" stroke-width="1"/><text x="${pl - 6}" y="${y + 3.5}" text-anchor="end" font-size="10" fill="#9a8573">${fmt(r1(max * f))}</text>`; });
+  groups.forEach((g, gi) => {
+    const x0 = pl + gi * band + (band - (bw * ns + gap * (ns - 1))) / 2, dim = SA.sel !== null && SA.sel !== gi;
+    g.vals.forEach((v, si) => { const bh = ih * v / max; h += `<path d="${barPath(x0 + si * (bw + gap), pt + ih - bh, bw, bh, 4)}" fill="${series[si].color}"${dim ? ' opacity=".35"' : ''}/>`; });
+    if (gi % every === 0) h += `<text x="${pl + gi * band + band / 2}" y="${H - 6}" text-anchor="middle" font-size="10" fill="#9a8573">${g.label}</text>`;
+    h += `<rect x="${pl + gi * band}" y="${pt}" width="${band}" height="${ih + pb}" fill="transparent" data-act="sa-bar" data-i="${gi}" style="cursor:pointer"/>`;
+  });
+  return h + '</svg>';
+}
+function saReadout(){
+  const unit = SA.mode === 'month' ? '天' : '个月';
+  if (SA.sel !== null && saGroups[SA.sel]) { const g = saGroups[SA.sel]; return `${g.full}：` + saSeries.map((x, k) => `${x.name} <b>${fmt(r1(g.vals[k]))}</b> 件`).join(' · '); }
+  const best = saGroups.reduce((a, g) => g.vals[0] > (a ? a.vals[0] : 0) ? g : a, null);
+  return best ? `点柱子看具体数字 · 用得最多的一${unit}：${best.full} <b>${fmt(r1(best.vals[0]))}</b> 件` : '点柱子看具体数字';
+}
+function renderStat(){
+  const now = new Date();
+  if (SA.y === null) { SA.y = now.getFullYear(); SA.m = now.getMonth(); }
+  const [a, b] = saRange(), [pa, pb] = saRange(-1), M = SA.mode === 'month';
+  $('#sa-label').textContent = M ? `${a.getFullYear()}年${a.getMonth() + 1}月` : `${a.getFullYear()}年`;
+  $('#sa-next').disabled = b > now;
+  document.querySelectorAll('#v-stat [data-act=sa-mode]').forEach(x => x.classList.toggle('on', x.dataset.m === SA.mode));
+  const ev = S.log.filter(e => e.t >= +a && e.t < +b), pev = S.log.filter(e => e.t >= +pa && e.t < +pb);
+  const sum = (l, f) => l.reduce((x, e) => x + f(e), 0);
+  const C = sum(ev, consumedOf), B = sum(ev, boughtOf), Wt = sum(ev, wastedOf), PC = sum(pev, consumedOf), PB = sum(pev, boughtOf);
+  $('#sa-msg').textContent = !S.log.length ? '从现在开始自动记录：每次加减、入库、盘点都会留痕' : `这段时间共 ${ev.length} 条变动记录`;
+  const per = M ? '月' : '年';
+  if (!ev.length) {
+    $('#sa-body').innerHTML = `<div class="card empty"><div class="big">📭</div>这个${per}还没有记录<br><span style="font-size:13px">库存页点 +/−、首页「用掉」、清单入库、盘点校准都会自动记下来</span></div>` +
+      (S.log.length ? `<div class="btns" style="margin-top:0"><button class="btn ghost" style="flex:1" data-act="exp-log">📤 导出全部历史（CSV）</button></div>` : '');
+    return;
+  }
+  // 本期还没过完时按「日均」比较，避免拿 10 天和整月比
+  const curDays = Math.max(1, (Math.min(+now, +b) - +a) / 864e5), prevDays = Math.max(1, (+pb - +pa) / 864e5), partial = b > now;
+  const dl = (cur, prev) => { if (!prev) return `上${per}没有记录`; const x = cur / curDays, y = prev / prevDays, pct = Math.round((x - y) / y * 100);
+    return `${partial ? '日均' : ''}比上${per} ${pct >= 0 ? '↑' : '↓'} ${Math.abs(pct)}%`; };
+  let h = `<div class="kpis">
+    <div class="kpi"><div class="l"><span class="dot" style="background:${C_USE}"></span>用掉</div><div class="n">${fmt(r1(C))}<small>件</small></div><div class="dl">${dl(C, PC)}</div></div>
+    <div class="kpi"><div class="l"><span class="dot" style="background:${C_BUY}"></span>买入</div><div class="n">${fmt(r1(B))}<small>件</small></div><div class="dl">${dl(B, PB)}</div></div>
+    <div class="kpi"><div class="l">🗑️ 过期浪费</div><div class="n">${fmt(r1(Wt))}<small>件</small></div><div class="dl">${Wt ? '下面列出是哪些' : '没有浪费 👍'}</div></div>
+    <div class="kpi"><div class="l">📝 记录</div><div class="n">${ev.length}<small>条</small></div><div class="dl">${Math.max(1, new Set(ev.map(e => e.b).filter(Boolean)).size)} 人参与</div></div></div>`;
+  if (M) {
+    const nd = new Date(a.getFullYear(), a.getMonth() + 1, 0).getDate();
+    saGroups = Array.from({length:nd}, (_, k) => ({label:String(k + 1), full:`${a.getMonth() + 1}月${k + 1}日`, vals:[0]}));
+    ev.forEach(e => { const c = consumedOf(e); if (c) saGroups[new Date(e.t).getDate() - 1].vals[0] += c; });
+    saSeries = [{name:'用掉', color:C_USE}];
+  } else {
+    saGroups = Array.from({length:12}, (_, k) => ({label:`${k + 1}`, full:`${k + 1}月`, vals:[0, 0]}));
+    ev.forEach(e => { const g = saGroups[new Date(e.t).getMonth()]; g.vals[0] += consumedOf(e); g.vals[1] += boughtOf(e); });
+    saSeries = [{name:'用掉', color:C_USE}, {name:'买入', color:C_BUY}];
+  }
+  h += `<div class="card"><div class="sec-head" style="margin-bottom:6px"><h2>📊 ${M ? '每天用掉多少' : '每月用掉 vs 买入'}</h2></div>
+    ${saSeries.length > 1 ? `<div class="legend">${saSeries.map(x => `<span><i style="background:${x.color}"></i>${x.name}</span>`).join('')}</div>` : ''}
+    <div class="readout" id="sa-read">${saReadout()}</div><div class="chart">${chartSVG(saGroups, saSeries, M ? 7 : 1)}</div>
+    <div class="muted" style="font-size:12px;margin-top:6px">不同单位直接相加，只看趋势。「用掉」含 −、用掉、盘亏和手动调少</div></div>`;
+  // 分类
+  const byCat = new Map(); ev.forEach(e => { const c = consumedOf(e); if (c) byCat.set(e.c, (byCat.get(e.c) || 0) + c); });
+  const cats = [...byCat].sort((x, y) => y[1] - x[1]);
+  if (cats.length) h += `<div class="card"><div class="sec-head"><h2>🏷️ 各分类用掉</h2></div>` + cats.map(([cid, v]) => { const c = catOf(cid);
+    return `<div class="hbar"><span class="nm">${esc(c.emoji)} ${esc(c.name)}</span><span class="tr"><i style="width:${Math.max(2, v / cats[0][1] * 100)}%;background:${esc(c.color)}"></i></span><span class="v">${fmt(r1(v))} 件 · ${Math.round(v / C * 100)}%</span></div>`; }).join('') + `</div>`;
+  // 排行
+  const elapsed = Math.max(1, (Math.min(+now, +b) - +a) / 864e5);
+  const byItem = new Map(); ev.forEach(e => { const c = consumedOf(e); if (!c) return; const r = byItem.get(e.i) || {n:e.n, v:0}; r.v += c; r.n = e.n; byItem.set(e.i, r); });
+  const top = [...byItem].sort((x, y) => y[1].v - x[1].v).slice(0, 10);
+  if (top.length) h += `<div class="card"><div class="sec-head"><h2>🔥 用得最多</h2><span class="muted">${top.length} 样</span></div>` + top.map(([iid, r], k) => { const u = (getItem(iid) || {}).unit || '';
+    return `<div class="rank"><span class="no">${k + 1}</span><div class="nm">${esc(r.n)}<small>${rateText(r.v / elapsed, u)}</small></div><div class="v">${fmt(r1(r.v))} ${esc(u)}</div></div>`; }).join('') + `</div>`;
+  // 浪费
+  const byWaste = new Map(); ev.forEach(e => { const w = wastedOf(e); if (w) { const r = byWaste.get(e.i) || {n:e.n, v:0}; r.v += w; byWaste.set(e.i, r); } });
+  if (byWaste.size) h += `<div class="card"><div class="sec-head"><h2>🗑️ 过期浪费</h2></div><div class="muted" style="margin-bottom:4px">这些可以少买一点或早点吃掉</div>` +
+    [...byWaste].sort((x, y) => y[1].v - x[1].v).map(([iid, r]) => `<div class="rank"><span class="no">!</span><div class="nm">${esc(r.n)}</div><div class="v">${fmt(r1(r.v))} ${esc((getItem(iid) || {}).unit || '')}</div></div>`).join('') + `</div>`;
+  // 明细
+  const KF = {all:null, use:['use'], buy:['buy'], waste:['waste'], st:['st'], edit:['edit', 'init', 'del']};
+  const list = ev.filter(e => !KF[SA.kind] || KF[SA.kind].includes(e.k)).sort((x, y) => y.t - x.t);
+  h += `<div class="card"><div class="sec-head"><h2>📝 记录明细</h2><span class="muted">${list.length} 条</span></div><div class="chips">` +
+    [['all', '全部'], ['use', '用掉'], ['buy', '买入'], ['waste', '过期'], ['st', '盘点'], ['edit', '修改']].map(([k, l]) => `<button class="${SA.kind === k ? 'on' : ''}" data-act="sa-kind" data-k="${k}">${l}</button>`).join('') + `</div>`;
+  let lastDay = '';
+  list.slice(0, SA.more).forEach(e => {
+    const day = cnDate(new Date(e.t)).replace(/^\d+年/, ''), u = (getItem(e.i) || {}).unit || '';
+    if (day !== lastDay) { h += `<div class="day-h">${day}</div>`; lastDay = day; }
+    h += `<div class="ev-row"><span class="ic">${KIND[e.k][0]}</span><div class="tx">${e.b ? `<b>${esc(e.b)}</b> ` : ''}${KIND[e.k][1]} ${esc(e.n)}<small>${hm(e.t)} · 之后剩 ${fmt(e.q)}${esc(u)}</small></div><span class="d">${e.d > 0 ? '+' : '−'}${fmt(Math.abs(e.d))}${esc(u)}</span></div>`;
+  });
+  if (!list.length) h += `<div class="empty">没有这类记录</div>`;
+  if (list.length > SA.more) h += `<div class="btns" style="margin-top:8px"><button class="btn ghost" style="flex:1" data-act="sa-more">再看 ${Math.min(40, list.length - SA.more)} 条</button></div>`;
+  h += `</div><div class="btns" style="margin-top:0"><button class="btn ghost" style="flex:1" data-act="exp-log">📤 导出全部历史（CSV）</button></div>`;
+  $('#sa-body').innerHTML = h;
+}
+function exportLog(){
+  if (!S.log.length) return toast('还没有历史记录');
+  const cell = v => { v = String(v ?? ''); return /[",\n\r]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; };
+  const rows = ['时间,谁,物品,分类,动作,变化,之后数量,单位'].concat([...S.log].sort((x, y) => x.t - y.t).map(e => {
+    const t = new Date(e.t); return [`${ymd(t)} ${hm(e.t)}`, e.b, e.n, e.c ? catOf(e.c).name : '', KIND[e.k][1], fmt(e.d), fmt(e.q), (getItem(e.i) || {}).unit || ''].map(cell).join(','); }));
+  deliver(`家庭囤货历史_${todayStr()}.csv`, '﻿' + rows.join('\r\n'), 'text/csv');
+}
+
 /* ---------- 示例数据 ---------- */
 function sampleData(){
+  const DAY = 864e5, now = Date.now(), start = now - 84 * DAY;
   const d = n => { const x = new Date(); x.setDate(x.getDate() + n); return ymd(x); };
-  const it = (name, category, location, qty, unit, minQty, exp, note = '') => ({name, category, location, qty, unit, minQty, expiry:exp === null ? null : d(exp), note});
-  const s = blank();
-  s.items = [
-    it('大米', 'food', '橱柜', 2, '袋', 1, 200), it('挂面', 'food', '橱柜', 3, '包', 2, 160), it('白糖', 'food', '橱柜', 1, '袋', 0, 540),
-    it('老抽', 'food', '橱柜', 1, '瓶', 1, 300), it('面粉', 'food', '橱柜', 2, '袋', 1, 120), it('食用油', 'food', '橱柜', 1, '桶', 1, 260, '5L 装'),
-    it('酸奶', 'food', '冰箱', 4, '杯', 2, -3), it('全麦面包', 'food', '冰箱', 1, '袋', 0, 5), it('鸡蛋', 'food', '冰箱', 8, '个', 6, 6),
-    it('纯牛奶', 'food', '冰箱', 6, '盒', 4, 22), it('速冻饺子', 'food', '冰箱', 2, '袋', 1, 75),
-    it('抽纸', 'daily', '壁橱', 6, '包', 4, null), it('卷纸', 'daily', '壁橱', 3, '提', 2, null), it('洗衣液', 'daily', '壁橱', 1, '瓶', 1, null, '开封后半年内用完'),
-    it('5号电池', 'daily', '电视机柜', 8, '节', 4, null), it('7号电池', 'daily', '电视机柜', 2, '节', 4, null),
-    it('保鲜袋', 'daily', '餐桌抽屉', 1, '盒', 0, null), it('保鲜膜', 'daily', '餐桌抽屉', 1, '卷', 1, null),
-    it('维生素C泡腾片', 'med', '药品箱', 1, '支', 0, -20), it('布洛芬', 'med', '药品箱', 1, '盒', 1, 28), it('创可贴', 'med', '药品箱', 15, '片', 10, 400),
-    it('感冒灵颗粒', 'med', '药品箱', 2, '盒', 1, 180),
-    it('面霜', 'beauty', '梳妆台', 1, '瓶', 1, 90, '开封 2026 年 8 月'), it('洗面奶', 'beauty', '梳妆台', 2, '支', 1, 400), it('防晒霜', 'beauty', '梳妆台', 1, '支', 0, 25),
-    it('羽毛球', 'fun', '办公桌', 6, '个', 3, null),
-  ].map((x, k) => ({...x, id:uid() + k, createdAt:Date.now() - k * 1000, updatedAt:Date.now()}));
+  // [名称, 分类, 位置, 初始数量, 单位, 水位, 到期(天后), 每天大约用多少, 备注]
+  const rows = [
+    ['大米','food','橱柜',2,'袋',1,200,0.05], ['挂面','food','橱柜',3,'包',2,160,0.12], ['白糖','food','橱柜',1,'袋',0,540,0.01],
+    ['老抽','food','橱柜',1,'瓶',1,300,0.03], ['面粉','food','橱柜',2,'袋',1,120,0.02], ['食用油','food','橱柜',1,'桶',1,260,0.03,'5L 装'],
+    ['酸奶','food','冰箱',4,'杯',2,-3,0.4], ['全麦面包','food','冰箱',1,'袋',0,5,0.15], ['鸡蛋','food','冰箱',8,'个',6,6,1.1],
+    ['纯牛奶','food','冰箱',6,'盒',4,22,0.5], ['速冻饺子','food','冰箱',2,'袋',1,75,0.08],
+    ['抽纸','daily','壁橱',6,'包',2,null,0.22], ['卷纸','daily','壁橱',3,'提',1,null,0.07], ['洗衣液','daily','壁橱',1,'瓶',1,null,0.035,'开封后半年内用完'],
+    ['5号电池','daily','电视机柜',8,'节',2,null,0.05], ['7号电池','daily','电视机柜',2,'节',2,null,0.07],
+    ['保鲜袋','daily','餐桌抽屉',1,'盒',0,null,0.015], ['保鲜膜','daily','餐桌抽屉',1,'卷',1,null,0.03],
+    ['维生素C泡腾片','med','药品箱',1,'支',0,-20,0], ['布洛芬','med','药品箱',1,'盒',1,28,0.01], ['创可贴','med','药品箱',15,'片',5,400,0.1],
+    ['感冒灵颗粒','med','药品箱',2,'盒',1,180,0.02],
+    ['面霜','beauty','梳妆台',1,'瓶',1,90,0.012,'开封 2026 年 8 月'], ['洗面奶','beauty','梳妆台',2,'支',1,400,0.02], ['防晒霜','beauty','梳妆台',1,'支',0,25,0.02],
+    ['羽毛球','fun','办公桌',6,'个',3,null,0.06],
+  ];
+  const who = ['爸爸', '妈妈', '小宝']; let seed = 20261010; const rnd = () => (seed = seed * 16807 % 2147483647) / 2147483647;
+  const s = blank(); s.meta.logSince = start; s.meta.lastStocktake = ymd(new Date(now - 30 * DAY));
+  rows.forEach(([name, category, location, qty, unit, minQty, exp, rate, note = ''], k) => {
+    const id = uid() + k;
+    const ev = (t, kind, dd, q) => s.log.push({id:uid() + 'e' + s.log.length, t:Math.round(t), i:id, n:name, c:category, k:kind, d:dd, q, b:who[Math.floor(rnd() * 3)], v:1});
+    let q = Math.max(qty, Math.ceil(rate * 21) + minQty), acc = 0;
+    ev(start + rnd() * 3e6, 'init', q, q);
+    for (let day = 1; day < 84; day++) {
+      const t0 = start + day * DAY;
+      acc += rate * (0.4 + rnd() * 1.2);
+      const n = Math.min(q, Math.floor(acc));
+      if (n > 0) { acc -= n; q -= n; ev(t0 + 3e7 + rnd() * 2e7, 'use', -n, q); }
+      if (rate && q <= Math.max(minQty, Math.ceil(rate * 3)) && rnd() < 0.5) { const bq = Math.max(1, Math.ceil(rate * 21)); q += bq; ev(t0 + 6.5e7 + rnd() * 1e7, 'buy', bq, q); }
+    }
+    if (name === '酸奶' && q >= 2) { q -= 2; ev(now - 9 * DAY, 'waste', -2, q); }
+    s.items.push({id, name, category, location, qty:q, unit, minQty, minAuto:true, expiry:exp === null ? null : d(exp), note, createdAt:start, updatedAt:now});
+  });
   return normalize(s);
 }
 
@@ -1476,21 +1915,26 @@ document.addEventListener('click', async e => {
     case 'item-save': saveItem(); break;
     case 'item-del': delItem(); break;
     case 'goto': UI.only = el.dataset.only || ''; if (el.dataset.to === 'inv') { UI.cat = ''; UI.loc = ''; $('#q').value = ''; if (UI.only) UI.sort = 'expiry'; } go(el.dataset.to); break;
-    case 'use': { const i = getItem(id); if (!i) break; snapshot('用掉 ' + i.name); i.qty = Math.max(0, i.qty - 1); i.updatedAt = Date.now(); save(); renderHome(); updateBadge(); toast(`已处理 1${i.unit} ${i.name}，还剩 ${fmt(i.qty)}`, true); break; }
+    case 'use': { const i = getItem(id); if (!i || i.qty <= 0) break; snapshot('用掉 ' + i.name);
+      const k = stat(i).expired ? 'waste' : 'use', d = -Math.min(1, i.qty);
+      i.qty = Math.max(0, Math.round((i.qty + d) * 100) / 100); i.updatedAt = Date.now(); logQty(i, k, d); save(); renderHome(); updateBadge();
+      toast(`${k === 'waste' ? '已处理（记为过期浪费）' : '已用掉'} 1${i.unit} ${i.name}，还剩 ${fmt(i.qty)}`, true); break; }
     case 'to-list': { const i = getItem(id); if (i) { addToList(i); renderHome(); updateBadge(); } break; }
     case 'f-cat': UI.cat = id; saveUI(); renderInv(); break;
     case 'f-only-clear': UI.only = ''; renderInvList(); break;
-    case 'list-add': $('#ml-name').value = ''; $('#ml-qty').value = 1; $('#ml-unit').value = '件'; $('#dl-names').innerHTML = [...new Set(S.items.map(i => i.name))].map(n => `<option value="${esc(n)}">`).join(''); openSheet('m-list'); setTimeout(() => $('#ml-name').focus(), 320); break;
+    case 'list-add': $('#ml-name').value = ''; $('#ml-qty').value = 1; $('#ml-unit').value = '件'; mlTouched = false; openSheet('m-list'); setTimeout(() => $('#ml-name').focus(), 320); break;
     case 'list-save': {
       const name = $('#ml-name').value.trim(); if (!name) { toast('写一下要买什么'); break; }
       const inv = S.items.find(i => i.name === name);
       S.shopping.push({id:uid(), name, qty:num($('#ml-qty').value) || 1, unit:$('#ml-unit').value.trim() || (inv ? inv.unit : '件'), location:inv ? inv.location : '', itemId:inv ? inv.id : '', checked:false});
       save(); closeSheet(); go('list'); toast('🛒 已加入 ' + name); break; }
-    case 'list-all-low': { let n = 0; S.items.filter(i => stat(i).low).forEach(i => { if (addToList(i, true)) n++; }); save(); renderList(); updateBadge(); toast(`🛒 已加入 ${n} 样`); break; }
+    case 'list-all-low': { let n = 0; S.items.filter(i => stat(i).low || (i.qty > 0 && needSoon(i))).forEach(i => { if (addToList(i, true)) n++; }); save(); renderList(); updateBadge(); toast(`🛒 已加入 ${n} 样`); break; }
     case 'sl-toggle': { const s = S.shopping.find(x => x.id === id); if (s) { s.checked = !s.checked; save(); renderList(); updateBadge(); } break; }
     case 'sl-inc': case 'sl-dec': { const s = S.shopping.find(x => x.id === id); if (s) { s.qty = Math.max(1, s.qty + (act === 'sl-inc' ? 1 : -1)); save(); renderList(); } break; }
     case 'sl-del': { const s = S.shopping.find(x => x.id === id); if (s) { snapshot('移出清单 ' + s.name); S.shopping = S.shopping.filter(x => x.id !== id); save(); renderList(); updateBadge(); toast('已移出 ' + s.name, true); } break; }
-    case 'sl-stock': stockIn(); break;
+    case 'sl-stock': openStockIn(); break;
+    case 'si-confirm': stockIn(); break;
+    case 'si-inc': case 'si-dec': { const s2 = S.shopping.find(x => x.id === id); if (s2) { s2.qty = Math.max(1, s2.qty + (act === 'si-inc' ? 1 : -1)); save(); $('#siq-' + id).textContent = fmt(s2.qty); } break; }
     case 'sl-copy': { const t = '🛒 购物清单\n' + S.shopping.filter(s => !s.checked).map(s => `□ ${s.name} ×${fmt(s.qty)}${s.unit}`).join('\n'); copyText(t).then(ok => toast(ok ? '📋 清单已复制，可粘贴到微信' : '复制失败')); break; }
     case 'st-loc': { const g = stGroups()[+el.dataset.gi]; if (g) calibrate(g.items); break; }
     case 'st-all': calibrate(S.items); break;
@@ -1534,6 +1978,22 @@ document.addEventListener('click', async e => {
       S.items.forEach(i => { if (i.location === old) i.location = nv; }); S.shopping.forEach(s => { if (s.location === old) s.location = nv; });
       if (UI.loc === old) UI.loc = nv; save(); renderSet(); toast('✅ 已改名'); break; }
     case 'ask-ok': askOk(); break;
+    case 'unit-pick': $('#mi-unit').value = el.dataset.u; miTouched.unit = true; markUnits(); break;
+    case 'min-mode':
+      miAuto = !miAuto; updateMode();
+      if (miAuto) { const i0 = editId && getItem(editId); $('#mi-min').value = fmt(i0 ? effMin({...i0, minAuto:true}) : ((guessFor($('#mi-name').value) || {}).min || 1)); miTouched.min = false; toast('🤖 水位会按实际用量自动调整'); }
+      else toast('✋ 已改为手动，不会自动调整'); break;
+    case 'pref': S.prefs[el.dataset.k] = +el.dataset.v; save(); renderSet(); toast('✅ 已更新，推算会按新的习惯计算'); break;
+    case 'pre-restore': { let pre = null; try { pre = JSON.parse(lsGet(PRE_KEY) || 'null'); } catch (err) {} if (pre) applyBackup(parseBackup(pre.data), '升级前的数据'); break; }
+    case 'sa-mode': SA.mode = el.dataset.m; SA.sel = null; SA.more = 40; { const n0 = new Date(); SA.y = n0.getFullYear(); SA.m = n0.getMonth(); } renderStat(); break;
+    case 'sa-prev': case 'sa-next': {
+      const k = act === 'sa-next' ? 1 : -1;
+      if (SA.mode === 'month') { const t = new Date(SA.y, SA.m + k, 1); SA.y = t.getFullYear(); SA.m = t.getMonth(); } else SA.y += k;
+      SA.sel = null; SA.more = 40; renderStat(); break; }
+    case 'sa-bar': { const i2 = +el.dataset.i; SA.sel = SA.sel === i2 ? null : i2; renderStat(); break; }
+    case 'sa-kind': SA.kind = el.dataset.k; SA.more = 40; renderStat(); break;
+    case 'sa-more': SA.more += 40; renderStat(); break;
+    case 'exp-log': exportLog(); break;
     case 'sync-now':
       if (!cloud) { go('set'); break; }
       toast('⏳ 正在同步…'); await syncNow();
@@ -1584,7 +2044,7 @@ function toast(msg, withUndo){
 load(); track(false);
 if (isWeChat()) $('#wx-banner').classList.remove('hidden');
 UI.only = '';
-go(['home', 'inv', 'list', 'st', 'set'].includes(UI.tab) ? UI.tab : 'home');
+go(['home', 'inv', 'list', 'st', 'stat', 'set'].includes(UI.tab) ? UI.tab : 'home');
 // 跨天 / 回到前台时刷新日期和预警
 document.addEventListener('visibilitychange', () => { if (!document.hidden) { safeRender(); syncNow(); } });
 document.addEventListener('focusout', () => { if (pendingRender) setTimeout(safeRender, 120); });
