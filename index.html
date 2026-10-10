@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#e5784c">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="家庭囤货">
+<meta name="application-name" content="家庭囤货">
+<meta name="format-detection" content="telephone=no">
+<meta name="description" content="家庭囤货盘点工作台：保质期预警、补货清单、定期盘点，数据只存在你自己的手机里。">
+<title>家庭囤货</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<style>
+:root{
+  --bg:#f7f0e8; --card:#fffaf5; --line:#efe3d6; --line2:#e7d9ca;
+  --text:#3a2a1f; --sub:#9a8573; --faint:#c7b6a6;
+  --primary:#e5784c; --primary-d:#cf5d3e; --primary-bg:#fce6db;
+  --red:#d0433b; --red-bg:#fdeae8; --red-line:#f5cdc8;
+  --orange:#dc8429; --orange-bg:#fff2e1; --orange-line:#f3dcba;
+  --yellow:#c99a12; --yellow-bg:#fff7d9; --yellow-line:#f1e4b2;
+  --blue:#3e70b6; --blue-bg:#e8effa; --blue-line:#d3e0f4;
+  --green:#4f9757; --green-bg:#e6f3e5;
+  --r:22px; --shadow:0 6px 18px rgba(120,78,40,.07);
+  --sat:env(safe-area-inset-top,0px); --sab:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{background:var(--bg)}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC",sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.45;-webkit-text-size-adjust:100%;min-height:100vh;overscroll-behavior-y:none}
+body.lock{overflow:hidden}
+button{font:inherit;color:inherit;border:none;background:none;cursor:pointer;touch-action:manipulation}
+input,select,textarea{font:inherit;color:inherit}
+.app{max-width:560px;margin:0 auto;padding-bottom:calc(92px + var(--sab))}
+.view{display:none}.view.active{display:block;animation:fade .22s ease}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.hidden{display:none!important}
+
+/* 顶部橙色头 */
+.hero{background:linear-gradient(135deg,#ee8d55 0%,#de6448 100%);color:#fff;padding:calc(var(--sat) + 26px) 22px 26px;border-radius:0 0 30px 30px;position:relative;box-shadow:0 10px 24px rgba(214,98,62,.20)}
+.hero h1{font-size:29px;font-weight:800;letter-spacing:.5px;padding-right:64px}
+.hero .msg{font-size:14.5px;opacity:.93;margin-top:8px;padding-right:56px}
+.hero .date{font-size:13.5px;opacity:.78;margin-top:6px}
+.hero-add{position:absolute;right:20px;top:calc(var(--sat) + 22px);width:54px;height:54px;border-radius:50%;background:rgba(255,255,255,.2);color:#fff;font-size:32px;font-weight:300;line-height:1;display:flex;align-items:center;justify-content:center;box-shadow:inset 0 0 0 1px rgba(255,255,255,.28)}
+.hero-add:active{transform:scale(.93)}
+.wrap{padding:16px 16px 0}
+.card{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);padding:18px;margin-bottom:16px}
+.sec-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+.sec-head h2{font-size:18px;font-weight:800;display:flex;gap:8px;align-items:center}
+.link{color:var(--primary-d);font-weight:700;font-size:15px}
+.muted{color:var(--sub);font-size:13.5px}
+.pill{display:inline-flex;align-items:center;gap:4px;padding:4px 12px;border-radius:999px;font-size:13px;font-weight:700;white-space:nowrap}
+.pill.red{background:var(--red-bg);color:var(--red)}
+.pill.green{background:var(--green-bg);color:var(--green)}
+.banner{margin:12px 16px 0;padding:12px 14px;border-radius:16px;background:#fff4d6;color:#7a5a12;font-size:13.5px;line-height:1.5;border:1px solid #f1df9e}
+.banner b{color:#5a4008}
+
+/* 首页统计 */
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.stat{border-radius:var(--r);padding:16px 18px;text-align:left;box-shadow:var(--shadow);min-height:114px}
+.stat:active{transform:scale(.98)}
+.stat .n{font-size:36px;font-weight:800;line-height:1.1}
+.stat .l{font-size:15.5px;margin-top:6px;display:flex;gap:6px;align-items:center;font-weight:700}
+.stat .s{font-size:12.5px;opacity:.72;margin-top:3px}
+.stat.total{background:linear-gradient(135deg,#fdf1e3,#fbe4cd);color:#7a4a22}
+.stat.expired{background:linear-gradient(135deg,#fde9e7,#fbd8d5);color:#b8352e}
+.stat.soon{background:linear-gradient(135deg,#fff3e0,#fde4c0);color:#c46f1b}
+.stat.low{background:linear-gradient(135deg,#edf3fc,#dce7f8);color:#365f9e}
+.group-t{font-size:15.5px;font-weight:800;margin:16px 0 9px;display:flex;align-items:center;gap:8px}
+.group-t:first-of-type{margin-top:4px}
+.group-t .c{color:var(--sub);font-weight:500}
+.alert{display:flex;align-items:center;gap:10px;padding:13px 14px 13px 16px;border-radius:18px;margin-bottom:10px;border:1.5px solid}
+.alert.red{background:#fff5f4;border-color:var(--red-line)}
+.alert.orange{background:#fffaf1;border-color:var(--orange-line)}
+.alert.yellow{background:#fffdf3;border-color:var(--yellow-line)}
+.alert.blue{background:#f6f9fe;border-color:var(--blue-line)}
+.alert .t{font-weight:800;font-size:16.5px}
+.alert .d{font-size:13.5px;color:var(--sub);margin-top:2px}
+.alert .d b{font-weight:800}
+.alert.red .d b{color:var(--red)} .alert.orange .d b{color:var(--orange)} .alert.yellow .d b{color:var(--yellow)} .alert.blue .d b{color:var(--blue)}
+.alert .act{margin-left:auto;padding:9px 15px;border-radius:999px;font-size:14px;font-weight:800;background:#fde3dc;color:var(--primary-d);white-space:nowrap;flex-shrink:0}
+.alert .act.done{background:#efe7de;color:var(--sub)}
+.alert .act:active{transform:scale(.95)}
+.empty{text-align:center;padding:26px 10px;color:var(--sub);font-size:14px}
+.empty .big{font-size:40px;margin-bottom:6px}
+.welcome{text-align:center;padding:26px 18px}
+.welcome .big{font-size:52px}
+.welcome h3{font-size:19px;margin:8px 0 6px}
+.welcome .btns{flex-direction:column}
+
+/* 库存 */
+.tools{display:flex;gap:8px;margin-bottom:12px}
+.search{flex:1;min-width:0;display:flex;align-items:center;gap:6px;height:48px;padding:0 16px;border-radius:999px;background:var(--card);box-shadow:var(--shadow)}
+.search input{flex:1;min-width:0;border:none;outline:none;background:transparent;font-size:16px}
+.search input::placeholder{color:var(--faint)}
+.chip-sel{height:48px;border-radius:999px;background:var(--card);box-shadow:var(--shadow);border:none;padding:0 14px;font-size:15px;outline:none;appearance:none;-webkit-appearance:none;max-width:112px;text-overflow:ellipsis;font-weight:500}
+.cats{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 10px;margin:0 -16px 4px;padding-left:16px;padding-right:16px;scrollbar-width:none}
+.cats::-webkit-scrollbar{display:none}
+.cat{flex-shrink:0;display:flex;align-items:center;gap:6px;height:42px;padding:0 16px;border-radius:999px;background:var(--card);box-shadow:var(--shadow);font-size:15px;white-space:nowrap}
+.cat .dot{width:9px;height:9px}
+.cat.on{background:#3a2a1f;color:#fff}
+.filter-note{display:flex;align-items:center;justify-content:space-between;margin:0 2px 10px;font-size:13.5px;color:var(--sub)}
+.filter-note button{color:var(--primary-d);font-weight:700}
+.dot{display:inline-block;width:10px;height:10px;border-radius:3px;flex-shrink:0}
+.item{display:flex;align-items:center;gap:10px;background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);padding:16px 14px 16px 18px;margin-bottom:12px;cursor:pointer}
+.item-main{flex:1;min-width:0}
+.item-top{display:flex;align-items:center;flex-wrap:wrap;gap:6px 8px}
+.item-top .nm{font-size:17.5px;font-weight:800;word-break:break-all}
+.tg{display:inline-flex;align-items:center;gap:2px;padding:3px 10px;border-radius:999px;font-size:12.5px;font-weight:600;white-space:nowrap;background:#f3ebe2;color:#7d6a5a}
+.tg.blue{background:var(--blue-bg);color:var(--blue)}
+.tg.red{background:var(--red-bg);color:var(--red)}
+.tg.orange{background:var(--orange-bg);color:var(--orange)}
+.tg.yellow{background:var(--yellow-bg);color:var(--yellow)}
+.tg.green{background:var(--green-bg);color:var(--green)}
+.item-bot{display:flex;align-items:center;gap:12px;margin-top:10px}
+.q{font-size:28px;font-weight:800;line-height:1;white-space:nowrap}
+.q small{font-size:14px;font-weight:500;color:var(--sub);margin-left:2px}
+.q.zero{color:var(--faint)}
+.bar{flex:1;max-width:220px;height:9px;border-radius:9px;background:#efe6dc;overflow:hidden}
+.bar i{display:block;height:100%;border-radius:9px;background:#6aab6f;transition:width .15s}
+.bar i.red{background:#d9534a}
+.wl{font-size:13px;color:var(--sub);white-space:nowrap}
+.note{font-size:12.5px;color:var(--sub);margin-top:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.steps{display:flex;flex-direction:column;gap:10px;flex-shrink:0}
+.step{width:54px;height:54px;border-radius:18px;font-size:28px;font-weight:500;line-height:1;display:flex;align-items:center;justify-content:center;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+.step.plus{background:#fde3dc;color:var(--primary-d)}
+.step.minus{background:#efe9e2;color:#8c7a6b}
+.step.pressing{transform:scale(.9);filter:brightness(.95)}
+.fab{position:fixed;right:max(18px,calc(50% - 262px));bottom:calc(96px + var(--sab));width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#ee8d55,#de6448);color:#fff;font-size:36px;font-weight:300;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 22px rgba(222,100,72,.38);z-index:40}
+.fab:active{transform:scale(.93)}
+
+/* 清单 */
+.li{display:flex;align-items:center;gap:12px;background:var(--card);border-radius:20px;box-shadow:var(--shadow);padding:14px 14px 14px 16px;margin-bottom:10px}
+.ck{width:28px;height:28px;border-radius:9px;border:2px solid #d9cabb;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;font-weight:900}
+.li.on .ck{background:var(--green);border-color:var(--green)}
+.li.on .nm{text-decoration:line-through;color:var(--sub)}
+.li .info{flex:1;min-width:0}
+.li .nm{font-weight:800;font-size:16.5px}
+.li .sub{font-size:13px;color:var(--sub);margin-top:2px}
+.mini{display:flex;align-items:center;gap:4px;flex-shrink:0}
+.mini button{width:34px;height:34px;border-radius:12px;background:#f1e9e0;font-size:19px;color:#7d6a5a}
+.mini span{min-width:26px;text-align:center;font-weight:800}
+.del{width:32px;height:32px;border-radius:50%;color:var(--faint);font-size:18px;flex-shrink:0}
+.tip-card{display:flex;align-items:center;gap:12px;background:var(--blue-bg);border-radius:18px;padding:14px 16px;margin-bottom:14px;color:#2f5a96}
+.tip-card .t{flex:1;font-size:14.5px;font-weight:600}
+.tip-card button{background:#fff;color:var(--blue);font-weight:800;border-radius:999px;padding:8px 14px;font-size:14px;white-space:nowrap}
+.sub-head{font-size:14px;font-weight:700;color:var(--sub);margin:16px 4px 8px}
+
+/* 盘点 */
+.st-sec{margin-bottom:8px}
+.st-head{display:flex;align-items:center;justify-content:space-between;margin:18px 4px 10px}
+.st-head .t{font-size:17px;font-weight:800;display:flex;align-items:center;gap:6px}
+.st-head .t span{font-size:14px;color:var(--sub);font-weight:500}
+.st-cal{background:var(--primary-bg);color:var(--primary-d);font-weight:800;font-size:14px;border-radius:999px;padding:7px 14px}
+.st-cal:disabled{opacity:.45}
+.st-item{display:flex;align-items:center;gap:10px;background:var(--card);border-radius:20px;box-shadow:var(--shadow);padding:14px 14px 14px 18px;margin-bottom:10px;border:1.5px solid transparent;transition:border-color .15s,background .15s}
+.st-item.up{border-color:#bfe0c1;background:#f7fcf6}
+.st-item.down{border-color:var(--red-line);background:#fff7f6}
+.st-item .info{flex:1;min-width:0}
+.st-item .nm{font-weight:800;font-size:17px}
+.st-item .sub{font-size:13.5px;color:var(--sub);margin-top:2px}
+.st-item .df{font-weight:800;margin-left:4px}
+.st-item.up .df{color:var(--green)} .st-item.down .df{color:var(--red)} .st-item.same .df{color:var(--sub)}
+.stepper{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.sb{width:42px;height:42px;border-radius:13px;background:#efe9e2;color:#8c7a6b;font-size:22px;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+.sb.pressing{transform:scale(.9)}
+.st-in{width:58px;height:42px;border-radius:13px;border:1.5px solid var(--line2);background:#fff;text-align:center;font-size:18px;font-weight:800;outline:none;-moz-appearance:textfield}
+.st-in::-webkit-outer-spin-button,.st-in::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.st-in::placeholder{color:#cdbcab;font-weight:700}
+.st-in:focus{border-color:var(--primary)}
+.st-unit{font-size:14px;color:var(--sub);width:22px}
+.floatbar{position:fixed;left:0;right:0;bottom:calc(84px + var(--sab));z-index:40;padding:0 16px;pointer-events:none}
+.floatbar button{pointer-events:auto;display:block;width:100%;max-width:528px;margin:0 auto;height:56px;border-radius:20px;background:linear-gradient(135deg,#ee8d55,#de6448);color:#fff;font-size:17px;font-weight:800;box-shadow:0 10px 22px rgba(222,100,72,.35)}
+.floatbar button.idle{background:rgba(120,100,85,.72);box-shadow:0 8px 18px rgba(0,0,0,.12);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.st-pad{height:70px}
+
+/* 设置 */
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tile{background:#fff;border-radius:20px;padding:18px 10px 16px;text-align:center;box-shadow:0 3px 10px rgba(120,78,40,.06);border:1px solid #f3eadf}
+.tile:active{transform:scale(.97)}
+.tile .i{font-size:32px;line-height:1.2}
+.tile .t{font-size:17px;font-weight:800;margin-top:6px}
+.tile .s{font-size:13px;color:var(--sub);margin-top:3px}
+.data-note{font-size:14px;color:var(--sub);margin-top:14px;line-height:1.7}
+.data-note b{color:var(--text)}
+.row-btns{display:flex;gap:10px;margin-top:12px}
+.row-btns .btn{flex:1;height:48px;font-size:15px}
+.cat-row{display:flex;align-items:center;gap:12px;padding:14px 2px;border-bottom:1.5px dashed var(--line)}
+.cat-row:last-child{border-bottom:none}
+.cat-row .main{flex:1;min-width:0;cursor:pointer}
+.cat-row .nm{font-size:17px;font-weight:800;display:flex;align-items:center;gap:8px}
+.cat-row .nm .e{font-size:22px}
+.cat-row .s{font-size:13.5px;color:var(--sub);margin-top:2px}
+.trash{width:40px;height:40px;border-radius:12px;font-size:19px;opacity:.55}
+.locs{display:flex;flex-wrap:wrap;gap:10px}
+.loc{display:flex;align-items:center;gap:6px;height:42px;padding:0 6px 0 16px;border-radius:999px;background:#f3ebe2;font-size:15.5px;font-weight:600}
+.loc .c{color:var(--sub);font-weight:500}
+.loc .x{width:28px;height:28px;border-radius:50%;color:var(--sub);font-size:15px}
+.add-row{display:flex;gap:10px;margin-top:14px}
+.add-row .in{flex:1;min-width:0}
+.add-row .btn{height:50px;padding:0 22px}
+.set-row{display:flex;align-items:center;gap:12px;padding:13px 2px;border-bottom:1px solid var(--line);font-size:15.5px}
+.set-row:last-child{border-bottom:none}
+.set-row .k{flex:1}
+.set-row .k small{display:block;color:var(--sub);font-size:12.5px;margin-top:1px}
+.set-row .v{color:var(--sub);font-size:14px;text-align:right}
+.set-row.btnrow{cursor:pointer}
+.set-row.danger .k{color:var(--red)}
+.steps-guide{counter-reset:s;list-style:none;margin-top:8px}
+.steps-guide li{counter-increment:s;position:relative;padding:6px 0 6px 34px;font-size:14.5px;line-height:1.55}
+.steps-guide li::before{content:counter(s);position:absolute;left:0;top:7px;width:24px;height:24px;border-radius:50%;background:var(--primary-bg);color:var(--primary-d);font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+.seg{display:flex;background:#f1e9e0;border-radius:12px;padding:3px;margin:6px 0 4px}
+.seg button{flex:1;height:34px;border-radius:10px;font-size:14px;font-weight:700;color:var(--sub)}
+.seg button.on{background:#fff;color:var(--text);box-shadow:0 1px 4px rgba(0,0,0,.08)}
+
+/* 底部导航 */
+.nav{position:fixed;left:0;right:0;bottom:0;z-index:50;background:rgba(255,250,245,.95);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid var(--line);padding:8px 0 calc(6px + var(--sab))}
+.nav-in{max-width:560px;margin:0 auto;display:flex}
+.nav button{flex:1;display:flex;flex-direction:column;align-items:center;gap:1px;font-size:12.5px;color:var(--sub);position:relative;padding:2px 0}
+.nav .ic{font-size:27px;line-height:1.15;opacity:.82;filter:saturate(.75)}
+.nav button.on{color:var(--primary-d);font-weight:800}
+.nav button.on .ic{opacity:1;filter:none}
+.nav .badge{position:absolute;top:-2px;left:calc(50% + 9px);background:var(--red);color:#fff;font-size:10.5px;min-width:18px;height:18px;border-radius:9px;padding:0 5px;display:flex;align-items:center;justify-content:center;font-weight:800}
+
+/* 底部弹层 */
+.mask{position:fixed;inset:0;background:rgba(45,28,16,.4);z-index:100;display:none;align-items:flex-end;justify-content:center}
+.mask.show{display:flex}
+.sheet{background:#fffaf4;width:100%;max-width:560px;border-radius:30px 30px 0 0;padding:10px 20px calc(22px + var(--sab));max-height:92vh;overflow-y:auto;-webkit-overflow-scrolling:touch;animation:up .3s cubic-bezier(.2,.8,.2,1)}
+@keyframes up{from{transform:translateY(100%)}to{transform:none}}
+.grab{width:46px;height:5px;border-radius:3px;background:#e2d5c7;margin:2px auto 16px}
+.sheet-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;gap:10px}
+.sheet-h h3{font-size:22px;font-weight:800}
+.x-btn{width:42px;height:42px;border-radius:50%;background:#f0e8df;color:var(--sub);font-size:20px;flex-shrink:0}
+.f{margin-bottom:14px;min-width:0}
+.f label{display:block;font-size:14.5px;color:var(--sub);font-weight:700;margin-bottom:8px}
+.f label i{color:var(--red);font-style:normal}
+.in{display:block;width:100%;min-width:0;height:52px;padding:0 16px;border:1.5px solid var(--line2);border-radius:17px;background:#fff;font-size:16px;outline:none;appearance:none;-webkit-appearance:none}
+textarea.in{height:auto;min-height:80px;padding:13px 16px;resize:none;line-height:1.5}
+.in:focus{border-color:var(--primary)}
+select.in{background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='20' viewBox='0 0 14 20'%3E%3Cpath d='M3 8l4-4 4 4M3 12l4 4 4-4' fill='none' stroke='%233a2a1f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 16px center/12px 18px;padding-right:40px}
+input[type=date].in{line-height:49px}
+input[list]::-webkit-calendar-picker-indicator{display:none!important}
+input[type=date].in::-webkit-date-and-time-value{text-align:left}
+.row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+.btns{display:flex;gap:12px;margin-top:20px}
+.btn{height:54px;border-radius:19px;font-size:16.5px;font-weight:800;padding:0 22px;white-space:nowrap}
+.btn.ghost{background:#fff;border:1.5px solid var(--line2);color:var(--text)}
+.btn.main{flex:1;background:linear-gradient(135deg,#ee8d55,#de6448);color:#fff;box-shadow:0 8px 18px rgba(222,100,72,.28)}
+.btn.soft{background:var(--primary-bg);color:var(--primary-d)}
+.btn.danger{background:var(--red-bg);color:var(--red)}
+.btn:active{transform:scale(.97)}
+.emoji-pick{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.emoji-pick button{width:42px;height:42px;border-radius:12px;background:#f3ebe2;font-size:22px}
+.colors{display:flex;flex-wrap:wrap;gap:10px}
+.colors button{width:36px;height:36px;border-radius:12px;box-shadow:inset 0 0 0 3px rgba(255,255,255,.6)}
+.colors button.on{outline:3px solid var(--text);outline-offset:2px}
+.code{font-family:ui-monospace,Menlo,monospace;font-size:12px;word-break:break-all;min-height:120px}
+.hint{font-size:13px;color:var(--sub);line-height:1.6;margin-top:-4px;margin-bottom:12px}
+
+.toast{position:fixed;left:50%;top:calc(var(--sat) + 14px);transform:translate(-50%,-140%);background:rgba(45,32,24,.92);color:#fff;padding:11px 18px;border-radius:999px;font-size:14.5px;z-index:300;opacity:0;transition:all .28s;max-width:calc(100% - 32px);display:flex;align-items:center;gap:12px;pointer-events:none;white-space:nowrap}
+.toast.show{transform:translate(-50%,0);opacity:1;pointer-events:auto}
+.toast span{overflow:hidden;text-overflow:ellipsis}
+.toast button{color:#ffb489;font-weight:800;font-size:14.5px}
+</style>
+</head>
+<body>
+<div class="app">
+  <div id="wx-banner" class="banner hidden" style="margin-top:calc(var(--sat) + 12px)">⚠️ 你正在<b>微信内置浏览器</b>里打开。请点右上角 <b>···</b> →「在浏览器打开」（iPhone 选 Safari），再添加到主屏幕。否则数据可能丢失。</div>
+
+  <!-- 首页 -->
+  <section class="view" id="v-home">
+    <div class="hero">
+      <h1 id="h-greet">你好 ☀️</h1>
+      <div class="msg" id="h-msg"></div>
+      <div class="date js-date"></div>
+      <button class="hero-add" data-act="add" aria-label="添加物品">+</button>
+    </div>
+    <div class="wrap" id="home-body"></div>
+  </section>
+
+  <!-- 库存 -->
+  <section class="view" id="v-inv">
+    <div class="hero">
+      <h1>库存管理</h1>
+      <div class="date js-date"></div>
+      <button class="hero-add" data-act="add" aria-label="添加物品">+</button>
+    </div>
+    <div class="wrap">
+      <div class="tools">
+        <label class="search"><span>🔍</span><input id="q" type="search" placeholder="搜索物品名称…" autocomplete="off" enterkeyhint="search"></label>
+        <select class="chip-sel" id="f-loc" aria-label="位置筛选"></select>
+        <select class="chip-sel" id="f-sort" aria-label="排序">
+          <option value="name">按名称</option>
+          <option value="expiry">按到期</option>
+          <option value="stock">按余量</option>
+          <option value="recent">最近添加</option>
+        </select>
+      </div>
+      <div class="cats" id="f-cats"></div>
+      <div class="filter-note" id="f-note"></div>
+      <div id="inv-list"></div>
+    </div>
+    <button class="fab" data-act="add" aria-label="添加物品">+</button>
+  </section>
+
+  <!-- 清单 -->
+  <section class="view" id="v-list">
+    <div class="hero">
+      <h1>购物清单</h1>
+      <div class="msg" id="l-msg"></div>
+      <div class="date js-date"></div>
+      <button class="hero-add" data-act="list-add" aria-label="添加到清单">+</button>
+    </div>
+    <div class="wrap" id="list-body"></div>
+  </section>
+
+  <!-- 盘点 -->
+  <section class="view" id="v-st">
+    <div class="hero">
+      <h1>定期盘点</h1>
+      <div class="date js-date"></div>
+      <button class="hero-add" data-act="add" aria-label="添加物品">+</button>
+    </div>
+    <div class="wrap">
+      <div class="card">
+        <div class="sec-head" style="margin-bottom:8px"><h2>📋 盘点说明</h2></div>
+        <div style="font-size:14.5px;line-height:1.75;color:#6d5a4b">按存放位置<b style="color:var(--text)">逐区清点实物数量</b>，用 −/+ 或直接输入「实际数量」，只改有差异的就行。改完点「校准本区」或底部「一键校准」，账面数自动更新为实盘数。</div>
+        <div class="muted" style="margin-top:10px" id="st-last"></div>
+      </div>
+      <div id="st-body"></div>
+      <div class="st-pad"></div>
+    </div>
+    <div class="floatbar" id="st-float"><button data-act="st-all" id="st-all"></button></div>
+  </section>
+
+  <!-- 设置 -->
+  <section class="view" id="v-set">
+    <div class="hero">
+      <h1>设置</h1>
+      <div class="date js-date"></div>
+    </div>
+    <div class="wrap">
+      <div class="card">
+        <div class="sec-head"><h2>💾 数据备份</h2></div>
+        <div class="tiles">
+          <button class="tile" data-act="exp-csv"><div class="i">📊</div><div class="t">导出 CSV</div><div class="s">Excel 可直接打开</div></button>
+          <button class="tile" data-act="exp-json"><div class="i">📤</div><div class="t">导出备份</div><div class="s">完整数据 JSON</div></button>
+          <button class="tile" data-act="imp-csv"><div class="i">📥</div><div class="t">导入 CSV</div><div class="s">按名称+位置合并</div></button>
+          <button class="tile" data-act="imp-json"><div class="i">♻️</div><div class="t">恢复备份</div><div class="s">整份覆盖</div></button>
+        </div>
+        <div class="data-note" id="data-note"></div>
+        <div id="undo-row"></div>
+      </div>
+
+      <div class="card">
+        <div class="sec-head"><h2>👨‍👩‍👧 家人同步</h2></div>
+        <div class="muted" style="line-height:1.7">不用注册、不用服务器：一方点「生成同步码」发到微信，另一方长按复制，回来点「粘贴同步码」即可整份同步（会覆盖对方数据，可撤销）。</div>
+        <div class="row-btns">
+          <button class="btn main" data-act="sync-out">📨 生成同步码</button>
+          <button class="btn soft" data-act="sync-in">📋 粘贴同步码</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="sec-head"><h2>🏷️ 分类管理</h2><button class="link" data-act="cat-new">＋ 新增分类</button></div>
+        <div id="cat-list"></div>
+      </div>
+
+      <div class="card">
+        <div class="sec-head"><h2>📍 存放位置</h2><span class="muted">点名称可改名</span></div>
+        <div class="locs" id="loc-list"></div>
+        <div class="add-row">
+          <input class="in" id="loc-new" placeholder="新位置名称，如：阳台储物柜" maxlength="20" enterkeyhint="done">
+          <button class="btn main" style="flex:none" data-act="loc-add">添加</button>
+        </div>
+      </div>
+
+      <div class="card" id="install-card">
+        <div class="sec-head"><h2>📱 安装到手机</h2><span id="install-state"></span></div>
+        <div id="install-body"></div>
+      </div>
+
+      <div class="card">
+        <div class="sec-head"><h2>⚙️ 其他</h2></div>
+        <div class="set-row"><div class="k">存储状态<small>数据只存在这台手机的这个浏览器 / 桌面 App 里</small></div><div class="v" id="persist-state">检测中…</div></div>
+        <div class="set-row btnrow" data-act="sample"><div class="k">加载示例数据<small>先看看效果，随时可清空</small></div><div class="v">›</div></div>
+        <div class="set-row btnrow danger" data-act="wipe"><div class="k">清空所有数据<small>清空前会自动留一份可撤销的快照</small></div><div class="v">›</div></div>
+        <div class="set-row"><div class="k">版本</div><div class="v" id="ver"></div></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<nav class="nav"><div class="nav-in">
+  <button data-tab="home"><span class="ic">🏠</span>首页</button>
+  <button data-tab="inv"><span class="ic">📦</span>库存</button>
+  <button data-tab="list"><span class="ic">🛒</span>清单<i class="badge hidden" id="nav-badge"></i></button>
+  <button data-tab="st"><span class="ic">📋</span>盘点</button>
+  <button data-tab="set"><span class="ic">⚙️</span>设置</button>
+</div></nav>
+
+<!-- 物品编辑 -->
+<div class="mask" id="m-item"><div class="sheet">
+  <div class="grab"></div>
+  <div class="sheet-h"><h3 id="mi-title">🆕 添加物品</h3><button class="x-btn" data-act="close">✕</button></div>
+  <div class="f"><label>物品名称 <i>*</i></label><input class="in" id="mi-name" placeholder="如：抽纸 / 大米 / 面霜" maxlength="30" list="dl-names" autocomplete="off"></div>
+  <div class="row">
+    <div class="f"><label>分类</label><select class="in" id="mi-cat"></select></div>
+    <div class="f"><label>存放位置</label><select class="in" id="mi-loc"></select></div>
+  </div>
+  <div class="row">
+    <div class="f"><label>当前数量</label><input class="in" id="mi-qty" type="number" inputmode="decimal" min="0" step="1" value="1"></div>
+    <div class="f"><label>单位</label><input class="in" id="mi-unit" value="件" maxlength="4" list="dl-units"></div>
+  </div>
+  <div class="row">
+    <div class="f"><label>保质期（最近一批）</label><input class="in" id="mi-exp" type="date"></div>
+    <div class="f"><label>安全库存水位</label><input class="in" id="mi-min" type="number" inputmode="decimal" min="0" step="1" value="1"></div>
+  </div>
+  <div class="f"><label>备注</label><textarea class="in" id="mi-note" rows="2" placeholder="品牌、规格、开封提醒…" maxlength="120"></textarea></div>
+  <div class="btns" id="mi-btns">
+    <button class="btn ghost" data-act="close">取消</button>
+    <button class="btn danger hidden" id="mi-del" data-act="item-del">删除</button>
+    <button class="btn main" data-act="item-save">保存</button>
+  </div>
+</div></div>
+
+<!-- 分类编辑 -->
+<div class="mask" id="m-cat"><div class="sheet">
+  <div class="grab"></div>
+  <div class="sheet-h"><h3 id="mc-title">新增分类</h3><button class="x-btn" data-act="close">✕</button></div>
+  <div class="row" style="grid-template-columns:96px minmax(0,1fr)">
+    <div class="f"><label>图标</label><input class="in" id="mc-emoji" maxlength="4" style="text-align:center;font-size:24px"></div>
+    <div class="f"><label>分类名称 <i>*</i></label><input class="in" id="mc-name" maxlength="8" placeholder="如：宠物用品"></div>
+  </div>
+  <div class="emoji-pick" id="mc-emojis"></div>
+  <div class="f" style="margin-top:16px"><label>颜色</label><div class="colors" id="mc-colors"></div></div>
+  <div class="btns"><button class="btn ghost" data-act="close">取消</button><button class="btn main" data-act="cat-save">保存</button></div>
+</div></div>
+
+<!-- 清单项 -->
+<div class="mask" id="m-list"><div class="sheet">
+  <div class="grab"></div>
+  <div class="sheet-h"><h3>🛒 加到购物清单</h3><button class="x-btn" data-act="close">✕</button></div>
+  <div class="f"><label>要买什么 <i>*</i></label><input class="in" id="ml-name" maxlength="30" list="dl-names" placeholder="如：洗衣液" autocomplete="off"></div>
+  <div class="row">
+    <div class="f"><label>数量</label><input class="in" id="ml-qty" type="number" inputmode="decimal" min="1" value="1"></div>
+    <div class="f"><label>单位</label><input class="in" id="ml-unit" value="件" maxlength="4" list="dl-units"></div>
+  </div>
+  <div class="btns"><button class="btn ghost" data-act="close">取消</button><button class="btn main" data-act="list-save">加入清单</button></div>
+</div></div>
+
+<!-- 通用输入 -->
+<div class="mask" id="m-ask"><div class="sheet">
+  <div class="grab"></div>
+  <div class="sheet-h"><h3 id="ma-title"></h3><button class="x-btn" data-act="close">✕</button></div>
+  <div class="f"><input class="in" id="ma-input" maxlength="20" enterkeyhint="done"></div>
+  <div class="btns"><button class="btn ghost" data-act="close">取消</button><button class="btn main" data-act="ask-ok">确定</button></div>
+</div></div>
+
+<!-- 同步码 -->
+<div class="mask" id="m-sync"><div class="sheet">
+  <div class="grab"></div>
+  <div class="sheet-h"><h3 id="ms-title">同步码</h3><button class="x-btn" data-act="close">✕</button></div>
+  <div class="hint" id="ms-hint"></div>
+  <div class="f"><textarea class="in code" id="ms-text" rows="6" spellcheck="false" autocomplete="off"></textarea></div>
+  <div class="btns" id="ms-btns-out">
+    <button class="btn ghost" data-act="sync-share">分享…</button>
+    <button class="btn main" data-act="sync-copy">复制同步码</button>
+  </div>
+  <div class="btns" id="ms-btns-in">
+    <button class="btn ghost" data-act="sync-paste">从剪贴板粘贴</button>
+    <button class="btn main" data-act="sync-apply">导入并覆盖</button>
+  </div>
+</div></div>
+
+<datalist id="dl-names"></datalist>
+<datalist id="dl-units"></datalist>
+<input type="file" id="file-json" accept=".json,.txt,application/json,text/plain" hidden>
+<input type="file" id="file-csv" accept=".csv,text/csv,text/comma-separated-values,application/vnd.ms-excel" hidden>
+<div class="toast" id="toast"></div>
+
+<script>
+'use strict';
+const APP_VERSION = '2.0.0';
+const KEY = 'hs_data_v2', UNDO_KEY = 'hs_undo', DRAFT_KEY = 'hs_st_draft', UI_KEY = 'hs_ui';
+const DEFAULT_CATS = [
+  {id:'food',  name:'食品粮油', emoji:'🍚', color:'#e8894f', builtin:true},
+  {id:'daily', name:'日用消耗', emoji:'🧻', color:'#4fa89b', builtin:true},
+  {id:'med',   name:'药品应急', emoji:'💊', color:'#e0607e', builtin:true},
+  {id:'beauty',name:'美妆护肤', emoji:'💄', color:'#b07ad6', builtin:true},
+  {id:'cloth', name:'衣物鞋帽', emoji:'👕', color:'#5b8fd6', builtin:true},
+  {id:'fun',   name:'体育文娱', emoji:'⚽', color:'#7aa84f', builtin:true},
+];
+const DEFAULT_LOCS = ['橱柜','冰箱','壁橱','电视机柜','餐桌抽屉','办公桌','梳妆台','药品箱'];
+const PALETTE = ['#e8894f','#4fa89b','#e0607e','#b07ad6','#5b8fd6','#7aa84f','#d4a21c','#8d6e63','#ef6c57','#26a0c4'];
+const EMOJIS = ['🍚','🥫','🧂','🍜','🥛','🍪','🧻','🧴','🧼','🪥','💊','🩹','💄','🧴','👕','🧦','⚽','🔋','🐱','🍼','🧹','📦'];
+const UNITS = ['件','个','袋','包','盒','瓶','罐','卷','支','片','板','节','箱','桶','斤','升','双','套','提','块'];
+
+/* ---------- 工具 ---------- */
+const $ = s => document.querySelector(s);
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const num = v => { const n = parseFloat(v); return isFinite(n) && n > 0 ? Math.round(n * 100) / 100 : 0; };
+const fmt = n => Number.isInteger(n) ? String(n) : String(+n.toFixed(2));
+const ymd = d => d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+const todayStr = () => ymd(new Date());
+function normDate(s){
+  if (!s) return null;
+  const m = String(s).trim().match(/^(\d{4})\D(\d{1,2})\D(\d{1,2})/);
+  if (!m) return null;
+  const d = new Date(+m[1], +m[2] - 1, +m[3]);
+  return isNaN(d) ? null : ymd(d);
+}
+function daysLeft(s){
+  if (!s) return null;
+  const [y, m, d] = s.split('-').map(Number), t = new Date();
+  return Math.round((Date.UTC(y, m - 1, d) - Date.UTC(t.getFullYear(), t.getMonth(), t.getDate())) / 864e5);
+}
+const cnDate = (d = new Date()) => `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日 · 周${'日一二三四五六'[d.getDay()]}`;
+const lsGet = k => { try { return localStorage.getItem(k); } catch (e) { return null; } };
+const lsSet = (k, v) => { try { localStorage.setItem(k, v); return true; } catch (e) { return false; } };
+const lsDel = k => { try { localStorage.removeItem(k); } catch (e) {} };
+const vibrate = () => { try { navigator.vibrate && navigator.vibrate(8); } catch (e) {} };
+
+/* ---------- 数据 ---------- */
+let S;
+const blank = () => ({version:2, items:[], categories:DEFAULT_CATS.map(c => ({...c})), locations:[...DEFAULT_LOCS], shopping:[], meta:{lastStocktake:null, lastBackup:null}});
+
+function normalize(d){
+  const b = blank(), out = {version:2};
+  out.categories = (Array.isArray(d.categories) && d.categories.length ? d.categories : b.categories)
+    .filter(c => c && c.name).map(c => ({id:String(c.id || uid()), name:String(c.name).trim(), emoji:String(c.emoji || '📦'), color:String(c.color || '#a89888'), builtin:!!c.builtin}));
+  const catIds = new Set(out.categories.map(c => c.id));
+  out.locations = (Array.isArray(d.locations) ? d.locations : b.locations).filter(x => typeof x === 'string' && x.trim()).map(x => x.trim());
+  out.items = (Array.isArray(d.items) ? d.items : []).filter(i => i && String(i.name || '').trim()).map(i => ({
+    id:String(i.id || uid()), name:String(i.name).trim(), category:catIds.has(String(i.category)) ? String(i.category) : '',
+    location:String(i.location || '').trim(), qty:num(i.qty), unit:String(i.unit || '件').trim() || '件', minQty:num(i.minQty),
+    expiry:normDate(i.expiry), note:String(i.note || ''), createdAt:+i.createdAt || Date.now(), updatedAt:+i.updatedAt || Date.now()
+  }));
+  out.items.forEach(i => { if (i.location && !out.locations.includes(i.location)) out.locations.push(i.location); });
+  out.locations = [...new Set(out.locations)];
+  out.shopping = (Array.isArray(d.shopping) ? d.shopping : []).filter(s => s && String(s.name || '').trim()).map(s => ({
+    id:String(s.id || uid()), name:String(s.name).trim(), qty:num(s.qty) || 1, unit:String(s.unit || '件'), location:String(s.location || ''), itemId:s.itemId ? String(s.itemId) : '', checked:!!s.checked
+  }));
+  out.meta = Object.assign({lastStocktake:null, lastBackup:null}, d.meta || {});
+  return out;
+}
+// 兼容上一版（v1.x）的数据：{inventory:[], shoppingList:[]}，分类存的是中文名
+function fromV1(d){
+  const s = blank();
+  const catId = n => {
+    if (!n) return '';
+    let c = s.categories.find(c => c.name === n);
+    if (!c) { c = {id:uid(), name:String(n), emoji:'📦', color:PALETTE[s.categories.length % PALETTE.length], builtin:false}; s.categories.push(c); }
+    return c.id;
+  };
+  s.items = (d.inventory || []).map(i => ({...i, id:String(i.id || uid()), category:catId(i.category)}));
+  s.shopping = (d.shoppingList || []).map(x => ({...x, id:String(x.id || uid())}));
+  return normalize(s);
+}
+function parseBackup(o){
+  if (o && o.app === 'home-stock' && o.data) return normalize(o.data);
+  if (o && Array.isArray(o.items)) return normalize(o);
+  if (o && Array.isArray(o.inventory)) return fromV1(o);
+  throw new Error('不是有效的囤货备份');
+}
+function load(){
+  const raw = lsGet(KEY);
+  if (raw) { try { S = normalize(JSON.parse(raw)); return; } catch (e) {} }
+  const v1 = lsGet('homeInventory');
+  if (v1) { try { S = fromV1({inventory:JSON.parse(v1), shoppingList:JSON.parse(lsGet('homeShoppingList') || '[]')}); save(); return; } catch (e) {} }
+  S = blank();
+}
+function save(){
+  if (!lsSet(KEY, JSON.stringify(S))) toast('⚠️ 保存失败：浏览器存储不可用或已满');
+  askPersist();
+}
+let persistAsked = false;
+function askPersist(){
+  if (persistAsked || !navigator.storage || !navigator.storage.persist) return;
+  persistAsked = true; navigator.storage.persist().then(updatePersist).catch(() => {});
+}
+// 撤销快照（单槽）
+function snapshot(label){ lsSet(UNDO_KEY, JSON.stringify({label, at:Date.now(), data:S})); }
+function undo(){
+  const raw = lsGet(UNDO_KEY); if (!raw) return toast('没有可撤销的操作');
+  try { const u = JSON.parse(raw); S = normalize(u.data); save(); lsDel(UNDO_KEY); refresh(); toast('↩️ 已撤销「' + u.label + '」'); } catch (e) { toast('撤销失败'); }
+}
+
+const getItem = id => S.items.find(i => i.id === id);
+const catOf = id => S.categories.find(c => c.id === id) || {id:'', name:'未分类', emoji:'📦', color:'#c2b2a3'};
+function stat(i){
+  const dl = i.qty > 0 ? daysLeft(i.expiry) : null;
+  return {dl, expired:dl !== null && dl < 0, soon:dl !== null && dl >= 0 && dl <= 7, month:dl !== null && dl > 7 && dl <= 30, low:i.minQty > 0 && i.qty <= i.minQty};
+}
+const inList = i => S.shopping.some(s => s.itemId === i.id || s.name === i.name);
+const suggestQty = i => Math.max(1, Math.ceil(i.minQty * 2 - i.qty));
+
+/* ---------- UI 状态（仅本机偏好） ---------- */
+let UI = {tab:'home', cat:'', loc:'', sort:'name', only:'', lastCat:'food', lastLoc:''};
+try { Object.assign(UI, JSON.parse(lsGet(UI_KEY) || '{}')); } catch (e) {}
+const saveUI = () => lsSet(UI_KEY, JSON.stringify(UI));
+let draft = {};
+try { draft = JSON.parse(lsGet(DRAFT_KEY) || '{}') || {}; } catch (e) {}
+const saveDraft = () => lsSet(DRAFT_KEY, JSON.stringify(draft));
+
+/* ---------- 导航 ---------- */
+function go(tab){
+  UI.tab = tab; saveUI();
+  document.querySelectorAll('.view').forEach(v => v.classList.toggle('active', v.id === 'v-' + tab));
+  document.querySelectorAll('.nav button').forEach(b => b.classList.toggle('on', b.dataset.tab === tab));
+  render(tab); window.scrollTo(0, 0);
+}
+function render(tab = UI.tab){
+  document.querySelectorAll('.js-date').forEach(e => e.textContent = cnDate());
+  ({home:renderHome, inv:renderInv, list:renderList, st:renderSt, set:renderSet})[tab]();
+  updateBadge();
+}
+const refresh = () => render();
+function updateBadge(){
+  const n = S.shopping.filter(s => !s.checked).length, b = $('#nav-badge');
+  b.textContent = n; b.classList.toggle('hidden', !n);
+}
+
+/* ---------- 首页 ---------- */
+function renderHome(){
+  const h = new Date().getHours();
+  $('#h-greet').textContent = h < 5 ? '夜深了 🌙' : h < 11 ? '早上好 ☀️' : h < 13 ? '中午好 🌤️' : h < 18 ? '下午好 ☕' : '晚上好 🌙';
+  let total = 0; const ex = [], soon = [], month = [], low = [];
+  S.items.forEach(i => { total += i.qty; const st = stat(i); i._st = st;
+    if (st.expired) ex.push(i); else if (st.soon) soon.push(i); else if (st.month) month.push(i);
+    if (st.low) low.push(i); });
+  const byDl = (a, b) => a._st.dl - b._st.dl; ex.sort(byDl); soon.sort(byDl); month.sort(byDl);
+  $('#h-msg').textContent = !S.items.length ? '从记下第一件囤货开始吧～'
+    : ex.length ? `家里的囤货还好吗？有 ${ex.length} 件已过期，记得处理～`
+    : soon.length ? `有 ${soon.length} 件 7 天内到期，优先用掉哦～`
+    : low.length ? `有 ${low.length} 样快用完了，记得补货～` : '一切井井有条，继续保持 ✨';
+
+  if (!S.items.length) {
+    $('#home-body').innerHTML = `<div class="card welcome"><div class="big">🏡</div><h3>欢迎使用家庭囤货</h3>
+      <div class="muted">记下家里囤的东西，到期会提醒、快用完会进清单。<br>数据只保存在这台手机上。</div>
+      <div class="btns"><button class="btn main" data-act="add">＋ 添加第一件物品</button>
+      <button class="btn soft" data-act="imp-json">♻️ 恢复旧备份 / 同步码</button>
+      <button class="btn ghost" data-act="sample">👀 先看看示例数据</button></div></div>`;
+    return;
+  }
+  const lowNeed = low.filter(i => !inList(i)).length;
+  const backupDays = S.meta.lastBackup ? -daysLeft(S.meta.lastBackup) : null;
+  let html = `<div class="stats">
+    <button class="stat total" data-act="goto" data-to="inv" data-only=""><div class="n">${S.items.length}</div><div class="l">📦 在管物品</div><div class="s">共计 ${fmt(total)} 件</div></button>
+    <button class="stat expired" data-act="goto" data-to="inv" data-only="expired"><div class="n">${ex.length}</div><div class="l">🔴 已过期</div><div class="s">${ex.length ? '尽快处理' : '没有过期的'}</div></button>
+    <button class="stat soon" data-act="goto" data-to="inv" data-only="soon"><div class="n">${soon.length}</div><div class="l">🟠 7天内到期</div><div class="s">优先吃掉</div></button>
+    <button class="stat low" data-act="goto" data-to="list"><div class="n">${low.length}</div><div class="l">📦 待补货</div><div class="s">${lowNeed ? lowNeed + ' 样还没进清单' : '看看清单'}</div></button></div>`;
+  const pending = ex.length + soon.length + month.length + low.length;
+  html += `<div class="card"><div class="sec-head"><h2>⚠️ 预警中心</h2>${pending ? `<span class="pill red">${pending} 项待处理</span>` : '<span class="pill green">全部正常</span>'}</div>`;
+  if (!pending) html += `<div class="empty"><div class="big">🎉</div>没有需要处理的，家里状态很好</div>`;
+  const group = (title, list, cls, text, btn) => list.length ? `<div class="group-t">${title} <span class="c">(${list.length})</span></div>` + list.map(i => `
+    <div class="alert ${cls}"><div style="min-width:0"><div class="t">${esc(i.name)}</div><div class="d">${text(i)}${i.location ? ' · ' + esc(i.location) : ''}</div></div>${btn(i)}</div>`).join('') : '';
+  const useBtn = (label) => i => `<button class="act" data-act="use" data-id="${i.id}">${label}1${esc(i.unit)}</button>`;
+  html += group('🔴 已过期', ex, 'red', i => `已过期 <b>${-i._st.dl} 天</b>`, useBtn('处理'));
+  html += group('🟠 7天内到期', soon, 'orange', i => i._st.dl === 0 ? '<b>今天到期</b>' : `还剩 <b>${i._st.dl} 天</b>`, useBtn('用掉'));
+  html += group('🟡 30天内到期', month, 'yellow', i => `还剩 <b>${i._st.dl} 天</b>`, useBtn('用掉'));
+  html += group('📦 低于安全水位', low, 'blue', i => `仅剩 <b>${fmt(i.qty)} ${esc(i.unit)}</b>（水位 ${fmt(i.minQty)}）`,
+    i => inList(i) ? `<button class="act done" data-act="goto" data-to="list">已在清单</button>` : `<button class="act" data-act="to-list" data-id="${i.id}">加入清单</button>`);
+  html += `</div>`;
+  if (backupDays === null || backupDays >= 30) html += `<div class="tip-card" style="background:#fff3e6;color:#8a5520"><div class="t">💾 ${backupDays === null ? '还没导出过备份' : `已经 ${backupDays} 天没备份了`}，换手机或清缓存会丢数据</div><button data-act="exp-json" style="color:#c46f1b">立即备份</button></div>`;
+  $('#home-body').innerHTML = html;
+}
+
+/* ---------- 库存 ---------- */
+function renderInv(){
+  const locSel = $('#f-loc');
+  locSel.innerHTML = `<option value="">全部位置</option>` + S.locations.map(l => `<option value="${esc(l)}">${esc(l)}</option>`).join('') + (S.items.some(i => !i.location) ? `<option value="__none">未设置位置</option>` : '');
+  if (UI.loc && UI.loc !== '__none' && !S.locations.includes(UI.loc)) UI.loc = '';
+  locSel.value = UI.loc; $('#f-sort').value = UI.sort;
+  if (UI.cat && !S.categories.some(c => c.id === UI.cat) && UI.cat !== '__none') UI.cat = '';
+  $('#f-cats').innerHTML = `<button class="cat ${UI.cat === '' ? 'on' : ''}" data-act="f-cat" data-id="">全部</button>` +
+    S.categories.map(c => `<button class="cat ${UI.cat === c.id ? 'on' : ''}" data-act="f-cat" data-id="${c.id}"><span class="dot" style="background:${esc(c.color)}"></span>${esc(c.emoji)} ${esc(c.name)}</button>`).join('') +
+    (S.items.some(i => !i.category) ? `<button class="cat ${UI.cat === '__none' ? 'on' : ''}" data-act="f-cat" data-id="__none">📦 未分类</button>` : '');
+  renderInvList();
+}
+function renderInvList(){
+  const q = $('#q').value.trim().toLowerCase();
+  let list = S.items.filter(i => {
+    if (UI.cat && (UI.cat === '__none' ? i.category : i.category !== UI.cat)) return false;
+    if (UI.loc && (UI.loc === '__none' ? i.location : i.location !== UI.loc)) return false;
+    if (UI.only) { const st = stat(i); if (UI.only === 'expired' && !st.expired) return false; if (UI.only === 'soon' && !st.soon) return false; if (UI.only === 'low' && !st.low) return false; }
+    if (q) { const hay = (i.name + ' ' + i.note + ' ' + i.location + ' ' + catOf(i.category).name).toLowerCase(); if (!hay.includes(q)) return false; }
+    return true;
+  });
+  const byName = (a, b) => a.name.localeCompare(b.name, 'zh-CN');
+  const sorters = {
+    name: byName,
+    expiry: (a, b) => (a.expiry && a.qty > 0 ? daysLeft(a.expiry) : 1e9) - (b.expiry && b.qty > 0 ? daysLeft(b.expiry) : 1e9) || byName(a, b),
+    stock: (a, b) => ((a.minQty ? a.qty / a.minQty : 99) - (b.minQty ? b.qty / b.minQty : 99)) || byName(a, b),
+    recent: (a, b) => b.createdAt - a.createdAt,
+  };
+  list.sort(sorters[UI.sort] || byName);
+  const onlyLabel = {expired:'已过期', soon:'7天内到期', low:'待补货'}[UI.only];
+  $('#f-note').innerHTML = onlyLabel ? `<span>仅看「${onlyLabel}」· ${list.length} 样</span><button data-act="f-only-clear">显示全部 ✕</button>`
+    : `<span>${list.length === S.items.length ? `共 ${list.length} 样` : `筛出 ${list.length} / ${S.items.length} 样`}</span><span>长按 +/− 连续调整</span>`;
+  $('#inv-list').innerHTML = list.length ? list.map(i => `<div class="item" data-act="edit" data-id="${i.id}">
+      <div class="item-main" id="im-${i.id}">${itemMain(i)}</div>
+      <div class="steps"><button class="step plus" data-step="1" data-id="${i.id}" aria-label="加一">+</button><button class="step minus" data-step="-1" data-id="${i.id}" aria-label="减一">−</button></div></div>`).join('')
+    : `<div class="empty"><div class="big">🔍</div>${S.items.length ? '没有符合条件的物品' : '还没有物品，点右下角 ＋ 添加'}</div>`;
+}
+function itemMain(i){
+  const c = catOf(i.category), st = stat(i);
+  let tags = i.location ? `<span class="tg">📍${esc(i.location)}</span>` : '';
+  if (st.low) tags += `<span class="tg blue">待补货</span>`;
+  if (st.expired) tags += `<span class="tg red">已过期${-st.dl}天</span>`;
+  else if (st.dl !== null) tags += `<span class="tg ${st.soon ? 'orange' : st.month ? 'yellow' : 'green'}">${st.dl === 0 ? '今天到期' : '剩' + st.dl + '天'}</span>`;
+  let bar = '';
+  if (i.minQty > 0) {
+    const pct = Math.min(100, i.qty / (i.minQty * 2) * 100);
+    bar = `<div class="bar"><i class="${st.low ? 'red' : ''}" style="width:${Math.max(pct, i.qty > 0 ? 6 : 0)}%"></i></div><span class="wl">水位 ${fmt(i.minQty)}${esc(i.unit)}</span>`;
+  }
+  return `<div class="item-top"><span class="dot" style="background:${esc(c.color)}" title="${esc(c.name)}"></span><span class="nm">${esc(i.name)}</span>${tags}</div>
+    <div class="item-bot"><span class="q ${i.qty ? '' : 'zero'}">${fmt(i.qty)}<small>${esc(i.unit)}</small></span>${bar}</div>${i.note ? `<div class="note">📝 ${esc(i.note)}</div>` : ''}`;
+}
+function invStep(id, d){
+  const i = getItem(id); if (!i) return;
+  const nq = Math.max(0, Math.round((i.qty + d) * 100) / 100);
+  if (nq === i.qty) return;
+  i.qty = nq; i.updatedAt = Date.now(); save(); vibrate();
+  const el = document.getElementById('im-' + id); if (el) el.innerHTML = itemMain(i);
+}
+
+/* 长按连续加减（库存 & 盘点通用） */
+let hold = null;
+document.addEventListener('pointerdown', e => {
+  const b = e.target.closest('[data-step]');
+  if (!b || (e.pointerType === 'mouse' && e.button !== 0)) return;
+  endHold(false);
+  const id = b.dataset.id, d = +b.dataset.step;
+  const fn = b.dataset.kind === 'st' ? () => stStep(id, d) : () => invStep(id, d);
+  hold = {fn, b, fired:false, n:0};
+  b.classList.add('pressing');
+  hold.t = setTimeout(() => {
+    hold.fired = true; fn();
+    const tick = () => { if (!hold) return; hold.n++; fn(); hold.iv = setTimeout(tick, hold.n > 15 ? 45 : 95); };
+    hold.iv = setTimeout(tick, 95);
+  }, 420);
+});
+function endHold(apply){
+  if (!hold) return;
+  const h = hold; hold = null;
+  clearTimeout(h.t); clearTimeout(h.iv); h.b.classList.remove('pressing');
+  if (apply && !h.fired) h.fn();
+  updateBadge();
+}
+window.addEventListener('pointerup', () => endHold(true));
+window.addEventListener('pointercancel', () => endHold(false));
+window.addEventListener('blur', () => endHold(false));
+document.addEventListener('contextmenu', e => { if (e.target.closest('[data-step]')) e.preventDefault(); });
+
+/* ---------- 清单 ---------- */
+function renderList(){
+  const todo = S.shopping.filter(s => !s.checked), done = S.shopping.filter(s => s.checked);
+  const lowOut = S.items.filter(i => stat(i).low && !inList(i));
+  $('#l-msg').textContent = todo.length ? `还有 ${todo.length} 样要买` + (done.length ? `，${done.length} 样已买到待入库` : '') : done.length ? `${done.length} 样已买到，记得一键入库` : '清单是空的，去逛逛也不怕漏买';
+  const row = s => `<div class="li ${s.checked ? 'on' : ''}">
+    <button class="ck" data-act="sl-toggle" data-id="${s.id}" aria-label="勾选">${s.checked ? '✓' : ''}</button>
+    <div class="info"><div class="nm">${esc(s.name)}</div><div class="sub">${s.checked ? '已买到 · 待入库' : '要买'} ${fmt(s.qty)} ${esc(s.unit)}${s.location ? ' · 放' + esc(s.location) : ''}</div></div>
+    <div class="mini"><button data-act="sl-dec" data-id="${s.id}">−</button><span>${fmt(s.qty)}</span><button data-act="sl-inc" data-id="${s.id}">+</button></div>
+    <button class="del" data-act="sl-del" data-id="${s.id}" aria-label="删除">✕</button></div>`;
+  let html = '';
+  if (lowOut.length) html += `<div class="tip-card"><div class="t">📦 有 ${lowOut.length} 样低于安全水位：${lowOut.slice(0, 3).map(i => esc(i.name)).join('、')}${lowOut.length > 3 ? '…' : ''}</div><button data-act="list-all-low">一键加入</button></div>`;
+  html += todo.length ? todo.map(row).join('') : (done.length ? '' : `<div class="card empty"><div class="big">🛒</div>购物清单是空的<br><span style="font-size:13px">首页「加入清单」或右上角 ＋ 手动添加</span></div>`);
+  if (done.length) html += `<div class="sub-head">✅ 已买到（${done.length}）</div>` + done.map(row).join('') +
+    `<div class="btns" style="margin-top:6px"><button class="btn main" data-act="sl-stock">✓ 已买的 ${done.length} 样一键入库</button></div>`;
+  html += `<div class="btns" style="margin-top:${done.length ? 10 : 4}px"><button class="btn ghost" style="flex:1" data-act="list-add">＋ 手动添加</button>${S.shopping.length ? `<button class="btn ghost" data-act="sl-copy">复制清单</button>` : ''}</div>`;
+  $('#list-body').innerHTML = html;
+}
+function addToList(i, silent){
+  if (inList(i)) { if (!silent) toast(i.name + ' 已经在清单里啦'); return false; }
+  S.shopping.push({id:uid(), name:i.name, qty:suggestQty(i), unit:i.unit, location:i.location, itemId:i.id, checked:false});
+  if (!silent) { save(); toast('🛒 ' + i.name + ' 已加入清单'); }
+  return true;
+}
+function stockIn(){
+  const done = S.shopping.filter(s => s.checked); if (!done.length) return;
+  snapshot('入库'); let created = 0;
+  done.forEach(s => {
+    let it = (s.itemId && getItem(s.itemId)) || S.items.find(i => i.name === s.name);
+    if (it) { it.qty = Math.round((it.qty + s.qty) * 100) / 100; it.updatedAt = Date.now(); }
+    else { created++; S.items.push({id:uid(), name:s.name, category:'', location:s.location || '', qty:s.qty, unit:s.unit, minQty:0, expiry:null, note:'', createdAt:Date.now(), updatedAt:Date.now()}); }
+  });
+  S.shopping = S.shopping.filter(s => !s.checked); save(); refresh();
+  toast(`📦 ${done.length} 样已入库${created ? `（新建 ${created} 样）` : ''}，有保质期的记得更新`, true);
+}
+
+/* ---------- 盘点 ---------- */
+function stGroups(){
+  const locs = [...S.locations]; if (S.items.some(i => !i.location)) locs.push('');
+  return locs.map(l => ({loc:l, items:S.items.filter(i => i.location === l).sort((a, b) => a.name.localeCompare(b.name, 'zh-CN'))})).filter(g => g.items.length);
+}
+const hasDiff = i => draft[i.id] !== undefined && draft[i.id] !== i.qty;
+function renderSt(){
+  Object.keys(draft).forEach(id => { if (!getItem(id)) delete draft[id]; });
+  const last = S.meta.lastStocktake;
+  $('#st-last').textContent = '🕘 上次盘点：' + (last ? `${last}（${-daysLeft(last)} 天前）${-daysLeft(last) > 31 ? '，该盘点啦' : ''}` : '从未盘点，建议每月一次');
+  const gs = stGroups();
+  $('#st-body').innerHTML = gs.length ? gs.map((g, gi) => `<div class="st-sec">
+    <div class="st-head"><div class="t">📍 ${g.loc ? esc(g.loc) : '未设置位置'} <span>${g.items.length} 件物品</span></div><button class="st-cal" data-act="st-loc" data-gi="${gi}" id="stc-${gi}">校准本区</button></div>
+    ${g.items.map(i => `<div class="st-item" id="st-${i.id}"><div class="info"><div class="nm">${esc(i.name)}</div><div class="sub">账面 ${fmt(i.qty)} ${esc(i.unit)}<span class="df"></span></div></div>
+      <div class="stepper"><button class="sb" data-step="-1" data-kind="st" data-id="${i.id}">−</button><input class="st-in" type="number" inputmode="decimal" min="0" data-id="${i.id}" placeholder="${fmt(i.qty)}"><button class="sb" data-step="1" data-kind="st" data-id="${i.id}">+</button></div><span class="st-unit">${esc(i.unit)}</span></div>`).join('')}</div>`).join('')
+    : `<div class="card empty"><div class="big">📋</div>还没有物品可以盘点</div>`;
+  S.items.forEach(i => updateStRow(i.id, true));
+  $('#st-float').classList.toggle('hidden', !gs.length);
+  updateStCount();
+}
+function updateStRow(id, setInput){
+  const i = getItem(id), row = document.getElementById('st-' + id); if (!i || !row) return;
+  const v = draft[id];
+  if (setInput) row.querySelector('.st-in').value = v === undefined ? '' : fmt(v);
+  row.classList.remove('up', 'down', 'same');
+  const df = row.querySelector('.df');
+  if (v === undefined) df.textContent = '';
+  else if (v > i.qty) { row.classList.add('up'); df.textContent = ` · 盘盈 +${fmt(v - i.qty)}`; }
+  else if (v < i.qty) { row.classList.add('down'); df.textContent = ` · 盘亏 −${fmt(i.qty - v)}`; }
+  else { row.classList.add('same'); df.textContent = ' · ✓ 一致'; }
+}
+function updateStCount(){
+  const n = S.items.filter(hasDiff).length, b = $('#st-all');
+  b.textContent = n ? `✓ 一键校准全部差异（${n} 项）` : '✓ 一键校准全部差异'; b.classList.toggle('idle', !n);
+  stGroups().forEach((g, gi) => { const c = document.getElementById('stc-' + gi); if (c) c.disabled = !g.items.some(hasDiff); });
+}
+function stStep(id, d){
+  const i = getItem(id); if (!i) return;
+  const base = draft[id] !== undefined ? draft[id] : i.qty;
+  draft[id] = Math.max(0, Math.round((base + d) * 100) / 100); saveDraft(); vibrate();
+  updateStRow(id, true); updateStCount();
+}
+document.addEventListener('input', e => {
+  const t = e.target;
+  if (t.classList.contains('st-in')) {
+    const id = t.dataset.id;
+    if (t.value === '') delete draft[id]; else { const n = parseFloat(t.value); if (isFinite(n) && n >= 0) draft[id] = Math.round(n * 100) / 100; }
+    saveDraft(); updateStRow(id, false); updateStCount();
+  } else if (t.id === 'q') renderInvList();
+});
+function calibrate(items){
+  const diffs = items.filter(hasDiff);
+  if (!diffs.length) {
+    if (items.length === S.items.length && confirm('没有发现差异。\n要把今天记为一次完成的盘点吗？')) { S.meta.lastStocktake = todayStr(); save(); renderSt(); toast('✅ 已记录本次盘点'); }
+    else if (items.length !== S.items.length) toast('本区没有差异');
+    return;
+  }
+  snapshot('盘点校准');
+  diffs.forEach(i => { i.qty = draft[i.id]; i.updatedAt = Date.now(); });
+  items.forEach(i => delete draft[i.id]); saveDraft();
+  S.meta.lastStocktake = todayStr(); save(); renderSt(); updateBadge();
+  toast(`✅ 校准完成，修正了 ${diffs.length} 项`, true);
+}
+
+/* ---------- 设置 ---------- */
+function renderSet(){
+  const total = S.items.reduce((a, i) => a + i.qty, 0);
+  $('#data-note').innerHTML = `当前共 <b>${S.items.length}</b> 样物品、<b>${fmt(total)}</b> 件囤货 · 数据仅保存在本机浏览器，换设备前记得导出备份。` +
+    (S.meta.lastBackup ? `<br>上次备份：${S.meta.lastBackup}` : '<br>还没有备份过');
+  let u = null; try { u = JSON.parse(lsGet(UNDO_KEY) || 'null'); } catch (e) {}
+  $('#undo-row').innerHTML = u ? `<div class="row-btns"><button class="btn ghost" data-act="undo">↩️ 撤销「${esc(u.label)}」（${new Date(u.at).toLocaleString('zh-CN', {month:'numeric', day:'numeric', hour:'2-digit', minute:'2-digit'})}）</button></div>` : '';
+  $('#cat-list').innerHTML = S.categories.map(c => { const n = S.items.filter(i => i.category === c.id).length;
+    return `<div class="cat-row"><span class="dot" style="background:${esc(c.color)};width:14px;height:14px;border-radius:4px"></span>
+      <div class="main" data-act="cat-edit" data-id="${c.id}"><div class="nm"><span class="e">${esc(c.emoji)}</span>${esc(c.name)}</div><div class="s">${n} 样物品 · ${c.builtin ? '内置分类' : '自定义'}</div></div>
+      <button class="trash" data-act="cat-del" data-id="${c.id}" aria-label="删除">🗑️</button></div>`; }).join('') || '<div class="empty">还没有分类</div>';
+  $('#loc-list').innerHTML = S.locations.map((l, idx) => `<span class="loc"><span data-act="loc-ren" data-idx="${idx}">${esc(l)} <span class="c">${S.items.filter(i => i.location === l).length}</span></span><button class="x" data-act="loc-del" data-idx="${idx}" aria-label="删除">✕</button></span>`).join('') || '<span class="muted">还没有位置</span>';
+  renderInstall(); updatePersist(); $('#ver').textContent = 'v' + APP_VERSION + ' · 单机版';
+}
+const isStandalone = () => matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+const isIOS = () => /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+const isWeChat = () => /MicroMessenger/i.test(navigator.userAgent);
+let installEvt = null;
+window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); installEvt = e; if (UI.tab === 'set') renderInstall(); });
+let guideOS = null;
+function renderInstall(){
+  if (isStandalone()) {
+    $('#install-state').innerHTML = '<span class="pill green">✓ 已安装</span>';
+    $('#install-body').innerHTML = '<div class="muted" style="line-height:1.7">你正在桌面 App 里使用，数据保存在这个 App 中。<br>注意：iPhone 上桌面 App 和 Safari 网页的数据<b>互不相通</b>，以后请一直从桌面图标打开。</div>';
+    return;
+  }
+  $('#install-state').innerHTML = '';
+  const os = guideOS || (isIOS() ? 'ios' : 'android');
+  const ios = `<ol class="steps-guide"><li>用 <b>Safari</b> 打开本页（微信里请先点 ··· →「在浏览器打开」）</li><li>点底部工具栏的 <b>分享按钮</b>（方框加向上箭头）</li><li>下滑选择「<b>添加到主屏幕</b>」→ 右上角「添加」</li><li>以后<b>只从桌面图标打开</b>，在桌面 App 里录入数据</li></ol>`;
+  const and = `<ol class="steps-guide"><li>用 <b>Chrome / Edge / 系统浏览器</b>打开本页（不要用微信内置浏览器）</li><li>点右上角 <b>⋮</b> 菜单 →「<b>添加到主屏幕</b>」或「<b>安装应用</b>」</li><li>部分国产浏览器在菜单「工具箱 / 添加到桌面」里，需允许“创建桌面快捷方式”权限</li><li>以后从桌面图标打开即可全屏使用、离线可用</li></ol>`;
+  $('#install-body').innerHTML = (installEvt ? `<div class="btns" style="margin-top:0;margin-bottom:10px"><button class="btn main" data-act="install">⬇️ 一键安装到桌面</button></div>` : '') +
+    `<div class="seg"><button class="${os === 'ios' ? 'on' : ''}" data-act="guide" data-os="ios">iPhone / iPad</button><button class="${os === 'android' ? 'on' : ''}" data-act="guide" data-os="android">安卓</button></div>` + (os === 'ios' ? ios : and);
+}
+function updatePersist(){
+  const el = $('#persist-state'); if (!el) return;
+  if (!navigator.storage || !navigator.storage.persisted) { el.textContent = isStandalone() ? '桌面 App ✓' : '普通'; return; }
+  navigator.storage.persisted().then(p => { el.textContent = p ? '持久保存 ✓' : (isStandalone() ? '桌面 App ✓' : '可能被浏览器清理'); }).catch(() => {});
+}
+
+/* ---------- 弹层（支持安卓返回键关闭） ---------- */
+const sheets = [];
+let askResolve = null;
+function openSheet(id){
+  $('#' + id).classList.add('show'); sheets.push(id); document.body.classList.add('lock');
+  try { history.pushState({sheet:id}, ''); } catch (e) {}
+}
+function closeSheet(){ if (!sheets.length) return; try { history.back(); } catch (e) { hideTop(); } }
+function hideTop(){
+  const id = sheets.pop(); if (!id) return;
+  $('#' + id).classList.remove('show'); if (!sheets.length) document.body.classList.remove('lock');
+  if (id === 'm-ask' && askResolve) { const r = askResolve; askResolve = null; r(null); }
+}
+window.addEventListener('popstate', () => { if (sheets.length) hideTop(); });
+document.querySelectorAll('.mask').forEach(m => m.addEventListener('click', e => { if (e.target === m) closeSheet(); }));
+function askText(title, value = '', placeholder = ''){
+  $('#ma-title').textContent = title; const inp = $('#ma-input'); inp.value = value; inp.placeholder = placeholder;
+  openSheet('m-ask'); setTimeout(() => inp.focus(), 320);
+  return new Promise(r => { askResolve = r; });
+}
+function askOk(){ const v = $('#ma-input').value.trim(); const r = askResolve; askResolve = null; closeSheet(); r && r(v || null); }
+$('#ma-input').addEventListener('keydown', e => { if (e.key === 'Enter') askOk(); });
+
+/* 物品弹层 */
+let editId = null;
+function fillSelects(catId, loc){
+  $('#mi-cat').innerHTML = S.categories.map(c => `<option value="${c.id}">${esc(c.emoji)} ${esc(c.name)}</option>`).join('') + `<option value="">📦 未分类</option><option value="__new">＋ 新增分类…</option>`;
+  $('#mi-cat').value = S.categories.some(c => c.id === catId) ? catId : (S.categories[0] ? S.categories[0].id : '');
+  $('#mi-loc').innerHTML = S.locations.map(l => `<option value="${esc(l)}">${esc(l)}</option>`).join('') + `<option value="">（不设置）</option><option value="__new">＋ 新增位置…</option>`;
+  $('#mi-loc').value = loc && S.locations.includes(loc) ? loc : (S.locations[0] || '');
+  $('#dl-names').innerHTML = [...new Set(S.items.map(i => i.name))].map(n => `<option value="${esc(n)}">`).join('');
+}
+function openItem(id){
+  const i = id ? getItem(id) : null; editId = i ? i.id : null;
+  $('#mi-title').textContent = i ? '✏️ 编辑物品' : '🆕 添加物品';
+  fillSelects(i ? i.category : UI.lastCat, i ? i.location : UI.lastLoc);
+  $('#mi-name').value = i ? i.name : ''; $('#mi-qty').value = i ? fmt(i.qty) : 1; $('#mi-unit').value = i ? i.unit : '件';
+  $('#mi-exp').value = i && i.expiry ? i.expiry : ''; $('#mi-min').value = i ? fmt(i.minQty) : 1; $('#mi-note').value = i ? i.note : '';
+  if (i && !i.category) $('#mi-cat').value = '';
+  if (i && !i.location) $('#mi-loc').value = '';
+  $('#mi-del').classList.toggle('hidden', !i);
+  openSheet('m-item');
+  if (!i) setTimeout(() => $('#mi-name').focus(), 320);
+}
+$('#mi-name').addEventListener('change', () => {
+  if (editId) return;
+  const ex = S.items.find(i => i.name === $('#mi-name').value.trim()); if (!ex) return;
+  $('#mi-unit').value = ex.unit; $('#mi-min').value = fmt(ex.minQty);
+  if (ex.category) $('#mi-cat').value = ex.category; if (ex.location) $('#mi-loc').value = ex.location;
+});
+let prevCat = '', prevLoc = '';
+$('#mi-cat').addEventListener('focus', e => prevCat = e.target.value);
+$('#mi-loc').addEventListener('focus', e => prevLoc = e.target.value);
+$('#mi-cat').addEventListener('change', async e => {
+  if (e.target.value !== '__new') { prevCat = e.target.value; return; }
+  const name = await askText('新增分类', '', '如：宠物用品');
+  if (!name) { e.target.value = prevCat; return; }
+  let c = S.categories.find(c => c.name === name);
+  if (!c) { c = {id:uid(), name, emoji:'📦', color:PALETTE[S.categories.length % PALETTE.length], builtin:false}; S.categories.push(c); save(); }
+  fillSelects(c.id, $('#mi-loc').value); $('#mi-cat').value = c.id;
+});
+$('#mi-loc').addEventListener('change', async e => {
+  if (e.target.value !== '__new') { prevLoc = e.target.value; return; }
+  const name = await askText('新增存放位置', '', '如：阳台储物柜');
+  if (!name) { e.target.value = prevLoc; return; }
+  if (!S.locations.includes(name)) { S.locations.push(name); save(); }
+  const cat = $('#mi-cat').value; fillSelects(cat, name); $('#mi-cat').value = cat; $('#mi-loc').value = name;
+});
+function saveItem(){
+  const name = $('#mi-name').value.trim();
+  if (!name) { toast('请填写物品名称'); $('#mi-name').focus(); return; }
+  let category = $('#mi-cat').value; if (category === '__new') category = '';
+  let location = $('#mi-loc').value; if (location === '__new') location = '';
+  const data = {name, category, location, qty:num($('#mi-qty').value), unit:$('#mi-unit').value.trim() || '件', expiry:normDate($('#mi-exp').value), minQty:num($('#mi-min').value), note:$('#mi-note').value.trim()};
+  if (editId) {
+    Object.assign(getItem(editId), data, {updatedAt:Date.now()}); toast('✅ 已保存');
+  } else {
+    const dup = S.items.find(i => i.name === name && i.location === location);
+    if (dup && confirm(`「${location || '未设置位置'}」里已经有「${name}」（${fmt(dup.qty)}${dup.unit}）。\n\n确定：直接给它加上 ${fmt(data.qty)}${data.unit}${data.expiry ? '，并更新保质期' : ''}\n取消：另建一条`)) {
+      dup.qty = Math.round((dup.qty + data.qty) * 100) / 100; if (data.expiry) dup.expiry = data.expiry; dup.updatedAt = Date.now();
+      toast(`✅ ${name} +${fmt(data.qty)}`);
+    } else {
+      S.items.push({id:uid(), ...data, createdAt:Date.now(), updatedAt:Date.now()}); toast('✅ 已添加 ' + name);
+    }
+    UI.lastCat = category; UI.lastLoc = location; saveUI();
+  }
+  save(); closeSheet(); refresh();
+}
+function delItem(){
+  const i = getItem(editId); if (!i || !confirm(`确定删除「${i.name}」吗？`)) return;
+  snapshot('删除 ' + i.name);
+  S.items = S.items.filter(x => x.id !== i.id); delete draft[i.id]; saveDraft();
+  save(); closeSheet(); refresh(); toast('🗑️ 已删除 ' + i.name, true);
+}
+
+/* 分类弹层 */
+let catEditId = null, catColor = PALETTE[0];
+function openCat(id){
+  const c = id ? S.categories.find(c => c.id === id) : null; catEditId = c ? c.id : null;
+  $('#mc-title').textContent = c ? '编辑分类' : '新增分类';
+  $('#mc-name').value = c ? c.name : ''; $('#mc-emoji').value = c ? c.emoji : '📦';
+  catColor = c ? c.color : PALETTE[S.categories.length % PALETTE.length];
+  $('#mc-emojis').innerHTML = [...new Set(EMOJIS)].map(e => `<button data-act="pick-emoji" data-e="${e}">${e}</button>`).join('');
+  drawColors(); openSheet('m-cat');
+}
+function drawColors(){ $('#mc-colors').innerHTML = PALETTE.map(c => `<button class="${c === catColor ? 'on' : ''}" style="background:${c}" data-act="pick-color" data-c="${c}"></button>`).join(''); }
+function saveCat(){
+  const name = $('#mc-name').value.trim(); if (!name) return toast('请填写分类名称');
+  if (S.categories.some(c => c.name === name && c.id !== catEditId)) return toast('已有同名分类');
+  const emoji = $('#mc-emoji').value.trim() || '📦';
+  if (catEditId) Object.assign(S.categories.find(c => c.id === catEditId), {name, emoji, color:catColor});
+  else S.categories.push({id:uid(), name, emoji, color:catColor, builtin:false});
+  save(); closeSheet(); refresh(); toast('✅ 分类已保存');
+}
+
+/* ---------- 导入导出 ---------- */
+const backupObj = () => ({app:'home-stock', version:2, exportedAt:new Date().toISOString(), data:S});
+function deliver(name, text, mime){
+  const blob = new Blob([text], {type:mime});
+  if (matchMedia('(pointer:coarse)').matches && navigator.canShare) {
+    try {
+      const f = new File([blob], name, {type:mime});
+      if (navigator.canShare({files:[f]})) {
+        navigator.share({files:[f], title:name}).then(() => toast('✅ 已导出 ' + name)).catch(e => { if (e.name !== 'AbortError') download(blob, name); });
+        return;
+      }
+    } catch (e) {}
+  }
+  download(blob, name);
+}
+function download(blob, name){
+  const url = URL.createObjectURL(blob), a = document.createElement('a');
+  a.href = url; a.download = name; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 5000); toast('✅ 已导出 ' + name);
+}
+function exportJSON(){
+  if (!S.items.length && !confirm('现在还没有物品，仍要导出空备份吗？')) return;
+  S.meta.lastBackup = todayStr(); save();
+  deliver(`家庭囤货备份_${todayStr()}.json`, JSON.stringify(backupObj(), null, 1), 'application/json');
+  if (UI.tab === 'set') renderSet();
+}
+const CSV_COLS = [['name','名称'],['category','分类'],['location','存放位置'],['qty','数量'],['unit','单位'],['minQty','安全水位'],['expiry','保质期'],['note','备注']];
+function exportCSV(){
+  const cell = v => { v = String(v ?? ''); return /[",\n\r]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; };
+  const rows = [CSV_COLS.map(c => c[1]).join(',')].concat(S.items.map(i => CSV_COLS.map(([k]) => cell(k === 'category' ? (i.category ? catOf(i.category).name : '') : k === 'qty' || k === 'minQty' ? fmt(i[k]) : i[k])).join(',')));
+  deliver(`家庭囤货清单_${todayStr()}.csv`, '﻿' + rows.join('\r\n'), 'text/csv');
+}
+function parseCSV(t){
+  t = t.replace(/^﻿/, ''); const sep = (t.split('\n')[0].match(/\t/g) || []).length > (t.split('\n')[0].match(/,/g) || []).length ? '\t' : ',';
+  const rows = []; let row = [], f = '', q = false;
+  for (let i = 0; i < t.length; i++) {
+    const c = t[i];
+    if (q) { if (c === '"') { if (t[i + 1] === '"') { f += '"'; i++; } else q = false; } else f += c; }
+    else if (c === '"') q = true;
+    else if (c === sep) { row.push(f); f = ''; }
+    else if (c === '\n') { row.push(f); rows.push(row); row = []; f = ''; }
+    else if (c !== '\r') f += c;
+  }
+  if (f !== '' || row.length) { row.push(f); rows.push(row); }
+  return rows.filter(r => r.some(x => x.trim() !== ''));
+}
+async function readText(file){
+  const buf = await file.arrayBuffer();
+  try { return new TextDecoder('utf-8', {fatal:true}).decode(buf); }
+  catch (e) { try { return new TextDecoder('gbk').decode(buf); } catch (e2) { return new TextDecoder().decode(buf); } }
+}
+function importCSV(text){
+  const rows = parseCSV(text); if (rows.length < 2) throw new Error('CSV 里没有数据行');
+  const alias = {name:['名称','物品名称','物品','name'], category:['分类','类别','category'], location:['存放位置','位置','location'], qty:['数量','当前数量','qty'], unit:['单位','unit'], minQty:['安全水位','安全库存水位','水位','minqty'], expiry:['保质期','到期日','过期日期','expiry'], note:['备注','note']};
+  const head = rows[0].map(h => h.trim().toLowerCase()), idx = {};
+  Object.entries(alias).forEach(([k, names]) => { idx[k] = head.findIndex(h => names.includes(h)); });
+  if (idx.name < 0) throw new Error('找不到「名称」列');
+  snapshot('导入 CSV'); let added = 0, updated = 0;
+  rows.slice(1).forEach(r => {
+    const g = k => idx[k] >= 0 ? String(r[idx[k]] ?? '').trim() : '';
+    const name = g('name'); if (!name) return;
+    const location = g('location');
+    if (location && !S.locations.includes(location)) S.locations.push(location);
+    let category;
+    const cn = g('category');
+    if (cn) { let c = S.categories.find(c => c.name === cn); if (!c) { c = {id:uid(), name:cn, emoji:'📦', color:PALETTE[S.categories.length % PALETTE.length], builtin:false}; S.categories.push(c); } category = c.id; }
+    let it = S.items.find(i => i.name === name && i.location === location);
+    if (!it) { it = {id:uid(), name, category:'', location, qty:0, unit:'件', minQty:0, expiry:null, note:'', createdAt:Date.now()}; S.items.push(it); added++; } else updated++;
+    if (category !== undefined) it.category = category;
+    if (g('qty') !== '') it.qty = num(g('qty'));
+    if (g('unit')) it.unit = g('unit');
+    if (g('minQty') !== '') it.minQty = num(g('minQty'));
+    if (idx.expiry >= 0) it.expiry = normDate(g('expiry'));
+    if (g('note')) it.note = g('note');
+    it.updatedAt = Date.now();
+  });
+  save(); refresh(); toast(`✅ CSV 导入：新增 ${added}，更新 ${updated}`, true);
+}
+function applyBackup(newS, label){
+  const msg = `将用${label}覆盖当前数据：\n\n备份里：${newS.items.length} 样物品、${newS.shopping.length} 条清单\n当前：${S.items.length} 样物品\n\n覆盖后可在「设置」里撤销。确定吗？`;
+  if (!confirm(msg)) return false;
+  snapshot(label === '同步码' ? '导入同步码' : '恢复备份');
+  S = newS; draft = {}; saveDraft(); save(); go('home'); toast('✅ 导入成功', true); return true;
+}
+// 同步码：HSYNC1 = gzip+base64；HSYNC0 = 纯 base64
+const b64 = u8 => { let s = ''; for (let i = 0; i < u8.length; i += 0x8000) s += String.fromCharCode.apply(null, u8.subarray(i, i + 0x8000)); return btoa(s); };
+const unb64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+async function makeSyncCode(){
+  const json = JSON.stringify(backupObj());
+  if (window.CompressionStream) {
+    try { const buf = await new Response(new Blob([json]).stream().pipeThrough(new CompressionStream('gzip'))).arrayBuffer(); return 'HSYNC1:' + b64(new Uint8Array(buf)); } catch (e) {}
+  }
+  return 'HSYNC0:' + b64(new TextEncoder().encode(json));
+}
+async function readSyncCode(text){
+  const m = String(text).replace(/\s+/g, '').match(/HSYNC([01]):([A-Za-z0-9+/=]+)/);
+  if (!m) { const t = String(text).trim(); if (t.startsWith('{')) return parseBackup(JSON.parse(t)); throw new Error('没有找到同步码（应以 HSYNC 开头）'); }
+  let json;
+  if (m[1] === '1') {
+    if (!window.DecompressionStream) throw new Error('这个浏览器太旧，无法解压同步码，请升级系统或改用备份文件');
+    json = await new Response(new Blob([unb64(m[2])]).stream().pipeThrough(new DecompressionStream('gzip'))).text();
+  } else json = new TextDecoder().decode(unb64(m[2]));
+  return parseBackup(JSON.parse(json));
+}
+async function openSyncOut(){
+  if (!S.items.length) return toast('还没有物品，先添加再同步');
+  $('#ms-title').textContent = '📨 生成同步码';
+  $('#ms-hint').innerHTML = '复制后发到家庭群或家人微信，对方长按复制，回到 App 点「粘贴同步码」。同步码包含全部物品、分类、位置和清单。';
+  $('#ms-text').value = '生成中…'; $('#ms-text').readOnly = true;
+  $('#ms-btns-out').classList.remove('hidden'); $('#ms-btns-in').classList.add('hidden');
+  openSheet('m-sync');
+  const code = await makeSyncCode(); $('#ms-text').value = code;
+  S.meta.lastBackup = todayStr(); save();
+}
+function openSyncIn(){
+  $('#ms-title').textContent = '📋 粘贴同步码';
+  $('#ms-hint').innerHTML = '把家人发来的整段同步码（以 <b>HSYNC</b> 开头）粘贴到下面。导入会<b>覆盖</b>你现在的数据，之后可撤销。';
+  $('#ms-text').value = ''; $('#ms-text').readOnly = false; $('#ms-text').placeholder = '长按此处 → 粘贴';
+  $('#ms-btns-out').classList.add('hidden'); $('#ms-btns-in').classList.remove('hidden');
+  openSheet('m-sync');
+}
+function copyText(text){
+  if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text).then(() => true).catch(() => fallbackCopy(text));
+  return Promise.resolve(fallbackCopy(text));
+}
+function fallbackCopy(text){
+  const ta = document.createElement('textarea'); ta.value = text; ta.setAttribute('readonly', ''); ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0';
+  document.body.appendChild(ta); ta.select(); ta.setSelectionRange(0, text.length);
+  let ok = false; try { ok = document.execCommand('copy'); } catch (e) {} ta.remove(); return ok;
+}
+
+/* ---------- 示例数据 ---------- */
+function sampleData(){
+  const d = n => { const x = new Date(); x.setDate(x.getDate() + n); return ymd(x); };
+  const it = (name, category, location, qty, unit, minQty, exp, note = '') => ({name, category, location, qty, unit, minQty, expiry:exp === null ? null : d(exp), note});
+  const s = blank();
+  s.items = [
+    it('大米', 'food', '橱柜', 2, '袋', 1, 200), it('挂面', 'food', '橱柜', 3, '包', 2, 160), it('白糖', 'food', '橱柜', 1, '袋', 0, 540),
+    it('老抽', 'food', '橱柜', 1, '瓶', 1, 300), it('面粉', 'food', '橱柜', 2, '袋', 1, 120), it('食用油', 'food', '橱柜', 1, '桶', 1, 260, '5L 装'),
+    it('酸奶', 'food', '冰箱', 4, '杯', 2, -3), it('全麦面包', 'food', '冰箱', 1, '袋', 0, 5), it('鸡蛋', 'food', '冰箱', 8, '个', 6, 6),
+    it('纯牛奶', 'food', '冰箱', 6, '盒', 4, 22), it('速冻饺子', 'food', '冰箱', 2, '袋', 1, 75),
+    it('抽纸', 'daily', '壁橱', 6, '包', 4, null), it('卷纸', 'daily', '壁橱', 3, '提', 2, null), it('洗衣液', 'daily', '壁橱', 1, '瓶', 1, null, '开封后半年内用完'),
+    it('5号电池', 'daily', '电视机柜', 8, '节', 4, null), it('7号电池', 'daily', '电视机柜', 2, '节', 4, null),
+    it('保鲜袋', 'daily', '餐桌抽屉', 1, '盒', 0, null), it('保鲜膜', 'daily', '餐桌抽屉', 1, '卷', 1, null),
+    it('维生素C泡腾片', 'med', '药品箱', 1, '支', 0, -20), it('布洛芬', 'med', '药品箱', 1, '盒', 1, 28), it('创可贴', 'med', '药品箱', 15, '片', 10, 400),
+    it('感冒灵颗粒', 'med', '药品箱', 2, '盒', 1, 180),
+    it('面霜', 'beauty', '梳妆台', 1, '瓶', 1, 90, '开封 2026 年 8 月'), it('洗面奶', 'beauty', '梳妆台', 2, '支', 1, 400), it('防晒霜', 'beauty', '梳妆台', 1, '支', 0, 25),
+    it('羽毛球', 'fun', '办公桌', 6, '个', 3, null),
+  ].map((x, k) => ({...x, id:uid() + k, createdAt:Date.now() - k * 1000, updatedAt:Date.now()}));
+  return normalize(s);
+}
+
+/* ---------- 统一点击处理 ---------- */
+document.addEventListener('click', async e => {
+  if (e.target.closest('[data-step]')) return;
+  const tabBtn = e.target.closest('[data-tab]'); if (tabBtn) return go(tabBtn.dataset.tab);
+  const el = e.target.closest('[data-act]'); if (!el) return;
+  const id = el.dataset.id, act = el.dataset.act;
+  switch (act) {
+    case 'add': openItem(null); break;
+    case 'edit': openItem(id); break;
+    case 'close': closeSheet(); break;
+    case 'item-save': saveItem(); break;
+    case 'item-del': delItem(); break;
+    case 'goto': UI.only = el.dataset.only || ''; if (el.dataset.to === 'inv') { UI.cat = ''; UI.loc = ''; $('#q').value = ''; if (UI.only) UI.sort = 'expiry'; } go(el.dataset.to); break;
+    case 'use': { const i = getItem(id); if (!i) break; snapshot('用掉 ' + i.name); i.qty = Math.max(0, i.qty - 1); i.updatedAt = Date.now(); save(); renderHome(); updateBadge(); toast(`已处理 1${i.unit} ${i.name}，还剩 ${fmt(i.qty)}`, true); break; }
+    case 'to-list': { const i = getItem(id); if (i) { addToList(i); renderHome(); updateBadge(); } break; }
+    case 'f-cat': UI.cat = id; saveUI(); renderInv(); break;
+    case 'f-only-clear': UI.only = ''; renderInvList(); break;
+    case 'list-add': $('#ml-name').value = ''; $('#ml-qty').value = 1; $('#ml-unit').value = '件'; $('#dl-names').innerHTML = [...new Set(S.items.map(i => i.name))].map(n => `<option value="${esc(n)}">`).join(''); openSheet('m-list'); setTimeout(() => $('#ml-name').focus(), 320); break;
+    case 'list-save': {
+      const name = $('#ml-name').value.trim(); if (!name) { toast('写一下要买什么'); break; }
+      const inv = S.items.find(i => i.name === name);
+      S.shopping.push({id:uid(), name, qty:num($('#ml-qty').value) || 1, unit:$('#ml-unit').value.trim() || (inv ? inv.unit : '件'), location:inv ? inv.location : '', itemId:inv ? inv.id : '', checked:false});
+      save(); closeSheet(); go('list'); toast('🛒 已加入 ' + name); break; }
+    case 'list-all-low': { let n = 0; S.items.filter(i => stat(i).low).forEach(i => { if (addToList(i, true)) n++; }); save(); renderList(); updateBadge(); toast(`🛒 已加入 ${n} 样`); break; }
+    case 'sl-toggle': { const s = S.shopping.find(x => x.id === id); if (s) { s.checked = !s.checked; save(); renderList(); updateBadge(); } break; }
+    case 'sl-inc': case 'sl-dec': { const s = S.shopping.find(x => x.id === id); if (s) { s.qty = Math.max(1, s.qty + (act === 'sl-inc' ? 1 : -1)); save(); renderList(); } break; }
+    case 'sl-del': { const s = S.shopping.find(x => x.id === id); if (s) { snapshot('移出清单 ' + s.name); S.shopping = S.shopping.filter(x => x.id !== id); save(); renderList(); updateBadge(); toast('已移出 ' + s.name, true); } break; }
+    case 'sl-stock': stockIn(); break;
+    case 'sl-copy': { const t = '🛒 购物清单\n' + S.shopping.filter(s => !s.checked).map(s => `□ ${s.name} ×${fmt(s.qty)}${s.unit}`).join('\n'); copyText(t).then(ok => toast(ok ? '📋 清单已复制，可粘贴到微信' : '复制失败')); break; }
+    case 'st-loc': { const g = stGroups()[+el.dataset.gi]; if (g) calibrate(g.items); break; }
+    case 'st-all': calibrate(S.items); break;
+    case 'exp-csv': if (!S.items.length) toast('还没有物品'); else exportCSV(); break;
+    case 'exp-json': exportJSON(); break;
+    case 'imp-csv': $('#file-csv').click(); break;
+    case 'imp-json': $('#file-json').click(); break;
+    case 'undo': undo(); break;
+    case 'sync-out': openSyncOut(); break;
+    case 'sync-in': openSyncIn(); break;
+    case 'sync-copy': { const v = $('#ms-text').value; if (!v.startsWith('HSYNC')) break; const ok = await copyText(v); if (!ok) { $('#ms-text').readOnly = false; $('#ms-text').focus(); $('#ms-text').select(); } toast(ok ? '📋 已复制，去微信粘贴发送吧' : '请手动全选复制'); break; }
+    case 'sync-share': { const v = $('#ms-text').value; if (!v.startsWith('HSYNC')) break; if (navigator.share) navigator.share({text:'【家庭囤货同步码】复制整段，在 App「设置 → 粘贴同步码」导入：\n' + v}).catch(() => {}); else toast('当前浏览器不支持分享，请用复制'); break; }
+    case 'sync-paste': try { const t = await navigator.clipboard.readText(); $('#ms-text').value = t; } catch (err) { toast('请长按输入框手动粘贴'); $('#ms-text').focus(); } break;
+    case 'sync-apply': try { const ns = await readSyncCode($('#ms-text').value); closeSheet(); setTimeout(() => applyBackup(ns, '同步码'), 60); } catch (err) { toast('❌ ' + err.message); } break;
+    case 'cat-new': openCat(null); break;
+    case 'cat-edit': openCat(id); break;
+    case 'cat-save': saveCat(); break;
+    case 'pick-emoji': $('#mc-emoji').value = el.dataset.e; break;
+    case 'pick-color': catColor = el.dataset.c; drawColors(); break;
+    case 'cat-del': {
+      const c = S.categories.find(c => c.id === id); if (!c) break;
+      const n = S.items.filter(i => i.category === id).length;
+      if (!confirm(n ? `「${c.name}」下有 ${n} 样物品，删除后它们会变成「未分类」。确定删除吗？` : `删除分类「${c.name}」？`)) break;
+      snapshot('删除分类 ' + c.name); S.categories = S.categories.filter(x => x.id !== id); S.items.forEach(i => { if (i.category === id) i.category = ''; });
+      if (UI.cat === id) UI.cat = ''; save(); renderSet(); toast('已删除分类', true); break; }
+    case 'loc-add': {
+      const v = $('#loc-new').value.trim(); if (!v) { toast('先输入位置名称'); break; }
+      if (S.locations.includes(v)) { toast('已经有这个位置了'); break; }
+      S.locations.push(v); save(); $('#loc-new').value = ''; renderSet(); toast('📍 已添加 ' + v); break; }
+    case 'loc-del': {
+      const l = S.locations[+el.dataset.idx]; if (l === undefined) break;
+      const n = S.items.filter(i => i.location === l).length;
+      if (!confirm(n ? `「${l}」里有 ${n} 样物品，删除后它们会变成「未设置位置」。确定吗？` : `删除位置「${l}」？`)) break;
+      snapshot('删除位置 ' + l); S.locations = S.locations.filter(x => x !== l); S.items.forEach(i => { if (i.location === l) i.location = ''; });
+      if (UI.loc === l) UI.loc = ''; save(); renderSet(); toast('已删除位置', true); break; }
+    case 'loc-ren': {
+      const old = S.locations[+el.dataset.idx]; if (old === undefined) break;
+      const nv = await askText('重命名位置', old); if (!nv || nv === old) break;
+      if (S.locations.includes(nv)) { if (!confirm(`已有「${nv}」，要把「${old}」合并进去吗？`)) break; S.locations = S.locations.filter(x => x !== old); }
+      else S.locations[S.locations.indexOf(old)] = nv;
+      S.items.forEach(i => { if (i.location === old) i.location = nv; }); S.shopping.forEach(s => { if (s.location === old) s.location = nv; });
+      if (UI.loc === old) UI.loc = nv; save(); renderSet(); toast('✅ 已改名'); break; }
+    case 'ask-ok': askOk(); break;
+    case 'guide': guideOS = el.dataset.os; renderInstall(); break;
+    case 'install': if (installEvt) { installEvt.prompt(); installEvt.userChoice.finally(() => { installEvt = null; renderInstall(); }); } break;
+    case 'sample':
+      if (S.items.length && !confirm('加载示例会覆盖当前数据（可撤销）。确定吗？')) break;
+      if (S.items.length) snapshot('加载示例');
+      S = sampleData(); draft = {}; saveDraft(); save(); go('home'); toast('👀 已加载示例数据，可在设置里清空'); break;
+    case 'wipe':
+      if (!confirm('确定清空所有物品、清单、分类和位置吗？\n（会留一份快照，可在设置里撤销）')) break;
+      snapshot('清空数据'); S = blank(); draft = {}; saveDraft(); save(); go('home'); toast('已清空', true); break;
+  }
+});
+$('#loc-new').addEventListener('keydown', e => { if (e.key === 'Enter') e.target.closest('.card').querySelector('[data-act="loc-add"]').click(); });
+$('#f-loc').addEventListener('change', e => { UI.loc = e.target.value; saveUI(); renderInvList(); });
+$('#f-sort').addEventListener('change', e => { UI.sort = e.target.value; saveUI(); renderInvList(); });
+$('#file-json').addEventListener('change', async e => {
+  const f = e.target.files[0]; e.target.value = ''; if (!f) return;
+  try { const t = await readText(f); const ns = /HSYNC[01]:/.test(t) ? await readSyncCode(t) : parseBackup(JSON.parse(t)); applyBackup(ns, '备份文件'); }
+  catch (err) { toast('❌ 读取失败：' + (err.message || '文件格式不对')); }
+});
+$('#file-csv').addEventListener('change', async e => {
+  const f = e.target.files[0]; e.target.value = ''; if (!f) return;
+  try { importCSV(await readText(f)); } catch (err) { toast('❌ ' + (err.message || 'CSV 读取失败')); }
+});
+
+/* ---------- Toast ---------- */
+let toastT;
+function toast(msg, withUndo){
+  const t = $('#toast');
+  t.innerHTML = `<span>${esc(msg)}</span>` + (withUndo ? '<button data-act="undo">撤销</button>' : '');
+  t.classList.add('show'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('show'), withUndo ? 4500 : 2300);
+}
+
+/* ---------- 启动 ---------- */
+load();
+if (isWeChat()) $('#wx-banner').classList.remove('hidden');
+UI.only = '';
+go(['home', 'inv', 'list', 'st', 'set'].includes(UI.tab) ? UI.tab : 'home');
+// 跨天 / 回到前台时刷新日期和预警
+document.addEventListener('visibilitychange', () => { if (!document.hidden && !sheets.length) { try { const raw = lsGet(KEY); if (raw) S = normalize(JSON.parse(raw)); } catch (e) {} render(); } });
+if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').then(reg => {
+      reg.addEventListener('updatefound', () => { const w = reg.installing; w && w.addEventListener('statechange', () => { if (w.state === 'installed' && navigator.serviceWorker.controller) toast('✨ 新版本已下载，下次打开自动生效'); }); });
+    }).catch(() => {});
+  });
+}
+</script>
+</body>
+</html>
