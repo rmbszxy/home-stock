@@ -261,6 +261,10 @@ input[type=date].in::-webkit-date-and-time-value{text-align:left}
 .code{font-family:ui-monospace,Menlo,monospace;font-size:12px;word-break:break-all;min-height:120px}
 .hint{font-size:13px;color:var(--sub);line-height:1.6;margin-top:-4px;margin-bottom:12px}
 
+.sync-chip{display:inline-flex;align-items:center;gap:4px;margin-top:10px;padding:5px 12px;border-radius:999px;background:rgba(255,255,255,.2);color:#fff;font-size:13px;font-weight:700;box-shadow:inset 0 0 0 1px rgba(255,255,255,.25)}
+.sync-chip.err{background:#fff3dc;color:#9a5512}
+.btn:disabled{opacity:.6}
+#mch-btns .btn{flex:none;width:100%}
 .toast{position:fixed;left:50%;top:calc(var(--sat) + 14px);transform:translate(-50%,-140%);background:rgba(45,32,24,.92);color:#fff;padding:11px 18px;border-radius:999px;font-size:14.5px;z-index:300;opacity:0;transition:all .28s;max-width:calc(100% - 32px);display:flex;align-items:center;gap:12px;pointer-events:none;white-space:nowrap}
 .toast.show{transform:translate(-50%,0);opacity:1;pointer-events:auto}
 .toast span{overflow:hidden;text-overflow:ellipsis}
@@ -277,6 +281,7 @@ input[type=date].in::-webkit-date-and-time-value{text-align:left}
       <h1 id="h-greet">你好 ☀️</h1>
       <div class="msg" id="h-msg"></div>
       <div class="date js-date"></div>
+      <button class="sync-chip hidden" id="sync-chip" data-act="sync-now"></button>
       <button class="hero-add" data-act="add" aria-label="添加物品">+</button>
     </div>
     <div class="wrap" id="home-body"></div>
@@ -344,6 +349,11 @@ input[type=date].in::-webkit-date-and-time-value{text-align:left}
       <div class="date js-date"></div>
     </div>
     <div class="wrap">
+      <div class="card" id="cloud-card">
+        <div class="sec-head"><h2>☁️ 家庭自动同步</h2><span id="cloud-pill"></span></div>
+        <div id="cloud-body"></div>
+      </div>
+
       <div class="card">
         <div class="sec-head"><h2>💾 数据备份</h2></div>
         <div class="tiles">
@@ -357,8 +367,8 @@ input[type=date].in::-webkit-date-and-time-value{text-align:left}
       </div>
 
       <div class="card">
-        <div class="sec-head"><h2>👨‍👩‍👧 家人同步</h2></div>
-        <div class="muted" style="line-height:1.7">不用注册、不用服务器：一方点「生成同步码」发到微信，另一方长按复制，回来点「粘贴同步码」即可整份同步（会覆盖对方数据，可撤销）。</div>
+        <div class="sec-head"><h2>📨 手动同步码</h2></div>
+        <div class="muted" style="line-height:1.7">不用自动同步、或 GitHub 暂时连不上时用：一方「生成同步码」发微信，另一方长按复制后点「粘贴同步码」。两边<b>按修改时间合并</b>，不会互相覆盖。</div>
         <div class="row-btns">
           <button class="btn main" data-act="sync-out">📨 生成同步码</button>
           <button class="btn soft" data-act="sync-in">📋 粘贴同步码</button>
@@ -407,6 +417,7 @@ input[type=date].in::-webkit-date-and-time-value{text-align:left}
 <div class="mask" id="m-item"><div class="sheet">
   <div class="grab"></div>
   <div class="sheet-h"><h3 id="mi-title">🆕 添加物品</h3><button class="x-btn" data-act="close">✕</button></div>
+  <div class="muted hidden" id="mi-meta" style="margin:-10px 0 14px"></div>
   <div class="f"><label>物品名称 <i>*</i></label><input class="in" id="mi-name" placeholder="如：抽纸 / 大米 / 面霜" maxlength="30" list="dl-names" autocomplete="off"></div>
   <div class="row">
     <div class="f"><label>分类</label><select class="in" id="mi-cat"></select></div>
@@ -469,12 +480,37 @@ input[type=date].in::-webkit-date-and-time-value{text-align:left}
   <div class="f"><textarea class="in code" id="ms-text" rows="6" spellcheck="false" autocomplete="off"></textarea></div>
   <div class="btns" id="ms-btns-out">
     <button class="btn ghost" data-act="sync-share">分享…</button>
-    <button class="btn main" data-act="sync-copy">复制同步码</button>
+    <button class="btn main" data-act="sync-copy">📋 复制</button>
   </div>
   <div class="btns" id="ms-btns-in">
     <button class="btn ghost" data-act="sync-paste">从剪贴板粘贴</button>
-    <button class="btn main" data-act="sync-apply">导入并覆盖</button>
+    <button class="btn main" data-act="sync-apply">合并导入</button>
   </div>
+</div></div>
+
+<!-- 家庭同步设置 -->
+<div class="mask" id="m-cloud"><div class="sheet">
+  <div class="grab"></div>
+  <div class="sheet-h"><h3 id="mcl-title">☁️ 家庭自动同步</h3><button class="x-btn" data-act="close">✕</button></div>
+  <div id="mcl-owner">
+    <div class="hint">按引导在 GitHub 建好<b>私有仓库</b>和<b>访问令牌</b>（令牌只给这个仓库的 Contents 读写权限），填到下面。</div>
+    <div class="f"><label>仓库 <i>*</i></label><input class="in" id="mcl-repo" placeholder="用户名/仓库名，如 rmbszxy/home-stock-data" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"></div>
+    <div class="f"><label>访问令牌 <i>*</i></label><input class="in" id="mcl-token" placeholder="github_pat_ 开头的一长串" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"></div>
+  </div>
+  <div id="mcl-join">
+    <div class="hint">把家人发来的整段邀请消息（里面有 <b>HSFAM1:</b> 开头的一串）粘贴到下面。</div>
+    <div class="f"><label>邀请码 <i>*</i></label><textarea class="in code" id="mcl-code" rows="4" placeholder="长按此处 → 粘贴" spellcheck="false"></textarea></div>
+  </div>
+  <div class="f"><label>我的称呼</label><input class="in" id="mcl-name" maxlength="8" placeholder="如：爸爸 / 妈妈 / 小宝"></div>
+  <div class="btns"><button class="btn ghost" data-act="close">取消</button><button class="btn main" id="mcl-go" data-act="cloud-connect">连接</button></div>
+</div></div>
+
+<!-- 二选一 -->
+<div class="mask" id="m-choose"><div class="sheet">
+  <div class="grab"></div>
+  <div class="sheet-h"><h3 id="mch-title"></h3></div>
+  <div class="hint" id="mch-text" style="margin-top:0;font-size:14.5px"></div>
+  <div class="btns" id="mch-btns" style="flex-direction:column"></div>
 </div></div>
 
 <datalist id="dl-names"></datalist>
@@ -485,7 +521,7 @@ input[type=date].in::-webkit-date-and-time-value{text-align:left}
 
 <script>
 'use strict';
-const APP_VERSION = '2.0.0';
+const APP_VERSION = '2.1.0';
 const KEY = 'hs_data_v2', UNDO_KEY = 'hs_undo', DRAFT_KEY = 'hs_st_draft', UI_KEY = 'hs_ui';
 const DEFAULT_CATS = [
   {id:'food',  name:'食品粮油', emoji:'🍚', color:'#e8894f', builtin:true},
@@ -528,25 +564,28 @@ const vibrate = () => { try { navigator.vibrate && navigator.vibrate(8); } catch
 
 /* ---------- 数据 ---------- */
 let S;
-const blank = () => ({version:2, items:[], categories:DEFAULT_CATS.map(c => ({...c})), locations:[...DEFAULT_LOCS], shopping:[], meta:{lastStocktake:null, lastBackup:null}});
+const blank = () => ({version:3, items:[], categories:DEFAULT_CATS.map(c => ({...c, updatedAt:0, updatedBy:''})), locations:[...DEFAULT_LOCS], locTs:{}, shopping:[], deleted:{}, meta:{lastStocktake:null, lastBackup:null}});
 
 function normalize(d){
-  const b = blank(), out = {version:2};
+  const b = blank(), out = {version:3}, ts = v => +v || 0;
+  const tsMap = o => { const r = {}; if (o && typeof o === 'object') Object.keys(o).sort().forEach(k => { const v = +o[k]; if (v > 0) r[k] = v; }); return r; };
   out.categories = (Array.isArray(d.categories) && d.categories.length ? d.categories : b.categories)
-    .filter(c => c && c.name).map(c => ({id:String(c.id || uid()), name:String(c.name).trim(), emoji:String(c.emoji || '📦'), color:String(c.color || '#a89888'), builtin:!!c.builtin}));
+    .filter(c => c && c.name).map(c => ({id:String(c.id || uid()), name:String(c.name).trim(), emoji:String(c.emoji || '📦'), color:String(c.color || '#a89888'), builtin:!!c.builtin, updatedAt:ts(c.updatedAt), updatedBy:String(c.updatedBy || '')}));
   const catIds = new Set(out.categories.map(c => c.id));
   out.locations = (Array.isArray(d.locations) ? d.locations : b.locations).filter(x => typeof x === 'string' && x.trim()).map(x => x.trim());
   out.items = (Array.isArray(d.items) ? d.items : []).filter(i => i && String(i.name || '').trim()).map(i => ({
     id:String(i.id || uid()), name:String(i.name).trim(), category:catIds.has(String(i.category)) ? String(i.category) : '',
     location:String(i.location || '').trim(), qty:num(i.qty), unit:String(i.unit || '件').trim() || '件', minQty:num(i.minQty),
-    expiry:normDate(i.expiry), note:String(i.note || ''), createdAt:+i.createdAt || Date.now(), updatedAt:+i.updatedAt || Date.now()
+    expiry:normDate(i.expiry), note:String(i.note || ''), createdAt:+i.createdAt || Date.now(), updatedAt:ts(i.updatedAt), updatedBy:String(i.updatedBy || '')
   }));
   out.items.forEach(i => { if (i.location && !out.locations.includes(i.location)) out.locations.push(i.location); });
   out.locations = [...new Set(out.locations)];
+  out.locTs = tsMap(d.locTs);
   out.shopping = (Array.isArray(d.shopping) ? d.shopping : []).filter(s => s && String(s.name || '').trim()).map(s => ({
-    id:String(s.id || uid()), name:String(s.name).trim(), qty:num(s.qty) || 1, unit:String(s.unit || '件'), location:String(s.location || ''), itemId:s.itemId ? String(s.itemId) : '', checked:!!s.checked
+    id:String(s.id || uid()), name:String(s.name).trim(), qty:num(s.qty) || 1, unit:String(s.unit || '件'), location:String(s.location || ''), itemId:s.itemId ? String(s.itemId) : '', checked:!!s.checked, updatedAt:ts(s.updatedAt), updatedBy:String(s.updatedBy || '')
   }));
-  out.meta = Object.assign({lastStocktake:null, lastBackup:null}, d.meta || {});
+  out.deleted = tsMap(d.deleted);
+  out.meta = {lastStocktake:normDate(d.meta && d.meta.lastStocktake), lastBackup:normDate(d.meta && d.meta.lastBackup)};
   return out;
 }
 // 兼容上一版（v1.x）的数据：{inventory:[], shoppingList:[]}，分类存的是中文名
@@ -575,10 +614,24 @@ function load(){
   if (v1) { try { S = fromV1({inventory:JSON.parse(v1), shoppingList:JSON.parse(lsGet('homeShoppingList') || '[]')}); save(); return; } catch (e) {} }
   S = blank();
 }
-function save(){
-  if (!lsSet(KEY, JSON.stringify(S))) toast('⚠️ 保存失败：浏览器存储不可用或已满');
-  askPersist();
+// 每次保存时自动比对：改过的记录打上「修改时间 + 修改人」，消失的记录留下删除标记，供多台手机合并
+let sigs = null;
+const sigOf = x => JSON.stringify(x, (k, v) => (k === 'updatedAt' || k === 'updatedBy' || k[0] === '_') ? undefined : v);
+function track(bump){
+  const now = Date.now(), me = cloudName(), next = {};
+  const col = (arr, p) => arr.forEach(x => { const k = p + x.id, sg = sigOf(x); next[k] = sg; if (bump && sigs[k] !== sg) { x.updatedAt = now; x.updatedBy = me; } });
+  col(S.items, 'i:'); col(S.shopping, 's:'); col(S.categories, 'c:');
+  S.locations.forEach(l => { const k = 'l:' + l; next[k] = '1'; if (bump && !sigs[k]) S.locTs[l] = now; });
+  if (bump) Object.keys(sigs).forEach(k => { if (!(k in next)) S.deleted[k] = now; });
+  sigs = next;
 }
+function save(){
+  track(!!sigs);
+  if (!lsSet(KEY, JSON.stringify(S))) toast('⚠️ 保存失败：浏览器存储不可用或已满');
+  askPersist(); syncSoon();
+}
+// 合并别人的数据后保存：保留对方的时间戳，不当成自己的修改
+function commitQuiet(){ sigs = null; track(false); lsSet(KEY, JSON.stringify(S)); }
 let persistAsked = false;
 function askPersist(){
   if (persistAsked || !navigator.storage || !navigator.storage.persist) return;
@@ -630,11 +683,11 @@ function updateBadge(){
 function renderHome(){
   const h = new Date().getHours();
   $('#h-greet').textContent = h < 5 ? '夜深了 🌙' : h < 11 ? '早上好 ☀️' : h < 13 ? '中午好 🌤️' : h < 18 ? '下午好 ☕' : '晚上好 🌙';
-  let total = 0; const ex = [], soon = [], month = [], low = [];
-  S.items.forEach(i => { total += i.qty; const st = stat(i); i._st = st;
+  const stm = new Map(); let total = 0; const ex = [], soon = [], month = [], low = [];
+  S.items.forEach(i => { total += i.qty; const st = stat(i); stm.set(i, st);
     if (st.expired) ex.push(i); else if (st.soon) soon.push(i); else if (st.month) month.push(i);
     if (st.low) low.push(i); });
-  const byDl = (a, b) => a._st.dl - b._st.dl; ex.sort(byDl); soon.sort(byDl); month.sort(byDl);
+  const byDl = (a, b) => stm.get(a).dl - stm.get(b).dl; ex.sort(byDl); soon.sort(byDl); month.sort(byDl);
   $('#h-msg').textContent = !S.items.length ? '从记下第一件囤货开始吧～'
     : ex.length ? `家里的囤货还好吗？有 ${ex.length} 件已过期，记得处理～`
     : soon.length ? `有 ${soon.length} 件 7 天内到期，优先用掉哦～`
@@ -661,9 +714,9 @@ function renderHome(){
   const group = (title, list, cls, text, btn) => list.length ? `<div class="group-t">${title} <span class="c">(${list.length})</span></div>` + list.map(i => `
     <div class="alert ${cls}"><div style="min-width:0"><div class="t">${esc(i.name)}</div><div class="d">${text(i)}${i.location ? ' · ' + esc(i.location) : ''}</div></div>${btn(i)}</div>`).join('') : '';
   const useBtn = (label) => i => `<button class="act" data-act="use" data-id="${i.id}">${label}1${esc(i.unit)}</button>`;
-  html += group('🔴 已过期', ex, 'red', i => `已过期 <b>${-i._st.dl} 天</b>`, useBtn('处理'));
-  html += group('🟠 7天内到期', soon, 'orange', i => i._st.dl === 0 ? '<b>今天到期</b>' : `还剩 <b>${i._st.dl} 天</b>`, useBtn('用掉'));
-  html += group('🟡 30天内到期', month, 'yellow', i => `还剩 <b>${i._st.dl} 天</b>`, useBtn('用掉'));
+  html += group('🔴 已过期', ex, 'red', i => `已过期 <b>${-stm.get(i).dl} 天</b>`, useBtn('处理'));
+  html += group('🟠 7天内到期', soon, 'orange', i => stm.get(i).dl === 0 ? '<b>今天到期</b>' : `还剩 <b>${stm.get(i).dl} 天</b>`, useBtn('用掉'));
+  html += group('🟡 30天内到期', month, 'yellow', i => `还剩 <b>${stm.get(i).dl} 天</b>`, useBtn('用掉'));
   html += group('📦 低于安全水位', low, 'blue', i => `仅剩 <b>${fmt(i.qty)} ${esc(i.unit)}</b>（水位 ${fmt(i.minQty)}）`,
     i => inList(i) ? `<button class="act done" data-act="goto" data-to="list">已在清单</button>` : `<button class="act" data-act="to-list" data-id="${i.id}">加入清单</button>`);
   html += `</div>`;
@@ -861,7 +914,7 @@ function calibrate(items){
 /* ---------- 设置 ---------- */
 function renderSet(){
   const total = S.items.reduce((a, i) => a + i.qty, 0);
-  $('#data-note').innerHTML = `当前共 <b>${S.items.length}</b> 样物品、<b>${fmt(total)}</b> 件囤货 · 数据仅保存在本机浏览器，换设备前记得导出备份。` +
+  $('#data-note').innerHTML = `当前共 <b>${S.items.length}</b> 样物品、<b>${fmt(total)}</b> 件囤货 · ${cloud ? '已开启家庭自动同步，云端仓库里也有一份。' : '数据仅保存在本机浏览器，换设备前记得导出备份。'}` +
     (S.meta.lastBackup ? `<br>上次备份：${S.meta.lastBackup}` : '<br>还没有备份过');
   let u = null; try { u = JSON.parse(lsGet(UNDO_KEY) || 'null'); } catch (e) {}
   $('#undo-row').innerHTML = u ? `<div class="row-btns"><button class="btn ghost" data-act="undo">↩️ 撤销「${esc(u.label)}」（${new Date(u.at).toLocaleString('zh-CN', {month:'numeric', day:'numeric', hour:'2-digit', minute:'2-digit'})}）</button></div>` : '';
@@ -870,7 +923,7 @@ function renderSet(){
       <div class="main" data-act="cat-edit" data-id="${c.id}"><div class="nm"><span class="e">${esc(c.emoji)}</span>${esc(c.name)}</div><div class="s">${n} 样物品 · ${c.builtin ? '内置分类' : '自定义'}</div></div>
       <button class="trash" data-act="cat-del" data-id="${c.id}" aria-label="删除">🗑️</button></div>`; }).join('') || '<div class="empty">还没有分类</div>';
   $('#loc-list').innerHTML = S.locations.map((l, idx) => `<span class="loc"><span data-act="loc-ren" data-idx="${idx}">${esc(l)} <span class="c">${S.items.filter(i => i.location === l).length}</span></span><button class="x" data-act="loc-del" data-idx="${idx}" aria-label="删除">✕</button></span>`).join('') || '<span class="muted">还没有位置</span>';
-  renderInstall(); updatePersist(); $('#ver').textContent = 'v' + APP_VERSION + ' · 单机版';
+  renderCloud(); renderInstall(); updatePersist(); $('#ver').textContent = 'v' + APP_VERSION + ' · 单机版';
 }
 const isStandalone = () => matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
 const isIOS = () => /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
@@ -909,6 +962,8 @@ function hideTop(){
   const id = sheets.pop(); if (!id) return;
   $('#' + id).classList.remove('show'); if (!sheets.length) document.body.classList.remove('lock');
   if (id === 'm-ask' && askResolve) { const r = askResolve; askResolve = null; r(null); }
+  if (id === 'm-choose' && chooseResolve) { const r = chooseResolve; chooseResolve = null; r(null); }
+  if (!sheets.length && pendingRender) setTimeout(safeRender, 60);
 }
 window.addEventListener('popstate', () => { if (sheets.length) hideTop(); });
 document.querySelectorAll('.mask').forEach(m => m.addEventListener('click', e => { if (e.target === m) closeSheet(); }));
@@ -938,6 +993,8 @@ function openItem(id){
   if (i && !i.category) $('#mi-cat').value = '';
   if (i && !i.location) $('#mi-loc').value = '';
   $('#mi-del').classList.toggle('hidden', !i);
+  const mm = $('#mi-meta'); mm.classList.toggle('hidden', !(i && i.updatedAt));
+  if (i && i.updatedAt) mm.textContent = '🕘 最后修改：' + (i.updatedBy ? i.updatedBy + ' · ' : '') + fmtTime(i.updatedAt);
   openSheet('m-item');
   if (!i) setTimeout(() => $('#mi-name').focus(), 320);
 }
@@ -971,7 +1028,7 @@ function saveItem(){
   let category = $('#mi-cat').value; if (category === '__new') category = '';
   let location = $('#mi-loc').value; if (location === '__new') location = '';
   const data = {name, category, location, qty:num($('#mi-qty').value), unit:$('#mi-unit').value.trim() || '件', expiry:normDate($('#mi-exp').value), minQty:num($('#mi-min').value), note:$('#mi-note').value.trim()};
-  if (editId) {
+  if (editId && getItem(editId)) {
     Object.assign(getItem(editId), data, {updatedAt:Date.now()}); toast('✅ 已保存');
   } else {
     const dup = S.items.find(i => i.name === name && i.location === location);
@@ -1013,7 +1070,7 @@ function saveCat(){
 }
 
 /* ---------- 导入导出 ---------- */
-const backupObj = () => ({app:'home-stock', version:2, exportedAt:new Date().toISOString(), data:S});
+const backupObj = () => ({app:'home-stock', version:3, exportedAt:new Date().toISOString(), data:S});
 function deliver(name, text, mime){
   const blob = new Blob([text], {type:mime});
   if (matchMedia('(pointer:coarse)').matches && navigator.canShare) {
@@ -1091,7 +1148,7 @@ function importCSV(text){
   save(); refresh(); toast(`✅ CSV 导入：新增 ${added}，更新 ${updated}`, true);
 }
 function applyBackup(newS, label){
-  const msg = `将用${label}覆盖当前数据：\n\n备份里：${newS.items.length} 样物品、${newS.shopping.length} 条清单\n当前：${S.items.length} 样物品\n\n覆盖后可在「设置」里撤销。确定吗？`;
+  const msg = `将用${label}覆盖当前数据：\n\n备份里：${newS.items.length} 样物品、${newS.shopping.length} 条清单\n当前：${S.items.length} 样物品\n${cloud ? '\n⚠️ 已开启家庭自动同步，全家的数据都会变成这份备份。\n' : ''}\n覆盖后可在「设置」里撤销。确定吗？`;
   if (!confirm(msg)) return false;
   snapshot(label === '同步码' ? '导入同步码' : '恢复备份');
   S = newS; draft = {}; saveDraft(); save(); go('home'); toast('✅ 导入成功', true); return true;
@@ -1108,6 +1165,7 @@ async function makeSyncCode(){
 }
 async function readSyncCode(text){
   const m = String(text).replace(/\s+/g, '').match(/HSYNC([01]):([A-Za-z0-9+/=]+)/);
+  if (!m && /HSFAM1:/.test(text)) throw new Error('这是家庭邀请码，请在「设置 → 家庭自动同步 → 我有邀请码」里粘贴');
   if (!m) { const t = String(text).trim(); if (t.startsWith('{')) return parseBackup(JSON.parse(t)); throw new Error('没有找到同步码（应以 HSYNC 开头）'); }
   let json;
   if (m[1] === '1') {
@@ -1128,7 +1186,7 @@ async function openSyncOut(){
 }
 function openSyncIn(){
   $('#ms-title').textContent = '📋 粘贴同步码';
-  $('#ms-hint').innerHTML = '把家人发来的整段同步码（以 <b>HSYNC</b> 开头）粘贴到下面。导入会<b>覆盖</b>你现在的数据，之后可撤销。';
+  $('#ms-hint').innerHTML = '把家人发来的整段同步码（以 <b>HSYNC</b> 开头）粘贴到下面。两边数据会<b>按修改时间合并</b>，不会删掉你这边新加的东西，之后也可撤销。';
   $('#ms-text').value = ''; $('#ms-text').readOnly = false; $('#ms-text').placeholder = '长按此处 → 粘贴';
   $('#ms-btns-out').classList.add('hidden'); $('#ms-btns-in').classList.remove('hidden');
   openSheet('m-sync');
@@ -1141,6 +1199,247 @@ function fallbackCopy(text){
   const ta = document.createElement('textarea'); ta.value = text; ta.setAttribute('readonly', ''); ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0';
   document.body.appendChild(ta); ta.select(); ta.setSelectionRange(0, text.length);
   let ok = false; try { ok = document.execCommand('copy'); } catch (e) {} ta.remove(); return ok;
+}
+
+/* ---------- 家庭自动同步（GitHub 私有仓库当云盘） ---------- */
+const CLOUD_KEY = 'hs_cloud', DATA_PATH = 'home-stock-data.json';
+let cloud = null;
+try { cloud = JSON.parse(lsGet(CLOUD_KEY) || 'null'); } catch (e) {}
+const cloudName = () => (cloud && cloud.name) || UI.myName || '';
+const saveCloud = () => cloud ? lsSet(CLOUD_KEY, JSON.stringify(cloud)) : lsDel(CLOUD_KEY);
+const fmtTime = t => new Date(t).toLocaleString('zh-CN', {month:'numeric', day:'numeric', hour:'2-digit', minute:'2-digit'});
+const utf8b64 = str => b64(new TextEncoder().encode(str));
+const sync = {busy:false, again:false, timer:null};
+// base = 上次和云端对齐时的数据，用来判断「这段时间本机改了什么、云端改了什么」
+const BASE_KEY = 'hs_base';
+let base = null;
+try { const raw = lsGet(BASE_KEY); if (raw) base = normalize(JSON.parse(raw)); } catch (e) {}
+function setBase(d){ base = d ? normalize(d) : null; if (base) lsSet(BASE_KEY, JSON.stringify(base)); else lsDel(BASE_KEY); }
+let pendingRender = false, chooseResolve = null, cloudMode = 'owner';
+
+// 别人的修改到达时，正在输入/弹窗/长按就先不刷新界面，结束后再刷
+function safeRender(){
+  const a = document.activeElement;
+  if (sheets.length || hold || (a && /^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName) && a.id !== 'q')) { pendingRender = true; return; }
+  pendingRender = false; render();
+}
+// 与顺序无关的规范形式，用来判断两边是否真的不同
+function canon(x){
+  const n = normalize(x), by = (a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
+  return JSON.stringify([n.items.sort(by), n.categories.sort(by), n.shopping.sort(by), n.locations.sort(), n.locTs, n.deleted, n.meta.lastStocktake]);
+}
+// 三方合并单条记录：o = 上次同步时的版本，x = 本机，y = 云端
+// 只有一边改了的字段取改的那边；两边都改了数量就把两边的增减都算上；其他字段两边都改了取较新的
+function merge3rec(o, x, y){
+  const r = {...(y.updatedAt > x.updatedAt ? y : x)};
+  Object.keys(r).forEach(f => {
+    if (f === 'id' || f === 'updatedAt' || f === 'updatedBy') return;
+    const xo = x[f] === o[f], yo = y[f] === o[f];
+    if (xo && !yo) r[f] = y[f];
+    else if (yo && !xo) r[f] = x[f];
+    else if (!xo && !yo && f === 'qty' && typeof o.qty === 'number') r[f] = Math.max(0, Math.round((x.qty + y.qty - o.qty) * 100) / 100);
+  });
+  r.updatedAt = Math.max(x.updatedAt, y.updatedAt);
+  return r;
+}
+// 按记录合并；有「上次同步版本」时逐字段三方合并，否则取修改时间新的；删除标记比记录新就删掉
+function mergeState(a, b, base){
+  const del = {...a.deleted};
+  Object.entries(b.deleted).forEach(([k, v]) => { if (!(del[k] >= v)) del[k] = v; });
+  const cutoff = Date.now() - 180 * 864e5; Object.keys(del).forEach(k => { if (del[k] < cutoff) delete del[k]; });
+  const list = (la, lb, p, lo) => {
+    const om = new Map((lo || []).map(x => [x.id, x])), m = new Map(); la.forEach(x => m.set(x.id, x));
+    lb.forEach(y => {
+      const x = m.get(y.id), o = om.get(y.id);
+      if (!x) m.set(y.id, y);
+      else if (o) m.set(y.id, merge3rec(o, x, y));
+      else if (y.updatedAt > x.updatedAt) m.set(y.id, y);
+    });
+    return [...m.values()].filter(x => !(del[p + x.id] >= x.updatedAt));
+  };
+  const locTs = {...a.locTs}; Object.entries(b.locTs).forEach(([k, v]) => { if (!(locTs[k] >= v)) locTs[k] = v; });
+  const locations = [...new Set([...a.locations, ...b.locations])].filter(l => !(del['l:' + l] >= (locTs[l] || 0)));
+  Object.keys(locTs).forEach(l => { if (!locations.includes(l)) delete locTs[l]; });
+  const st = [a.meta.lastStocktake, b.meta.lastStocktake].filter(Boolean).sort().pop() || null;
+  return normalize({items:list(a.items, b.items, 'i:', base && base.items), categories:list(a.categories, b.categories, 'c:', base && base.categories), shopping:list(a.shopping, b.shopping, 's:', base && base.shopping),
+    locations, locTs, deleted:del, meta:{lastStocktake:st, lastBackup:a.meta.lastBackup}});
+}
+function mergeIn(ns){
+  snapshot('合并同步码');
+  const before = new Map(S.items.map(i => [i.id, i.updatedAt]));
+  S = mergeState(S, ns); commitQuiet(); syncSoon(300);
+  const added = S.items.filter(i => !before.has(i.id)).length, upd = S.items.filter(i => before.has(i.id) && before.get(i.id) !== i.updatedAt).length;
+  go('home'); toast(`✅ 已合并：新增 ${added} 样、更新 ${upd} 样`, true);
+}
+
+function ghErr(status){
+  return new Error(status === 401 ? '令牌无效或已过期，请重新设置' : status === 403 ? '没有权限：检查令牌是否给了这个仓库 Contents 读写权限' : status === 404 ? '找不到仓库，或令牌没有访问它的权限' : 'GitHub 返回错误 ' + status);
+}
+async function gh(method, path, body, headers = {}, cfg = cloud){
+  try {
+    return await fetch(`https://api.github.com/repos/${encodeURIComponent(cfg.owner)}/${encodeURIComponent(cfg.repo)}${path}`, {
+      method, cache:'no-store', body:body ? JSON.stringify(body) : undefined,
+      headers:{Accept:'application/vnd.github+json', Authorization:'Bearer ' + cfg.token, ...(body ? {'Content-Type':'application/json'} : {}), ...headers}});
+  } catch (e) { throw new Error('网络连不上 GitHub，稍后自动重试'); }
+}
+async function pullRemote(useEtag){
+  const res = await gh('GET', '/contents/' + DATA_PATH, null, useEtag && cloud.etag ? {'If-None-Match':cloud.etag} : {});
+  if (res.status === 304) return {same:true};
+  if (res.status === 404) return {missing:true};
+  if (!res.ok) throw ghErr(res.status);
+  const j = await res.json();
+  let text;
+  if (j.content) text = new TextDecoder().decode(unb64(j.content.replace(/\s/g, '')));
+  else { const r2 = await gh('GET', '/contents/' + DATA_PATH, null, {Accept:'application/vnd.github.raw+json'}); if (!r2.ok) throw ghErr(r2.status); text = await r2.text(); }
+  const o = JSON.parse(text);
+  return {data:parseBackup(o), sha:j.sha, etag:res.headers.get('ETag'), by:o.by || '', at:+o.at || 0};
+}
+async function pushRemote(sha){
+  const snap = JSON.parse(JSON.stringify(S));   // 推送的正是这一刻的数据；之后的改动下一轮再推
+  const body = {message:'更新 · ' + (cloudName() || '家人') + ' · ' + new Date().toLocaleString('zh-CN'), content:utf8b64(JSON.stringify({app:'home-stock', version:3, at:Date.now(), by:cloudName(), data:snap}))};
+  if (sha) body.sha = sha;
+  const res = await gh('PUT', '/contents/' + DATA_PATH, body);
+  if (res.status === 409 || res.status === 422) return {conflict:true};
+  if (!res.ok) throw ghErr(res.status);
+  return {sha:(await res.json()).content.sha, data:snap};
+}
+function syncSoon(ms = 2500){ if (!cloud) return; clearTimeout(sync.timer); sync.timer = setTimeout(syncNow, ms); }
+// 一轮同步：拉取 → 合并 → 若本机有新内容则推送；推送冲突（别人刚好也推了）就重来
+async function syncNow(){
+  if (!cloud) return;
+  if (sync.busy) { sync.again = true; return; }
+  clearTimeout(sync.timer);
+  if (navigator.onLine === false) { cloud.lastError = '离线中，联网后自动同步'; setSync(); return; }
+  sync.busy = true; setSync();
+  let changed = false;
+  try {
+    for (let n = 0; n < 5; n++) {
+      const r = await pullRemote(n === 0);
+      if (!cloud) return;
+      if (r.data) {
+        Object.assign(cloud, {sha:r.sha, etag:r.etag, remoteCanon:canon(r.data), lastBy:r.by, lastAt:r.at});
+        const merged = mergeState(S, r.data, base);
+        setBase(r.data);
+        if (canon(merged) !== canon(S)) { S = merged; commitQuiet(); changed = true; }
+      } else if (r.missing) { Object.assign(cloud, {sha:null, etag:null, remoteCanon:null}); setBase(null); }
+      const mine = canon(S);
+      if (mine === cloud.remoteCanon) break;
+      const p = await pushRemote(cloud.sha);
+      if (!cloud) return;
+      if (p.conflict) { cloud.etag = null; continue; }
+      Object.assign(cloud, {sha:p.sha, etag:null, remoteCanon:mine, lastBy:cloudName(), lastAt:Date.now()}); setBase(p.data);
+      break;
+    }
+    cloud.lastSync = Date.now(); cloud.lastError = '';
+  } catch (e) { if (cloud) cloud.lastError = e.message || '同步失败'; }
+  finally {
+    sync.busy = false; saveCloud(); setSync();
+    if (changed) safeRender();
+    if (sync.again) { sync.again = false; syncSoon(400); }
+  }
+}
+function setSync(){
+  const chip = $('#sync-chip'); if (!chip) return;
+  if (!cloud) { chip.classList.add('hidden'); return; }
+  chip.classList.remove('hidden');
+  let t, err = false;
+  if (sync.busy) t = '⏳ 同步中…';
+  else if (cloud.lastError) { t = navigator.onLine === false ? '📴 离线，联网后自动同步' : '⚠️ 同步失败，点我重试'; err = true; }
+  else if (cloud.lastSync) t = '☁️ 已和家人同步 · ' + new Date(cloud.lastSync).toLocaleTimeString('zh-CN', {hour:'2-digit', minute:'2-digit'});
+  else t = '☁️ 等待同步';
+  chip.textContent = t; chip.classList.toggle('err', err);
+  if (UI.tab === 'set' && !sheets.length) renderCloud();
+}
+function renderCloud(){
+  const body = $('#cloud-body'), pill = $('#cloud-pill'); if (!body) return;
+  if (!cloud) {
+    pill.innerHTML = '';
+    body.innerHTML = `<div class="muted" style="line-height:1.7">一家人共用一份数据：任何人加减物品，其他人的手机在打开 App 时、以及开着时每 30 秒自动更新。数据存在你自己的 GitHub <b>私有</b>仓库，家人不用注册，粘贴一次邀请码就行。</div>
+      <div class="row-btns"><button class="btn main" data-act="cloud-setup">🛠️ 我来创建</button><button class="btn soft" data-act="cloud-join">🔑 我有邀请码</button></div>`;
+    return;
+  }
+  pill.innerHTML = cloud.lastError ? '<span class="pill red">未同步</span>' : '<span class="pill green">✓ 已开启</span>';
+  body.innerHTML = `<div class="set-row"><div class="k">云端仓库</div><div class="v">${esc(cloud.owner)}/${esc(cloud.repo)}</div></div>
+    <div class="set-row btnrow" data-act="cloud-name"><div class="k">我的称呼<small>家人能看到每件物品是谁改的</small></div><div class="v">${esc(cloudName() || '未设置')} ›</div></div>
+    <div class="set-row"><div class="k">上次同步</div><div class="v">${sync.busy ? '同步中…' : cloud.lastSync ? fmtTime(cloud.lastSync) : '还没有'}</div></div>
+    ${cloud.lastAt ? `<div class="set-row"><div class="k">云端最近一次更新</div><div class="v">${esc(cloud.lastBy || '家人')} · ${fmtTime(cloud.lastAt)}</div></div>` : ''}
+    ${cloud.lastError ? `<div class="banner" style="margin:10px 0 0">⚠️ ${esc(cloud.lastError)}</div>` : ''}
+    <div class="row-btns"><button class="btn soft" data-act="sync-now">🔄 立即同步</button><button class="btn main" data-act="cloud-invite">👨‍👩‍👧 邀请家人</button></div>
+    <div class="set-row btnrow danger" style="margin-top:6px" data-act="cloud-off"><div class="k">断开同步<small>本机数据保留，不再和家人同步</small></div><div class="v">›</div></div>`;
+}
+function chooseSheet(title, html, opts){
+  $('#mch-title').textContent = title; $('#mch-text').innerHTML = html;
+  $('#mch-btns').innerHTML = opts.map(o => `<button class="btn ${o.cls || 'ghost'}" data-act="choose" data-v="${o.v}">${esc(o.label)}</button>`).join('');
+  openSheet('m-choose');
+  return new Promise(r => { chooseResolve = r; });
+}
+function openCloud(mode){
+  cloudMode = mode;
+  $('#mcl-title').textContent = mode === 'owner' ? '🛠️ 创建家庭同步' : '🔑 用邀请码加入';
+  $('#mcl-owner').classList.toggle('hidden', mode !== 'owner'); $('#mcl-join').classList.toggle('hidden', mode === 'owner');
+  $('#mcl-repo').value = ''; $('#mcl-token').value = ''; $('#mcl-code').value = ''; $('#mcl-name').value = UI.myName || '';
+  openSheet('m-cloud');
+}
+function parseInvite(text){
+  const m = String(text).replace(/\s+/g, '').match(/HSFAM1:([A-Za-z0-9+/=]+)/);
+  if (!m) throw new Error('没找到邀请码（应包含 HSFAM1: 开头的一段）');
+  let o; try { o = JSON.parse(new TextDecoder().decode(unb64(m[1]))); } catch (e) { throw new Error('邀请码不完整，请整段复制'); }
+  if (!o.o || !o.r || !o.t) throw new Error('邀请码不完整，请整段复制');
+  return {owner:o.o, repo:o.r, token:o.t};
+}
+const makeInvite = () => 'HSFAM1:' + utf8b64(JSON.stringify({o:cloud.owner, r:cloud.repo, t:cloud.token}));
+const appURL = () => location.origin + location.pathname.replace(/index\.html$/, '');
+const inviteText = code => `【家庭囤货·邀请码】\n1. 用浏览器打开 ${appURL()} 并添加到主屏幕\n2. 从桌面打开 → 设置 → 家庭自动同步 →「我有邀请码」\n3. 把这整段消息粘贴进去\n${code}\n（邀请码就是家里数据的钥匙，只发给家人）`;
+function showInvite(){
+  if (!cloud) return;
+  $('#ms-title').textContent = '👨‍👩‍👧 邀请家人';
+  $('#ms-hint').innerHTML = '把下面整段发给家人（微信私聊）。对方打开 App →「设置 → 家庭自动同步 → 我有邀请码」粘贴即可。<br><b>邀请码就是家里数据的钥匙，不要发到大群。</b>';
+  $('#ms-text').value = inviteText(makeInvite()); $('#ms-text').readOnly = true;
+  $('#ms-btns-out').classList.remove('hidden'); $('#ms-btns-in').classList.add('hidden');
+  openSheet('m-sync');
+}
+async function cloudConnect(){
+  let cfg;
+  try {
+    if (cloudMode === 'owner') {
+      const repo = $('#mcl-repo').value.trim().replace(/^https?:\/\/github\.com\//i, '').replace(/\.git$/, '').replace(/\/+$/, '');
+      const [owner, name] = repo.split('/'), token = $('#mcl-token').value.trim();
+      if (!owner || !name) throw new Error('仓库格式应为：用户名/仓库名');
+      if (!token) throw new Error('请填写访问令牌');
+      cfg = {owner, repo:name, token};
+    } else cfg = parseInvite($('#mcl-code').value);
+  } catch (e) { toast('❌ ' + e.message); return; }
+  const myName = $('#mcl-name').value.trim(), btn = $('#mcl-go');
+  btn.disabled = true; btn.textContent = '连接中…';
+  let r;
+  try {
+    const res = await gh('GET', '', null, {}, cfg);
+    if (!res.ok) throw ghErr(res.status);
+    const info = await res.json();
+    if (info.private === false && !confirm('⚠️ 这个仓库是「公开」的，任何人都能看到你家的囤货数据。\n建议到 GitHub 仓库 Settings 里改成 Private。\n\n仍然继续吗？')) return;
+    cloud = {...cfg, name:myName, etag:null, sha:null, remoteCanon:null, lastSync:0, lastError:''};
+    r = await pullRemote(false);
+  } catch (e) { cloud = null; toast('❌ ' + e.message); return; }
+  finally { btn.disabled = false; btn.textContent = '连接'; }
+  closeSheet(); await new Promise(res => setTimeout(res, 380));
+  let mode = 'merge';
+  if (r.data && S.items.length && r.data.items.length) {
+    mode = await chooseSheet('云端已经有数据', `云端：<b>${r.data.items.length}</b> 样物品${r.by ? `（${esc(r.by)} 最近更新）` : ''}<br>这台手机：<b>${S.items.length}</b> 样物品<br><br>这台手机上原有的数据怎么处理？`,
+      [{v:'merge', label:'合并两边（推荐）', cls:'main'}, {v:'cloud', label:'只用云端的，丢掉本机数据', cls:'ghost'}]);
+    if (!mode) { cloud = null; toast('已取消连接'); return; }
+  }
+  if (r.data) {
+    snapshot('连接家庭同步');
+    S = (mode === 'cloud' || !S.items.length) ? r.data : mergeState(S, r.data);
+    commitQuiet(); draft = {}; saveDraft();
+    Object.assign(cloud, {sha:r.sha, etag:r.etag, remoteCanon:canon(r.data), lastBy:r.by, lastAt:r.at}); setBase(r.data);
+  } else setBase(null);
+  if (myName) { UI.myName = myName; saveUI(); }
+  saveCloud(); await syncNow();
+  const ok = cloud && !cloud.lastError;
+  if (cloudMode === 'owner') { go('set'); if (ok) setTimeout(showInvite, 500); }
+  else go('home');
+  toast(ok ? (r.data ? '☁️ 已连接，和家人的数据同步好了' : '☁️ 家庭同步已开启，去邀请家人吧') : '⚠️ ' + ((cloud && cloud.lastError) || '连接失败'));
 }
 
 /* ---------- 示例数据 ---------- */
@@ -1202,10 +1501,10 @@ document.addEventListener('click', async e => {
     case 'undo': undo(); break;
     case 'sync-out': openSyncOut(); break;
     case 'sync-in': openSyncIn(); break;
-    case 'sync-copy': { const v = $('#ms-text').value; if (!v.startsWith('HSYNC')) break; const ok = await copyText(v); if (!ok) { $('#ms-text').readOnly = false; $('#ms-text').focus(); $('#ms-text').select(); } toast(ok ? '📋 已复制，去微信粘贴发送吧' : '请手动全选复制'); break; }
-    case 'sync-share': { const v = $('#ms-text').value; if (!v.startsWith('HSYNC')) break; if (navigator.share) navigator.share({text:'【家庭囤货同步码】复制整段，在 App「设置 → 粘贴同步码」导入：\n' + v}).catch(() => {}); else toast('当前浏览器不支持分享，请用复制'); break; }
+    case 'sync-copy': { const v = $('#ms-text').value; if (!/HS(YNC|FAM)/.test(v)) break; const ok = await copyText(v); if (!ok) { $('#ms-text').readOnly = false; $('#ms-text').focus(); $('#ms-text').select(); } toast(ok ? '📋 已复制，去微信粘贴发送吧' : '请手动全选复制'); break; }
+    case 'sync-share': { const v = $('#ms-text').value; if (!/HS(YNC|FAM)/.test(v)) break; if (navigator.share) navigator.share({text:v.includes('HSFAM') ? v : '【家庭囤货同步码】复制整段，在 App「设置 → 粘贴同步码」导入：\n' + v}).catch(() => {}); else toast('当前浏览器不支持分享，请用复制'); break; }
     case 'sync-paste': try { const t = await navigator.clipboard.readText(); $('#ms-text').value = t; } catch (err) { toast('请长按输入框手动粘贴'); $('#ms-text').focus(); } break;
-    case 'sync-apply': try { const ns = await readSyncCode($('#ms-text').value); closeSheet(); setTimeout(() => applyBackup(ns, '同步码'), 60); } catch (err) { toast('❌ ' + err.message); } break;
+    case 'sync-apply': try { const ns = await readSyncCode($('#ms-text').value); closeSheet(); setTimeout(() => mergeIn(ns), 60); } catch (err) { toast('❌ ' + err.message); } break;
     case 'cat-new': openCat(null); break;
     case 'cat-edit': openCat(id); break;
     case 'cat-save': saveCat(); break;
@@ -1235,15 +1534,29 @@ document.addEventListener('click', async e => {
       S.items.forEach(i => { if (i.location === old) i.location = nv; }); S.shopping.forEach(s => { if (s.location === old) s.location = nv; });
       if (UI.loc === old) UI.loc = nv; save(); renderSet(); toast('✅ 已改名'); break; }
     case 'ask-ok': askOk(); break;
+    case 'sync-now':
+      if (!cloud) { go('set'); break; }
+      toast('⏳ 正在同步…'); await syncNow();
+      toast(cloud && !cloud.lastError ? '☁️ 已和家人同步' : '⚠️ ' + ((cloud && cloud.lastError) || '同步失败')); break;
+    case 'cloud-setup': openCloud('owner'); break;
+    case 'cloud-join': openCloud('join'); break;
+    case 'cloud-connect': cloudConnect(); break;
+    case 'cloud-invite': showInvite(); break;
+    case 'cloud-name': { const n = await askText('我的称呼（家人能看到是谁改的）', cloudName(), '如：妈妈'); if (n && cloud) { cloud.name = n; UI.myName = n; saveUI(); saveCloud(); renderSet(); } break; }
+    case 'cloud-off':
+      if (!confirm('断开家庭自动同步？\n本机数据会保留，之后不再和家人同步。')) break;
+      cloud = null; saveCloud(); setBase(null); setSync(); renderSet(); toast('已断开同步'); break;
+    case 'choose': { const r = chooseResolve; chooseResolve = null; closeSheet(); r && r(el.dataset.v); break; }
     case 'guide': guideOS = el.dataset.os; renderInstall(); break;
     case 'install': if (installEvt) { installEvt.prompt(); installEvt.userChoice.finally(() => { installEvt = null; renderInstall(); }); } break;
     case 'sample':
+      if (cloud) { toast('已开启家庭同步，示例数据会同步给全家，请先断开同步'); break; }
       if (S.items.length && !confirm('加载示例会覆盖当前数据（可撤销）。确定吗？')) break;
       if (S.items.length) snapshot('加载示例');
       S = sampleData(); draft = {}; saveDraft(); save(); go('home'); toast('👀 已加载示例数据，可在设置里清空'); break;
     case 'wipe':
-      if (!confirm('确定清空所有物品、清单、分类和位置吗？\n（会留一份快照，可在设置里撤销）')) break;
-      snapshot('清空数据'); S = blank(); draft = {}; saveDraft(); save(); go('home'); toast('已清空', true); break;
+      if (!confirm('确定清空所有物品、清单、分类和位置吗？\n（会留一份快照，可在设置里撤销）' + (cloud ? '\n\n⚠️ 已开启家庭自动同步：所有家人手机上的数据也会被清空！' : ''))) break;
+      snapshot('清空数据'); S = blank(); draft = {}; saveDraft(); if (cloud) save(); else commitQuiet(); go('home'); toast('已清空', true); break;
   }
 });
 $('#loc-new').addEventListener('keydown', e => { if (e.key === 'Enter') e.target.closest('.card').querySelector('[data-act="loc-add"]').click(); });
@@ -1251,7 +1564,7 @@ $('#f-loc').addEventListener('change', e => { UI.loc = e.target.value; saveUI();
 $('#f-sort').addEventListener('change', e => { UI.sort = e.target.value; saveUI(); renderInvList(); });
 $('#file-json').addEventListener('change', async e => {
   const f = e.target.files[0]; e.target.value = ''; if (!f) return;
-  try { const t = await readText(f); const ns = /HSYNC[01]:/.test(t) ? await readSyncCode(t) : parseBackup(JSON.parse(t)); applyBackup(ns, '备份文件'); }
+  try { const t = await readText(f); if (/HSYNC[01]:/.test(t)) mergeIn(await readSyncCode(t)); else applyBackup(parseBackup(JSON.parse(t)), '备份文件'); }
   catch (err) { toast('❌ 读取失败：' + (err.message || '文件格式不对')); }
 });
 $('#file-csv').addEventListener('change', async e => {
@@ -1268,12 +1581,16 @@ function toast(msg, withUndo){
 }
 
 /* ---------- 启动 ---------- */
-load();
+load(); track(false);
 if (isWeChat()) $('#wx-banner').classList.remove('hidden');
 UI.only = '';
 go(['home', 'inv', 'list', 'st', 'set'].includes(UI.tab) ? UI.tab : 'home');
 // 跨天 / 回到前台时刷新日期和预警
-document.addEventListener('visibilitychange', () => { if (!document.hidden && !sheets.length) { try { const raw = lsGet(KEY); if (raw) S = normalize(JSON.parse(raw)); } catch (e) {} render(); } });
+document.addEventListener('visibilitychange', () => { if (!document.hidden) { safeRender(); syncNow(); } });
+document.addEventListener('focusout', () => { if (pendingRender) setTimeout(safeRender, 120); });
+window.addEventListener('online', () => syncNow());
+setInterval(() => { if (cloud && !document.hidden) syncNow(); }, 30000);
+setSync(); if (cloud) setTimeout(syncNow, 600);
 if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('sw.js').then(reg => {

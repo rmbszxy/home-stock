@@ -1,5 +1,5 @@
 // 家庭囤货 Service Worker：首次打开后离线可用；联网时自动取最新版本
-const VERSION = 'hs-2.0.0';
+const VERSION = 'hs-2.1.0';
 const ASSETS = ['./', './index.html', './manifest.webmanifest', './icons/icon-192.png', './icons/icon-512.png', './icons/apple-touch-icon.png', './icons/maskable-512.png'];
 
 self.addEventListener('install', e => {
