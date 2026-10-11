@@ -306,7 +306,7 @@ input[type=date].in::-webkit-date-and-time-value{text-align:left}
 .chips::-webkit-scrollbar{display:none}
 .chips button{flex-shrink:0;height:34px;padding:0 14px;border-radius:999px;background:#f3ebe2;font-size:14px;font-weight:600;color:#6d5a4b}
 .chips button.on{background:#3a2a1f;color:#fff}
-.day-h{font-size:13px;font-weight:800;color:var(--sub);margin:12px 0 2px}
+.day-h{font-size:13px;font-weight:800;color:var(--sub);margin:12px 0 2px;display:flex;justify-content:space-between}
 .ev-row{display:flex;align-items:center;gap:10px;padding:7px 0;font-size:14.5px}
 .ev-row .ic{width:34px;height:34px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;background:#f3ebe2}
 .ev-row .tx{flex:1;min-width:0}
@@ -317,6 +317,80 @@ input[type=date].in::-webkit-date-and-time-value{text-align:left}
 .si-row .nm{flex:1;min-width:0;font-weight:800;font-size:16px}
 .si-row .exp{display:flex;align-items:center;gap:10px;margin-top:10px;font-size:13.5px;color:var(--sub)}
 .si-row .exp input{flex:1;min-width:0;height:42px;border:1.5px solid var(--line2);border-radius:13px;padding:0 12px;background:#fff;font-size:15px;-webkit-appearance:none;appearance:none}
+.quote{padding-right:60px;cursor:pointer}
+.quote .en{font-family:Georgia,"Times New Roman","Songti SC",serif;font-size:19.5px;font-weight:700;line-height:1.38}
+.quote .by{font-size:13px;opacity:.88;margin-top:8px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.quote .tag{background:rgba(255,255,255,.22);border-radius:999px;padding:1px 9px;font-size:12px;font-weight:700}
+.quote .zh{font-size:14.5px;margin-top:9px;line-height:1.6;background:rgba(255,255,255,.15);border-radius:12px;padding:8px 11px}
+.hero-pill{position:absolute;right:86px;top:calc(var(--sat) + 30px);height:38px;padding:0 14px;border-radius:999px;background:rgba(255,255,255,.2);color:#fff;font-weight:800;font-size:14px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.28)}
+.hero-back{color:#fff;opacity:.88;font-size:14.5px;font-weight:800;padding:0;margin-bottom:6px;display:block}
+.rem{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px dashed var(--line);font-size:14.5px}
+.rem:last-child{border-bottom:none}
+.rem .t{flex:1;min-width:0;line-height:1.5}
+.rem button{flex-shrink:0;background:var(--primary-bg);color:var(--primary-d);font-weight:800;border-radius:999px;padding:7px 13px;font-size:13.5px}
+.composer{background:#fff;border:1.5px solid var(--line2);border-radius:18px;padding:10px 12px;margin-bottom:12px}
+.composer textarea{width:100%;border:none;outline:none;resize:none;font-size:16px;line-height:1.5;background:transparent;min-height:48px}
+.cmp-bar{display:flex;align-items:center;gap:8px;margin-top:4px}
+.moods{flex:1;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+.moods::-webkit-scrollbar{display:none}
+.moods button{flex-shrink:0;width:34px;height:34px;border-radius:10px;font-size:20px;opacity:.55}
+.moods button.on{opacity:1;background:#fbe9de}
+.btn.sm{height:38px;border-radius:13px;font-size:14.5px;padding:0 16px;flex:none}
+.dy{display:flex;gap:12px;padding:12px 0;border-top:1px solid var(--line);cursor:pointer}
+.dy .mood{font-size:26px;line-height:1.2;flex-shrink:0}
+.dy .tx{flex:1;min-width:0}
+.dy .body{font-size:15px;line-height:1.6;white-space:pre-wrap;word-break:break-word;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.dy small{display:block;color:var(--sub);font-size:12.5px;margin-top:3px}
+.memory{background:#fff4df;color:#7a5a2a;border-radius:14px;padding:9px 12px;font-size:13.5px;margin-bottom:8px;cursor:pointer}
+.dd{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);cursor:pointer}
+.dd:last-child{border-bottom:none}
+.dd .e{font-size:26px;flex-shrink:0}
+.dd .nm{flex:1;min-width:0;font-weight:700;font-size:15.5px}
+.dd .nm small{display:block;font-weight:500;color:var(--sub);font-size:12.5px}
+.dd .cd{text-align:right;font-size:13px;color:var(--sub);white-space:nowrap}
+.dd .cd b{display:block;font-size:20px;color:var(--text)}
+.dd.near .cd b{color:var(--primary-d)}
+.money-hero .l{font-size:14px;color:var(--sub);font-weight:700}
+.money-hero .n{font-size:40px;font-weight:800;line-height:1.15;margin-top:2px;letter-spacing:-.5px}
+.money-hero .sub{font-size:13.5px;color:var(--sub);margin-top:4px;line-height:1.6}
+.money-hero .sub b{color:var(--text)}
+.meter{height:10px;border-radius:5px;background:#e8effa;overflow:hidden;margin-top:14px}
+.meter i{display:block;height:100%;border-radius:0 4px 4px 0;background:#4a7cc0}
+.meter i.warn{background:#c58f1a} .meter i.over{background:var(--red)}
+.meter-t{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--sub);margin-top:6px}
+.fx-row{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--line);cursor:pointer}
+.fx-row:last-child{border-bottom:none}
+.fx-row .e{font-size:24px;width:30px;text-align:center;flex-shrink:0}
+.fx-row .nm{flex:1;min-width:0;font-weight:700;font-size:15.5px}
+.fx-row .nm small{display:block;font-weight:500;color:var(--sub);font-size:12.5px}
+.fx-row .amt{font-weight:800;color:var(--green);white-space:nowrap}
+.fx-row .rec{font-size:13.5px;font-weight:800;color:var(--primary-d);background:var(--primary-bg);border-radius:999px;padding:6px 12px;white-space:nowrap}
+.fx-row.late .rec{background:var(--red-bg);color:var(--red)}
+.tgl{width:48px;height:28px;border-radius:14px;background:#e3d8cc;position:relative;flex-shrink:0;transition:background .2s}
+.tgl::after{content:'';position:absolute;left:3px;top:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:left .2s;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.tgl.on{background:var(--green)} .tgl.on::after{left:23px}
+.ev-row .d.inc{color:var(--green)}
+.ev-row small .pr{color:var(--text);font-weight:700}
+.amt-in{display:flex;align-items:center;gap:6px;border-bottom:2px solid var(--line2);margin-bottom:16px;padding:2px}
+.amt-in span{font-size:28px;font-weight:800}
+.amt-in input{flex:1;min-width:0;border:none;outline:none;background:transparent;font-size:36px;font-weight:800;height:58px}
+.cgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px}
+.cgrid button{display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 0;border-radius:14px;background:#f6efe7;font-size:12.5px;font-weight:600;color:#6d5a4b}
+.cgrid button span{font-size:22px;line-height:1.2}
+.cgrid button.on{background:#3a2a1f;color:#fff}
+.stack{display:flex;gap:2px;height:14px;margin-top:16px}
+.stack i{display:block;height:100%}
+.stack i:first-child{border-radius:4px 0 0 4px} .stack i:last-child{border-radius:0 4px 4px 0} .stack i:only-child{border-radius:4px}
+.stack-l{display:flex;flex-direction:column;gap:4px;margin-top:10px;font-size:13.5px;color:var(--sub)}
+.stack-l i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.stack-l b{color:var(--text)}
+.insight{padding:9px 0;border-bottom:1px dashed var(--line);font-size:14.5px;line-height:1.6}
+.insight:last-child{border-bottom:none}
+.tbl .tr{display:grid;grid-template-columns:minmax(0,1.3fr) 1fr 1fr .9fr;gap:6px;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px;align-items:center}
+.tbl .tr:last-child{border-bottom:none}
+.tbl .tr span:not(:first-child){text-align:right;white-space:nowrap}
+.tbl .th{font-size:12.5px;color:var(--sub);font-weight:700}
+.up{color:var(--red)} .dn{color:var(--green)}
 .sync-chip{display:inline-flex;align-items:center;gap:4px;margin-top:10px;padding:5px 12px;border-radius:999px;background:rgba(255,255,255,.2);color:#fff;font-size:13px;font-weight:700;box-shadow:inset 0 0 0 1px rgba(255,255,255,.25)}
 .sync-chip.err{background:#fff3dc;color:#9a5512}
 .btn:disabled{opacity:.6}
@@ -334,7 +408,7 @@ input[type=date].in::-webkit-date-and-time-value{text-align:left}
   <!-- 首页 -->
   <section class="view" id="v-home">
     <div class="hero">
-      <h1 id="h-greet">你好 ☀️</h1>
+      <div class="quote" id="h-quote" data-act="quote-zh"></div>
       <div class="msg" id="h-msg"></div>
       <div class="date js-date"></div>
       <button class="sync-chip hidden" id="sync-chip" data-act="sync-now"></button>
@@ -348,6 +422,7 @@ input[type=date].in::-webkit-date-and-time-value{text-align:left}
     <div class="hero">
       <h1>库存管理</h1>
       <div class="date js-date"></div>
+      <button class="hero-pill" data-act="goto-st">📋 盘点</button>
       <button class="hero-add" data-act="add" aria-label="添加物品">+</button>
     </div>
     <div class="wrap">
@@ -382,6 +457,7 @@ input[type=date].in::-webkit-date-and-time-value{text-align:left}
   <!-- 盘点 -->
   <section class="view" id="v-st">
     <div class="hero">
+      <button class="hero-back" data-act="goto-inv">‹ 返回库存</button>
       <h1>定期盘点</h1>
       <div class="date js-date"></div>
       <button class="hero-add" data-act="add" aria-label="添加物品">+</button>
@@ -399,6 +475,22 @@ input[type=date].in::-webkit-date-and-time-value{text-align:left}
   </section>
 
   <!-- 设置 -->
+  <section class="view" id="v-bill">
+    <div class="hero">
+      <h1>账本</h1>
+      <div class="msg" id="b-msg"></div>
+      <div class="date js-date"></div>
+      <button class="hero-add" data-act="bill-add" data-t="out" aria-label="记一笔">+</button>
+    </div>
+    <div class="wrap">
+      <div class="card" style="padding:12px 14px">
+        <div class="seg" style="margin:0 0 10px"><button data-act="bl-view" data-v="list">账单</button><button data-act="bl-view" data-v="report">月报分析</button></div>
+        <div class="period"><button data-act="bl-prev" aria-label="上个月">‹</button><b id="bl-label"></b><button data-act="bl-next" id="bl-next" aria-label="下个月">›</button></div>
+      </div>
+      <div id="bl-body"></div>
+    </div>
+  </section>
+
   <section class="view" id="v-stat">
     <div class="hero">
       <h1>统计</h1>
@@ -475,6 +567,7 @@ input[type=date].in::-webkit-date-and-time-value{text-align:left}
 
       <div class="card">
         <div class="sec-head"><h2>⚙️ 其他</h2></div>
+        <div class="set-row btnrow" data-act="my-name"><div class="k">我的称呼<small>记账、日记和每条记录里显示是谁</small></div><div class="v" id="my-name-v"></div></div>
         <div class="set-row"><div class="k">存储状态<small>数据只存在这台手机的这个浏览器 / 桌面 App 里</small></div><div class="v" id="persist-state">检测中…</div></div>
         <div class="set-row btnrow" data-act="sample"><div class="k">加载示例数据<small>先看看效果，随时可清空</small></div><div class="v">›</div></div>
         <div class="set-row btnrow danger" data-act="wipe"><div class="k">清空所有数据<small>清空前会自动留一份可撤销的快照</small></div><div class="v">›</div></div>
@@ -488,7 +581,7 @@ input[type=date].in::-webkit-date-and-time-value{text-align:left}
   <button data-tab="home"><span class="ic">🏠</span>首页</button>
   <button data-tab="inv"><span class="ic">📦</span>库存</button>
   <button data-tab="list"><span class="ic">🛒</span>清单<i class="badge hidden" id="nav-badge"></i></button>
-  <button data-tab="st"><span class="ic">📋</span>盘点</button>
+  <button data-tab="bill"><span class="ic">💰</span>账本</button>
   <button data-tab="stat"><span class="ic">📊</span>统计</button>
   <button data-tab="set"><span class="ic">⚙️</span>设置</button>
 </div></nav>
@@ -510,6 +603,8 @@ input[type=date].in::-webkit-date-and-time-value{text-align:left}
     <div class="f"><label>单位</label><input class="in" id="mi-unit" value="件" maxlength="4" autocomplete="off"></div>
   </div>
   <div class="units" id="mi-units"></div>
+  <div class="f"><label id="mi-src-label">这些是</label><div class="seg" style="margin:0"><button data-act="mi-src" data-v="buy" id="mi-src-buy">🛒 新买的</button><button data-act="mi-src" data-v="init" id="mi-src-init">📦 家里原有</button></div></div>
+  <div class="f" id="mi-price-wrap"><label>花了多少钱（选填，会记进账本）</label><input class="in" id="mi-price" type="number" inputmode="decimal" min="0" step="0.01" placeholder="¥ 这次买的总价"></div>
   <div class="row">
     <div class="f"><label>保质期（最近一批）</label><input class="in" id="mi-exp" type="date"></div>
     <div class="f"><div class="lbl-row"><label>安全水位</label><button class="mode" id="mi-mode" data-act="min-mode">🤖 自动</button></div><input class="in" id="mi-min" type="number" inputmode="decimal" min="0" step="1" value="1"></div>
@@ -596,6 +691,79 @@ input[type=date].in::-webkit-date-and-time-value{text-align:left}
   <div class="btns" id="mch-btns" style="flex-direction:column"></div>
 </div></div>
 
+<!-- 记一笔 -->
+<div class="mask" id="m-bill"><div class="sheet">
+  <div class="grab"></div>
+  <div class="sheet-h"><h3 id="mb-title">💰 记一笔</h3><button class="x-btn" data-act="close">✕</button></div>
+  <div class="seg" id="mb-type" style="margin:0 0 12px"></div>
+  <div class="amt-in"><span>¥</span><input id="mb-amt" type="number" inputmode="decimal" min="0" step="0.01" placeholder="0.00"></div>
+  <div class="cgrid" id="mb-cats"></div>
+  <div class="row"><div class="f"><label>日期</label><input class="in" id="mb-date" type="date"></div><div class="f"><label>谁花的</label><input class="in" id="mb-by" maxlength="8" placeholder="如：妈妈"></div></div>
+  <div class="f"><label>备注</label><input class="in" id="mb-note" maxlength="60" placeholder="如：超市、加油、孩子学费…"></div>
+  <div class="btns"><button class="btn ghost" data-act="close">取消</button><button class="btn danger hidden" id="mb-del" data-act="bill-del">删除</button><button class="btn main" data-act="bill-save">保存</button></div>
+</div></div>
+
+<!-- 固定支出项目 -->
+<div class="mask" id="m-fixed"><div class="sheet">
+  <div class="grab"></div>
+  <div class="sheet-h"><h3>🏠 固定支出项目</h3><button class="x-btn" data-act="close">✕</button></div>
+  <div class="hint">打开的项目每月都会出现在账本里等你记一笔。金额会记住上次的，水电这类每月不同的改一下就行。</div>
+  <div id="fx-list"></div>
+  <div class="btns"><button class="btn ghost" style="flex:1" data-act="fx-new">＋ 新增项目</button></div>
+</div></div>
+<div class="mask" id="m-fx"><div class="sheet">
+  <div class="grab"></div>
+  <div class="sheet-h"><h3 id="fx-title">固定支出</h3><button class="x-btn" data-act="close">✕</button></div>
+  <div class="row" style="grid-template-columns:96px minmax(0,1fr)">
+    <div class="f"><label>图标</label><input class="in" id="fx-emoji" maxlength="4" style="text-align:center;font-size:24px"></div>
+    <div class="f"><label>名称 <i>*</i></label><input class="in" id="fx-name" maxlength="10" placeholder="如：车位费"></div>
+  </div>
+  <div class="row"><div class="f"><label>每月几号交</label><input class="in" id="fx-day" type="number" inputmode="numeric" min="1" max="28"></div><div class="f"><label>参考金额（选填）</label><input class="in" id="fx-amt" type="number" inputmode="decimal" min="0" step="0.01" placeholder="¥"></div></div>
+  <div class="btns"><button class="btn ghost" data-act="close">取消</button><button class="btn danger hidden" id="fx-del" data-act="fx-del">删除</button><button class="btn main" data-act="fx-save">保存</button></div>
+</div></div>
+
+<!-- 修改一条记录 -->
+<div class="mask" id="m-ev"><div class="sheet">
+  <div class="grab"></div>
+  <div class="sheet-h"><h3>📝 这条记录</h3><button class="x-btn" data-act="close">✕</button></div>
+  <div class="hint" id="ev-sum"></div>
+  <div class="f"><label>算作</label><div class="seg" id="ev-kinds" style="margin:0"></div></div>
+  <div class="f" id="ev-price-wrap"><label>花了多少钱</label><input class="in" id="ev-price" type="number" inputmode="decimal" min="0" step="0.01" placeholder="¥ 这次买的总价（选填）"><div class="muted" id="ev-unit" style="margin-top:6px"></div></div>
+  <div class="muted" style="font-size:12.5px;margin-bottom:6px">改这里只影响统计和账本，不会改动库存数量。</div>
+  <div class="btns"><button class="btn danger" data-act="ev-del">删除记录</button><button class="btn main" data-act="ev-save">保存</button></div>
+</div></div>
+
+<!-- 日记 -->
+<div class="mask" id="m-dy"><div class="sheet">
+  <div class="grab"></div>
+  <div class="sheet-h"><h3>📔 日记</h3><button class="x-btn" data-act="close">✕</button></div>
+  <div class="moods" id="dye-moods" style="margin-bottom:12px"></div>
+  <div class="f"><textarea class="in" id="dye-text" rows="6" maxlength="2000"></textarea></div>
+  <div class="row"><div class="f"><label>日期</label><input class="in" id="dye-date" type="date"></div><div class="f"><label>作者</label><input class="in" id="dye-by" maxlength="8"></div></div>
+  <div class="btns"><button class="btn danger" data-act="dy-del">删除</button><button class="btn main" data-act="dy-save">保存</button></div>
+</div></div>
+<div class="mask" id="m-diary"><div class="sheet">
+  <div class="grab"></div>
+  <div class="sheet-h"><h3>📔 全部日记</h3><button class="x-btn" data-act="close">✕</button></div>
+  <label class="search" style="box-shadow:none;border:1.5px solid var(--line2);margin-bottom:8px"><span>🔍</span><input id="dya-q" type="search" placeholder="搜索日记…" autocomplete="off"></label>
+  <div id="dya-list"></div>
+</div></div>
+
+<!-- 重要日子 -->
+<div class="mask" id="m-day"><div class="sheet">
+  <div class="grab"></div>
+  <div class="sheet-h"><h3 id="da-title">📅 重要日子</h3><button class="x-btn" data-act="close">✕</button></div>
+  <div class="seg" id="da-type" style="margin:0 0 14px"></div>
+  <div class="row" style="grid-template-columns:96px minmax(0,1fr)">
+    <div class="f"><label>图标</label><input class="in" id="da-emoji" maxlength="4" style="text-align:center;font-size:24px"></div>
+    <div class="f"><label>名称 <i>*</i></label><input class="in" id="da-name" maxlength="16" placeholder="如：妈妈生日 / 车险到期"></div>
+  </div>
+  <div class="emoji-pick" id="da-emojis" style="margin:-4px 0 14px"></div>
+  <div class="row"><div class="f"><label id="da-date-l">日期</label><input class="in" id="da-date" type="date"></div><div class="f"><label>重复</label><div class="seg" id="da-rep" style="margin:0"></div></div></div>
+  <div class="f"><label>备注</label><input class="in" id="da-note" maxlength="60" placeholder="如：农历生日记得换算、保单号…"></div>
+  <div class="btns"><button class="btn ghost" data-act="close">取消</button><button class="btn danger hidden" id="da-del" data-act="day-del">删除</button><button class="btn main" data-act="day-save">保存</button></div>
+</div></div>
+
 <!-- 入库确认 -->
 <div class="mask" id="m-stock"><div class="sheet">
   <div class="grab"></div>
@@ -611,8 +779,8 @@ input[type=date].in::-webkit-date-and-time-value{text-align:left}
 
 <script>
 'use strict';
-const APP_VERSION = '3.0.0';
-const KEY = 'hs_data_v2', UNDO_KEY = 'hs_undo', DRAFT_KEY = 'hs_st_draft', UI_KEY = 'hs_ui', PRE_KEY = 'hs_pre_v3';
+const APP_VERSION = '3.1.0';
+const KEY = 'hs_data_v2', UNDO_KEY = 'hs_undo', DRAFT_KEY = 'hs_st_draft', UI_KEY = 'hs_ui', PRE_KEY = 'hs_pre_v5';
 const DEFAULT_CATS = [
   {id:'food',  name:'食品粮油', emoji:'🍚', color:'#e8894f', builtin:true},
   {id:'daily', name:'日用消耗', emoji:'🧻', color:'#4fa89b', builtin:true},
@@ -667,11 +835,103 @@ const UNIT_RULES = [
   [/笔/, '支', null, 1],
 ];
 // 历史记录的动作类型
-const KIND = {use:['➖', '用掉'], buy:['🛒', '买入'], waste:['🗑️', '过期处理'], st:['📋', '盘点调整'], edit:['✏️', '改数量'], init:['🆕', '新登记'], del:['❌', '删除物品']};
+const KIND = {use:['➖', '用掉'], buy:['🛒', '买入'], waste:['🗑️', '过期处理'], st:['📋', '盘点调整'], edit:['✏️', '改数量'], init:['📦', '原有登记'], del:['❌', '删除物品']};
 // 统计口径：用掉 = 用掉 + 盘亏 + 手动调少；买入 = 买入 / ＋ / 入库；浪费 = 过期处理
 const consumedOf = e => e.k === 'use' ? -e.d : ((e.k === 'st' || e.k === 'edit') && e.d < 0 ? -e.d : 0);
 const boughtOf = e => e.k === 'buy' ? e.d : 0;
 const wastedOf = e => e.k === 'waste' ? -e.d : 0;
+// 同步的数据集合：[字段名, 删除标记前缀]
+const COLS = [['items', 'i:'], ['shopping', 's:'], ['categories', 'c:'], ['bills', 'b:'], ['fixed', 'f:'], ['diary', 'd:'], ['days', 'a:']];
+
+/* 记账分类 */
+const BILL_OUT = [
+  {id:'food', name:'餐饮', emoji:'🍜', color:'#e8894f'}, {id:'grocery', name:'买菜', emoji:'🥬', color:'#7aa84f'},
+  {id:'daily', name:'日用', emoji:'🧴', color:'#4fa89b'}, {id:'traffic', name:'交通', emoji:'🚇', color:'#5b8fd6'},
+  {id:'cloth', name:'服饰', emoji:'👕', color:'#b07ad6'}, {id:'med', name:'医疗', emoji:'💊', color:'#e0607e'},
+  {id:'edu', name:'教育', emoji:'📚', color:'#26a0c4'}, {id:'fun', name:'娱乐', emoji:'🎮', color:'#d4a21c'},
+  {id:'gift', name:'人情', emoji:'🎁', color:'#ef6c57'}, {id:'pet', name:'宠物', emoji:'🐱', color:'#8d6e63'},
+  {id:'digital', name:'数码', emoji:'📱', color:'#607d8b'}, {id:'fixed', name:'固定支出', emoji:'🏠', color:'#4a7cc0'},
+  {id:'other', name:'其他', emoji:'📦', color:'#a1887f'},
+];
+const BILL_IN = [{id:'salary', name:'工资', emoji:'💼', color:'#4f9757'}, {id:'bonus', name:'奖金', emoji:'🧧', color:'#d0433b'}, {id:'invest', name:'理财', emoji:'📈', color:'#3e70b6'}, {id:'side', name:'副业', emoji:'🛠️', color:'#8d6e63'}, {id:'other_in', name:'其他', emoji:'💰', color:'#a1887f'}];
+const BILL_STOCK = {id:'stock', name:'囤货采购', emoji:'🛒', color:'#c4503a'};
+const billCat = (id, type) => id === 'stock' ? BILL_STOCK : (type === 'in' ? BILL_IN : BILL_OUT).find(c => c.id === id) || {id, name:'其他', emoji:'📦', color:'#a1887f'};
+// 每月固定支出模板（固定 id，多台手机各自升级也不会重复）
+const DEFAULT_FIXED = [['fx-rent', '房租/房贷', '🏠', 1], ['fx-water', '水费', '💧', 10], ['fx-power', '电费', '⚡', 10], ['fx-gas', '燃气费', '🔥', 10],
+  ['fx-net', '网费', '🌐', 1], ['fx-phone', '话费', '📱', 1], ['fx-prop', '物业费', '🏢', 1], ['fx-traffic', '交通费', '🚇', 1]]
+  .map(([id, name, emoji, day], k) => ({id, name, emoji, day, amount:0, on:true, order:k, updatedAt:0, updatedBy:''}));
+const MOODS = ['😄', '🥰', '😌', '🤔', '😴', '😢', '😤', '🤒', '🎉'];
+const DAY_EMOJI = ['🎂', '💍', '🎓', '👶', '❤️', '🛡️', '🚗', '🪪', '💉', '📅'];
+const DAY_TYPES = [['birthday', '生日'], ['anniv', '纪念日'], ['renew', '到期提醒'], ['other', '其他']];
+
+/* 首页名言：每 6 小时换一句（全家看到的是同一句）。[原文, 出处, 主题, 中文] */
+const QUOTES = [
+  ['The unexamined life is not worth living.', 'Socrates · Plato, Apology', '哲思', '未经审视的人生不值得过。'],
+  ['We suffer more often in imagination than in reality.', 'Seneca', '哲思', '我们在想象中受的苦，往往比现实中多。'],
+  ['It is not that we have a short time to live, but that we waste a lot of it.', 'Seneca · On the Shortness of Life', '哲思', '不是生命太短，而是我们浪费了太多。'],
+  ['He who has a why to live can bear almost any how.', 'Friedrich Nietzsche', '哲思', '知道为什么而活的人，几乎能承受任何「怎么活」。'],
+  ['Life can only be understood backwards; but it must be lived forwards.', 'Søren Kierkegaard', '哲思', '人生只能向后理解，却必须向前活。'],
+  ['First say to yourself what you would be; and then do what you have to do.', 'Epictetus · Discourses', '哲思', '先告诉自己想成为什么样的人，然后去做该做的事。'],
+  ['Very little is needed to make a happy life; it is all within yourself, in your way of thinking.', 'Marcus Aurelius · Meditations', '哲思', '幸福的生活所需甚少，一切都在你自己心里，在你的思考方式中。'],
+  ['We are what we repeatedly do. Excellence, then, is not an act, but a habit.', 'Will Durant, on Aristotle', '哲思', '我们反复做的事造就了我们。卓越不是一次行为，而是一种习惯。'],
+  ['The journey of a thousand miles begins with a single step.', 'Laozi · Tao Te Ching', '哲思', '千里之行，始于足下。'],
+  ['Knowing others is intelligence; knowing yourself is true wisdom.', 'Laozi · Tao Te Ching', '哲思', '知人者智，自知者明。'],
+  ['Learning without thought is labor lost; thought without learning is perilous.', 'Confucius · Analects', '哲思', '学而不思则罔，思而不学则殆。'],
+  ['Happiness is not something ready made. It comes from your own actions.', 'Dalai Lama', '哲思', '幸福不是现成的，它来自你自己的行动。'],
+  ['Life is like riding a bicycle. To keep your balance you must keep moving.', 'Albert Einstein · letter to his son, 1930', '哲思', '人生就像骑自行车，要保持平衡就得不断前进。'],
+  ['If I have seen further it is by standing on the shoulders of Giants.', 'Isaac Newton · letter, 1675', '哲思', '如果说我看得更远，那是因为站在巨人的肩膀上。'],
+  ['He who knows that enough is enough will always have enough.', 'Laozi · Tao Te Ching', '理财', '知足之足，常足矣。'],
+  ['Rule No. 1: Never lose money. Rule No. 2: Never forget Rule No. 1.', 'Warren Buffett', '理财', '第一条：永远不要亏钱。第二条：永远不要忘记第一条。'],
+  ['Price is what you pay. Value is what you get.', 'Warren Buffett · 2008 shareholder letter', '理财', '价格是你付出的，价值是你得到的。'],
+  ["Someone's sitting in the shade today because someone planted a tree a long time ago.", 'Warren Buffett', '理财', '今天有人能在树荫下乘凉，是因为很久以前有人种了树。'],
+  ["Risk comes from not knowing what you're doing.", 'Warren Buffett', '理财', '风险来自你不知道自己在做什么。'],
+  ['Beware of little expenses; a small leak will sink a great ship.', 'Benjamin Franklin', '理财', '当心小开销，小小的漏洞能让大船沉没。'],
+  ["The investor's chief problem—and even his worst enemy—is likely to be himself.", 'Benjamin Graham · The Intelligent Investor', '理财', '投资者最大的问题，甚至最大的敌人，很可能就是他自己。'],
+  ['In the short run, the market is a voting machine but in the long run, it is a weighing machine.', 'Benjamin Graham', '理财', '短期看，市场是投票机；长期看，市场是称重机。'],
+  ['The big money is not in the buying and selling, but in the waiting.', 'Charlie Munger', '理财', '大钱不在买进卖出，而在等待。'],
+  ["Wealth is what you don't see.", 'Morgan Housel · The Psychology of Money', '理财', '财富是你看不见的那部分。'],
+  ['Know what you own, and know why you own it.', 'Peter Lynch', '理财', '知道你持有什么，也知道为什么持有它。'],
+  ['Time is your friend; impulse is your enemy.', 'John C. Bogle', '理财', '时间是你的朋友，冲动是你的敌人。'],
+  ["Don't look for the needle in the haystack. Just buy the haystack!", 'John C. Bogle', '理财', '别在干草堆里找针，直接买下整个干草堆！'],
+  ["The four most dangerous words in investing are: 'this time it's different.'", 'Sir John Templeton', '理财', '投资中最危险的一句话是：「这次不一样」。'],
+  ['Annual income twenty pounds, annual expenditure nineteen nineteen and six, result happiness.', 'Charles Dickens · David Copperfield', '理财', '年收入二十镑，年支出十九镑十九先令六便士，结果是幸福。'],
+  ['Waste not, want not.', 'English proverb', '理财', '不浪费，就不匮乏。'],
+  ['The first principle is that you must not fool yourself—and you are the easiest person to fool.', 'Richard Feynman · Caltech, 1974', '理智', '第一原则是不要欺骗自己，而你自己恰恰是最容易被骗的人。'],
+  ['Extraordinary claims require extraordinary evidence.', 'Carl Sagan', '理智', '非凡的主张需要非凡的证据。'],
+  ['All models are wrong, but some are useful.', 'George E. P. Box', '理智', '所有模型都是错的，但有些是有用的。'],
+  ['Nothing in life is as important as you think it is, while you are thinking about it.', 'Daniel Kahneman · Thinking, Fast and Slow', '理智', '当你想着一件事的时候，它总没有你以为的那么重要。'],
+  ['Invert, always invert.', 'Carl Jacobi, as quoted by Charlie Munger', '理智', '反过来想，总是反过来想。'],
+  ['Spend each day trying to be a little wiser than you were when you woke up.', 'Charlie Munger · USC, 2007', '理智', '每天努力让自己比早上醒来时更聪明一点。'],
+  ['We should be careful to get out of an experience only the wisdom that is in it.', 'Mark Twain · Following the Equator', '理智', '我们要小心，从经历中只汲取其中真正的智慧。'],
+  ['Science is a way of thinking much more than it is a body of knowledge.', 'Carl Sagan', '理智', '科学更是一种思考方式，而不只是一堆知识。'],
+  ['Imagination is more important than knowledge.', 'Albert Einstein · 1929 interview', '理智', '想象力比知识更重要。（1929 年采访）'],
+  ['Stay hungry, stay foolish.', 'Steve Jobs · Stanford, 2005', '成功', '求知若饥，虚心若愚。'],
+  ["Your time is limited, so don't waste it living someone else's life.", 'Steve Jobs · Stanford, 2005', '成功', '你的时间有限，别浪费在过别人的生活上。'],
+  ['Focus is about saying no.', 'Steve Jobs · WWDC, 1997', '成功', '专注就是学会说不。'],
+  ["I'm convinced that about half of what separates the successful entrepreneurs from the non-successful ones is pure perseverance.", 'Steve Jobs · 1995 interview', '成功', '我确信，成功与不成功的创业者之间，大约一半的差别就在于纯粹的坚持。（1995 年采访）'],
+  ["I knew that if I failed I wouldn't regret that, but I knew the one thing I might regret is not trying.", 'Jeff Bezos · interview', '成功', '我知道失败了不会后悔，唯一可能后悔的是没有尝试。（采访）'],
+  ['Do what you can, with what you have, where you are.', 'Theodore Roosevelt', '成功', '在你所在之处，用你所有的，做你能做的。'],
+  ["If you're offered a seat on a rocket ship, don't ask what seat! Just get on.", 'Eric Schmidt, to Sheryl Sandberg', '成功', '如果有人邀请你登上火箭，别问是哪个座位，先上去再说！'],
+  ['Done is better than perfect.', 'Sheryl Sandberg · Lean In', '成功', '完成胜于完美。'],
+  ['The best time to plant a tree was 20 years ago. The second best time is now.', 'Proverb', '成功', '种一棵树最好的时间是二十年前，其次是现在。'],
+  ['Discipline equals freedom.', 'Jocko Willink', '成功', '自律即自由。'],
+  ['We always overestimate the change that will occur in the next two years and underestimate the change that will occur in the next ten.', 'Bill Gates · The Road Ahead', 'AI', '我们总是高估未来两年的变化，低估未来十年的变化。'],
+  ['We can only see a short distance ahead, but we can see plenty there that needs to be done.', 'Alan Turing · 1950', 'AI', '我们只能看到前方不远处，但那里已有许多事情要做。'],
+  ['Machines take me by surprise with great frequency.', 'Alan Turing · 1950', 'AI', '机器常常让我吃惊。'],
+  ['The question of whether a computer can think is no more interesting than the question of whether a submarine can swim.', 'Edsger W. Dijkstra', 'AI', '「计算机能否思考」，和「潜艇能否游泳」一样，并不是个有趣的问题。'],
+  ['Artificial intelligence is the new electricity.', 'Andrew Ng', 'AI', '人工智能就是新的电力。'],
+  ['AI is one of the most important things humanity is working on. It is more profound than electricity or fire.', 'Sundar Pichai · 2018 interview', 'AI', 'AI 是人类正在做的最重要的事情之一，它比电或火更深远。（2018 年采访）'],
+  ['The best way to predict the future is to invent it.', 'Alan Kay', 'AI', '预测未来最好的方式，就是创造它。'],
+  ['Any sufficiently advanced technology is indistinguishable from magic.', 'Arthur C. Clarke', 'AI', '任何足够先进的技术，都与魔法无异。'],
+  ["The future is already here — it's just not very evenly distributed.", 'William Gibson · interview', 'AI', '未来已经到来，只是分布得还不太均匀。（采访）'],
+  ['Success in creating AI would be the biggest event in human history.', 'Stephen Hawking · 2014', 'AI', '成功创造 AI 将是人类历史上最重大的事件。'],
+  ['The real problem is not whether machines think but whether men do.', 'B. F. Skinner', 'AI', '真正的问题不是机器会不会思考，而是人会不会。'],
+  ['Computers are like a bicycle for our minds.', 'Steve Jobs', 'AI', '计算机就像我们思维的自行车。'],
+  ['Software is eating the world.', 'Marc Andreessen · 2011', 'AI', '软件正在吞噬世界。'],
+  ['By far, the greatest danger of Artificial Intelligence is that people conclude too early that they understand it.', 'Eliezer Yudkowsky', 'AI', 'AI 最大的危险，是人们过早地以为自己已经理解了它。'],
+  ['Happy families are all alike; every unhappy family is unhappy in its own way.', 'Leo Tolstoy · Anna Karenina', '家庭', '幸福的家庭都是相似的，不幸的家庭各有各的不幸。'],
+  ['Other things may change us, but we start and end with the family.', 'Anthony Brandt', '家庭', '其他事物也许会改变我们，但我们始于家庭，也终于家庭。'],
+];
 
 /* ---------- 工具 ---------- */
 const $ = s => document.querySelector(s);
@@ -701,10 +961,10 @@ const vibrate = () => { try { navigator.vibrate && navigator.vibrate(8); } catch
 
 /* ---------- 数据 ---------- */
 let S;
-const blank = () => ({version:4, items:[], categories:DEFAULT_CATS.map(c => ({...c, updatedAt:0, updatedBy:''})), locations:[...DEFAULT_LOCS], locTs:{}, shopping:[], deleted:{}, log:[], prefs:{id:'prefs', cycleDays:14, safeDays:7, updatedAt:0, updatedBy:''}, meta:{lastStocktake:null, lastBackup:null, logSince:Date.now()}});
+const blank = () => ({version:5, items:[], categories:DEFAULT_CATS.map(c => ({...c, updatedAt:0, updatedBy:''})), locations:[...DEFAULT_LOCS], locTs:{}, shopping:[], bills:[], fixed:DEFAULT_FIXED.map(f => ({...f})), diary:[], days:[], deleted:{}, log:[], prefs:{id:'prefs', cycleDays:14, safeDays:7, budget:0, updatedAt:0, updatedBy:''}, meta:{lastStocktake:null, lastBackup:null, logSince:Date.now()}});
 
 function normalize(d){
-  const b = blank(), out = {version:4}, ts = v => +v || 0;
+  const b = blank(), out = {version:5}, ts = v => +v || 0, str = v => String(v ?? ''), m2 = v => { const n = parseFloat(v); return isFinite(n) && n > 0 ? Math.round(n * 100) / 100 : 0; };
   const tsMap = o => { const r = {}; if (o && typeof o === 'object') Object.keys(o).sort().forEach(k => { const v = +o[k]; if (v > 0) r[k] = v; }); return r; };
   out.categories = (Array.isArray(d.categories) && d.categories.length ? d.categories : b.categories)
     .filter(c => c && c.name).map(c => ({id:String(c.id || uid()), name:String(c.name).trim(), emoji:String(c.emoji || '📦'), color:String(c.color || '#a89888'), builtin:!!c.builtin, updatedAt:ts(c.updatedAt), updatedBy:String(c.updatedBy || '')}));
@@ -722,11 +982,20 @@ function normalize(d){
     id:String(s.id || uid()), name:String(s.name).trim(), qty:num(s.qty) || 1, unit:String(s.unit || '件'), location:String(s.location || ''), itemId:s.itemId ? String(s.itemId) : '', checked:!!s.checked, updatedAt:ts(s.updatedAt), updatedBy:String(s.updatedBy || '')
   }));
   out.deleted = tsMap(d.deleted);
+  const arr = k => Array.isArray(d[k]) ? d[k] : [], meta3 = x => ({updatedAt:ts(x.updatedAt), updatedBy:str(x.updatedBy)});
+  out.bills = arr('bills').filter(x => x && x.id && m2(x.amount)).map(x => ({id:str(x.id), date:normDate(x.date) || todayStr(), type:x.type === 'in' ? 'in' : 'out', cat:str(x.cat || 'other'),
+    amount:m2(x.amount), note:str(x.note).slice(0, 100), fixedId:str(x.fixedId), by:str(x.by), createdAt:+x.createdAt || 0, ...meta3(x)}));
+  out.fixed = (Array.isArray(d.fixed) ? d.fixed : b.fixed).filter(x => x && x.id && str(x.name).trim()).map((x, k) => ({id:str(x.id), name:str(x.name).trim(), emoji:str(x.emoji || '🏠'),
+    day:Math.min(28, Math.max(1, Math.round(+x.day) || 1)), amount:m2(x.amount), on:x.on !== false, order:isFinite(+x.order) ? +x.order : k, ...meta3(x)}));
+  out.diary = arr('diary').filter(x => x && x.id && str(x.text).trim()).map(x => ({id:str(x.id), date:normDate(x.date) || todayStr(), text:str(x.text).slice(0, 2000), mood:str(x.mood),
+    by:str(x.by), createdAt:+x.createdAt || 0, ...meta3(x)}));
+  out.days = arr('days').filter(x => x && x.id && str(x.name).trim() && normDate(x.date)).map(x => ({id:str(x.id), name:str(x.name).trim(), emoji:str(x.emoji || '📅'),
+    type:DAY_TYPES.some(t => t[0] === x.type) ? x.type : 'other', date:normDate(x.date), repeat:x.repeat === 'none' ? 'none' : 'year', note:str(x.note).slice(0, 100), ...meta3(x)}));
   out.meta = {lastStocktake:normDate(d.meta && d.meta.lastStocktake), lastBackup:normDate(d.meta && d.meta.lastBackup), logSince:+(d.meta && d.meta.logSince) || 0};
   const pf = d.prefs || {}, clamp = (v, def, lo, hi) => { v = Math.round(+v); return v >= lo && v <= hi ? v : def; };
-  out.prefs = {id:'prefs', cycleDays:clamp(pf.cycleDays, 14, 1, 90), safeDays:clamp(pf.safeDays, 7, 1, 60), updatedAt:ts(pf.updatedAt), updatedBy:String(pf.updatedBy || '')};
+  out.prefs = {id:'prefs', cycleDays:clamp(pf.cycleDays, 14, 1, 90), safeDays:clamp(pf.safeDays, 7, 1, 60), budget:m2(pf.budget), updatedAt:ts(pf.updatedAt), updatedBy:String(pf.updatedBy || '')};
   out.log = (Array.isArray(d.log) ? d.log : []).filter(e => e && e.id && e.i && +e.t > 0 && isFinite(+e.d)).map(e => ({
-    id:String(e.id), t:+e.t, i:String(e.i), n:String(e.n || ''), c:String(e.c || ''), k:KIND[e.k] ? e.k : 'edit', d:Math.round(+e.d * 100) / 100, q:isFinite(+e.q) ? +e.q : 0, b:String(e.b || ''), v:+e.v || 1
+    id:String(e.id), t:+e.t, i:String(e.i), n:String(e.n || ''), c:String(e.c || ''), k:KIND[e.k] ? e.k : 'edit', d:Math.round(+e.d * 100) / 100, q:isFinite(+e.q) ? +e.q : 0, b:String(e.b || ''), v:+e.v || 1, p:m2(e.p)
   })).sort((x, y) => x.t - y.t || (x.id < y.id ? -1 : 1));
   return out;
 }
@@ -754,7 +1023,7 @@ function load(){
   if (raw) { try {
     const o = JSON.parse(raw);
     // 第一次升级到新版：先在本机留一份升级前的原样数据，设置里可一键恢复
-    if ((o.version || 0) < 4 && Array.isArray(o.items) && o.items.length && !lsGet(PRE_KEY)) lsSet(PRE_KEY, JSON.stringify({at:Date.now(), from:o.version || 0, data:o}));
+    if ((o.version || 0) < 5 && Array.isArray(o.items) && o.items.length && !lsGet(PRE_KEY)) { lsDel('hs_pre_v3'); lsSet(PRE_KEY, JSON.stringify({at:Date.now(), from:o.version || 0, data:o})); }
     S = normalize(o); if (!S.meta.logSince) S.meta.logSince = Date.now(); dataVer++; return;
   } catch (e) {} }
   const v1 = lsGet('homeInventory');
@@ -767,7 +1036,7 @@ const sigOf = x => JSON.stringify(x, (k, v) => (k === 'updatedAt' || k === 'upda
 function track(bump){
   const now = Date.now(), me = cloudName(), next = {};
   const col = (arr, p) => arr.forEach(x => { const k = p + x.id, sg = sigOf(x); next[k] = sg; if (bump && sigs[k] !== sg) { x.updatedAt = now; x.updatedBy = me; } });
-  col(S.items, 'i:'); col(S.shopping, 's:'); col(S.categories, 'c:'); col([S.prefs], 'p:');
+  COLS.forEach(([k, p]) => col(S[k], p)); col([S.prefs], 'p:');
   S.log.forEach(e => { next['e:' + e.id] = '1'; });
   S.locations.forEach(l => { const k = 'l:' + l; next[k] = '1'; if (bump && !sigs[k]) S.locTs[l] = now; });
   if (bump) Object.keys(sigs).forEach(k => { if (!(k in next)) S.deleted[k] = now; });
@@ -859,16 +1128,23 @@ const hm = t => new Date(t).toLocaleTimeString('zh-CN', {hour:'2-digit', minute:
 /* ---------- 历史记录 ---------- */
 const myEvents = new Set();   // 本机这次打开后新记的，可与紧接着的同类操作合并（长按不会刷屏）
 function pushEvent(it, k, d){
-  const e = {id:uid(), t:Date.now(), i:it.id, n:it.name, c:it.category, k, d, q:it.qty, b:cloudName(), v:1};
+  const e = {id:uid(), t:Date.now(), i:it.id, n:it.name, c:it.category, k, d, q:it.qty, b:cloudName(), v:1, p:0};
   S.log.push(e); myEvents.add(e.id); return e;
 }
 function logQty(it, k, d){
   d = Math.round(d * 100) / 100; if (!d || !it) return;
   const last = S.log[S.log.length - 1], now = Date.now();
   if (last && myEvents.has(last.id) && last.i === it.id && last.k === k && now - last.t < 90000 && Math.sign(last.d) === Math.sign(d)) {
-    last.d = Math.round((last.d + d) * 100) / 100; last.q = it.qty; last.t = now; last.v++; return;
+    last.d = Math.round((last.d + d) * 100) / 100; last.q = it.qty; last.t = now; last.v++; return last;
   }
-  pushEvent(it, k, d);
+  return pushEvent(it, k, d);
+}
+// 给一条买入记录加上花费（同一次合并的买入会累加）
+function addPrice(e, price){ price = Math.round((parseFloat(price) || 0) * 100) / 100; if (e && price > 0) { e.p = Math.round(((e.p || 0) + price) * 100) / 100; e.v++; } }
+// 某物品最近一次有价格的买入 → 单价
+function lastPrice(iid, before = Infinity){
+  for (let k = S.log.length - 1; k >= 0; k--) { const e = S.log[k]; if (e.i === iid && e.k === 'buy' && e.p > 0 && e.d > 0 && e.t < before) return {unit:e.p / e.d, t:e.t, e}; }
+  return null;
 }
 // 库存页 +/−：90 秒内对同一件的连续加减算净变化（按错了再按回去不会留下记录）
 function logStep(it, d){
@@ -893,12 +1169,12 @@ const saveDraft = () => lsSet(DRAFT_KEY, JSON.stringify(draft));
 function go(tab){
   UI.tab = tab; saveUI();
   document.querySelectorAll('.view').forEach(v => v.classList.toggle('active', v.id === 'v-' + tab));
-  document.querySelectorAll('.nav button').forEach(b => b.classList.toggle('on', b.dataset.tab === tab));
+  document.querySelectorAll('.nav button').forEach(b => b.classList.toggle('on', b.dataset.tab === (tab === 'st' ? 'inv' : tab)));
   render(tab); window.scrollTo(0, 0);
 }
 function render(tab = UI.tab){
   document.querySelectorAll('.js-date').forEach(e => e.textContent = cnDate());
-  ({home:renderHome, inv:renderInv, list:renderList, st:renderSt, stat:renderStat, set:renderSet})[tab]();
+  ({home:renderHome, inv:renderInv, list:renderList, st:renderSt, bill:renderBill, stat:renderStat, set:renderSet})[tab]();
   updateBadge();
 }
 const refresh = () => render();
@@ -909,8 +1185,7 @@ function updateBadge(){
 
 /* ---------- 首页 ---------- */
 function renderHome(){
-  const h = new Date().getHours();
-  $('#h-greet').textContent = h < 5 ? '夜深了 🌙' : h < 11 ? '早上好 ☀️' : h < 13 ? '中午好 🌤️' : h < 18 ? '下午好 ☕' : '晚上好 🌙';
+  renderQuote();
   const stm = new Map(); let total = 0; const ex = [], soon = [], month = [], low = [], soonOut = [];
   S.items.forEach(i => { total += i.qty; const st = stat(i); stm.set(i, st);
     if (st.expired) ex.push(i); else if (st.soon) soon.push(i); else if (st.month) month.push(i);
@@ -927,16 +1202,16 @@ function renderHome(){
       <div class="muted">记下家里囤的东西，到期会提醒、快用完会进清单。<br>数据只保存在这台手机上。</div>
       <div class="btns"><button class="btn main" data-act="add">＋ 添加第一件物品</button>
       <button class="btn soft" data-act="imp-json">♻️ 恢复旧备份 / 同步码</button>
-      <button class="btn ghost" data-act="sample">👀 先看看示例数据</button></div></div>`;
-    return;
+      <button class="btn ghost" data-act="sample">👀 先看看示例数据</button></div></div>` + diaryCard() + daysCard();
+    restoreDraft(); return;
   }
   const lowNeed = low.filter(i => !inList(i)).length;
-  const backupDays = S.meta.lastBackup ? -daysLeft(S.meta.lastBackup) : null;
   let html = `<div class="stats">
     <button class="stat total" data-act="goto" data-to="inv" data-only=""><div class="n">${S.items.length}</div><div class="l">📦 在管物品</div><div class="s">共计 ${fmt(total)} 件</div></button>
     <button class="stat expired" data-act="goto" data-to="inv" data-only="expired"><div class="n">${ex.length}</div><div class="l">🔴 已过期</div><div class="s">${ex.length ? '尽快处理' : '没有过期的'}</div></button>
     <button class="stat soon" data-act="goto" data-to="inv" data-only="soon"><div class="n">${soon.length}</div><div class="l">🟠 7天内到期</div><div class="s">优先吃掉</div></button>
     <button class="stat low" data-act="goto" data-to="list"><div class="n">${low.length}</div><div class="l">📦 待补货</div><div class="s">${lowNeed ? lowNeed + ' 样还没进清单' : soonOut.length ? '另有 ' + soonOut.length + ' 样快用完' : '看看清单'}</div></button></div>`;
+  html += remindersCard() + diaryCard() + daysCard();
   const pending = ex.length + soon.length + month.length + low.length + soonOut.length;
   html += `<div class="card"><div class="sec-head"><h2>⚠️ 预警中心</h2>${pending ? `<span class="pill red">${pending} 项待处理</span>` : '<span class="pill green">全部正常</span>'}</div>`;
   if (!pending) html += `<div class="empty"><div class="big">🎉</div>没有需要处理的，家里状态很好</div>`;
@@ -950,8 +1225,7 @@ function renderHome(){
   html += group('📦 低于安全水位', low, 'blue', i => { const f = forecast(i); return `仅剩 <b>${fmt(i.qty)} ${esc(i.unit)}</b>（水位 ${fmt(f.m)}）${f.daysOut !== null && i.qty > 0 ? ' · 约' + daysText(f.daysOut) + '用完' : ''}`; }, listBtn);
   html += group(`⏳ ${S.prefs.cycleDays} 天内会用完`, soonOut, 'blue', i => { const f = forecast(i); return `约 <b>${daysText(f.daysToMin)}</b>后到水位 · ${daysText(f.daysOut)}左右用完`; }, listBtn);
   html += `</div>`;
-  if (backupDays === null || backupDays >= 30) html += `<div class="tip-card" style="background:#fff3e6;color:#8a5520"><div class="t">💾 ${backupDays === null ? '还没导出过备份' : `已经 ${backupDays} 天没备份了`}，换手机或清缓存会丢数据</div><button data-act="exp-json" style="color:#c46f1b">立即备份</button></div>`;
-  $('#home-body').innerHTML = html;
+  $('#home-body').innerHTML = html; restoreDraft();
 }
 
 /* ---------- 库存 ---------- */
@@ -1075,15 +1349,18 @@ function openStockIn(){
   const done = S.shopping.filter(s => s.checked); if (!done.length) return;
   $('#si-list').innerHTML = done.map(s => {
     const it = (s.itemId && getItem(s.itemId)) || S.items.find(i => i.name === s.name);
+    const lp = it && lastPrice(it.id);
     return `<div class="si-row"><div class="top"><div class="nm">${esc(s.name)}</div>
       <div class="mini"><button data-act="si-dec" data-id="${s.id}">−</button><span id="siq-${s.id}">${fmt(s.qty)}</span><button data-act="si-inc" data-id="${s.id}">+</button></div><span class="st-unit">${esc(s.unit)}</span></div>
-      <div class="exp"><span>到期日</span><input type="date" class="si-exp" data-sid="${s.id}"><span>${it ? (it.expiry ? '原 ' + it.expiry.slice(5).replace('-', '/') : '') : '新物品'}</span></div></div>`;
+      <div class="exp"><span>到期日</span><input type="date" class="si-exp" data-sid="${s.id}"><span>${it ? (it.expiry ? '原 ' + it.expiry.slice(5).replace('-', '/') : '') : '新物品'}</span></div>
+      <div class="exp"><span>花了 ¥</span><input type="number" inputmode="decimal" min="0" step="0.01" class="si-price" data-sid="${s.id}" placeholder="${lp ? '上次约 ' + money(lp.unit * s.qty) : '选填，记进账本'}"><span></span></div></div>`;
   }).join('');
   openSheet('m-stock');
 }
 function stockIn(){
   const done = S.shopping.filter(s => s.checked); if (!done.length) return;
   const exps = {}; document.querySelectorAll('#si-list .si-exp').forEach(inp => { const v = normDate(inp.value); if (v) exps[inp.dataset.sid] = v; });
+  const prices = {}; document.querySelectorAll('#si-list .si-price').forEach(inp => { const v = parseFloat(inp.value); if (v > 0) prices[inp.dataset.sid] = v; });
   snapshot('入库'); let created = 0;
   done.forEach(s => {
     let it = (s.itemId && getItem(s.itemId)) || S.items.find(i => i.name === s.name);
@@ -1097,10 +1374,11 @@ function stockIn(){
       it = {id:uid(), name:s.name, category:g.cat && S.categories.some(c => c.id === g.cat) ? g.cat : '', location:s.location || '', qty:s.qty, unit:s.unit, minQty:g.min || 1, minAuto:true, expiry:ne, note:'', createdAt:Date.now(), updatedAt:Date.now()};
       S.items.push(it);
     }
-    logQty(it, 'buy', s.qty);
+    addPrice(logQty(it, 'buy', s.qty), prices[s.id]);
   });
   S.shopping = S.shopping.filter(s => !s.checked); save(); closeSheet(); refresh();
-  toast(`📦 ${done.length} 样已入库${created ? `（新建 ${created} 样）` : ''}`, true);
+  const spent = Object.values(prices).reduce((a, v) => a + v, 0);
+  toast(`📦 ${done.length} 样已入库${created ? `（新建 ${created} 样）` : ''}${spent ? ' · 记账 ' + money(spent) : ''}`, true);
 }
 
 /* ---------- 盘点 ---------- */
@@ -1152,6 +1430,9 @@ document.addEventListener('input', e => {
     if (t.value === '') delete draft[id]; else { const n = parseFloat(t.value); if (isFinite(n) && n >= 0) draft[id] = Math.round(n * 100) / 100; }
     saveDraft(); updateStRow(id, false); updateStCount();
   } else if (t.id === 'q') renderInvList();
+  else if (t.id === 'dy-text') { dyDraft = t.value; lsSet('hs_dy_draft', dyDraft); }
+  else if (t.id === 'dya-q') renderDiaryAll();
+  else if (t.id === 'ev-price') evUnit();
 });
 function calibrate(items){
   const diffs = items.filter(hasDiff);
@@ -1183,6 +1464,7 @@ function renderSet(){
   $('#pf-cycle').innerHTML = seg('cycleDays', [7, 14, 30]); $('#pf-safe').innerHTML = seg('safeDays', [3, 7, 14]);
   let pre = null; try { pre = JSON.parse(lsGet(PRE_KEY) || 'null'); } catch (e) {}
   $('#pre-row').innerHTML = pre ? `<div class="set-row btnrow" style="margin-top:6px" data-act="pre-restore"><div class="k">♻️ 恢复升级前的数据<small>升级到 v3 时自动留的原样备份（${fmtTime(pre.at)}，${(pre.data.items || []).length} 样物品）</small></div><div class="v">›</div></div>` : '';
+  $('#my-name-v').textContent = (cloudName() || '未设置') + ' ›';
   renderCloud(); renderInstall(); updatePersist(); $('#ver').textContent = 'v' + APP_VERSION + ' · 家庭版';
 }
 const isStandalone = () => matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
@@ -1214,7 +1496,7 @@ function updatePersist(){
 const sheets = [];
 let askResolve = null;
 function openSheet(id){
-  $('#' + id).classList.add('show'); sheets.push(id); document.body.classList.add('lock');
+  const el = $('#' + id); el.style.zIndex = 100 + sheets.length * 2; el.classList.add('show'); sheets.push(id); document.body.classList.add('lock');
   try { history.pushState({sheet:id}, ''); } catch (e) {}
 }
 function closeSheet(){ if (!sheets.length) return; try { history.back(); } catch (e) { hideTop(); } }
@@ -1258,6 +1540,7 @@ function openItem(id){
   if (i && miAuto) $('#mi-min').value = fmt(effMin(i));
   $('#mi-usage').innerHTML = i ? usageBox(i) : '';
   $('#mi-hint').classList.add('hidden'); updateMode(); markUnits();
+  miSrc = i ? 'buy' : (UI.addSrc || 'buy'); $('#mi-price').value = ''; updateSrc();
   openSheet('m-item');
   if (!i) setTimeout(() => $('#mi-name').focus(), 320);
 }
@@ -1271,7 +1554,7 @@ function guessFor(raw){
   const r = UNIT_RULES.find(r => r[0].test(name));
   return r ? {unit:r[1], cat:r[2], min:r[3] || 1, src:'常见用法'} : null;
 }
-let miTouched = {}, miAuto = true, guessT = null, mlTouched = false;
+let miTouched = {}, miAuto = true, guessT = null, mlTouched = false, miSrc = 'buy';
 function applyGuess(){
   const g = guessFor($('#mi-name').value), hint = $('#mi-hint'), parts = [];
   if (g) {
@@ -1290,6 +1573,14 @@ $('#mi-loc').addEventListener('change', () => { miTouched.loc = true; });
 $('#mi-min').addEventListener('input', () => { miTouched.min = true; if (miAuto) { miAuto = false; updateMode(); } });
 $('#ml-name').addEventListener('input', () => { if (mlTouched) return; const g = guessFor($('#ml-name').value); if (g && g.unit) $('#ml-unit').value = g.unit; });
 $('#ml-unit').addEventListener('input', () => { mlTouched = true; });
+function updateSrc(){
+  $('#mi-src-label').textContent = editId ? '如果数量增加了，增加的部分是' : '这些是';
+  $('#mi-src-init').textContent = editId ? '✏️ 只是改数字' : '📦 家里原有';
+  $('#mi-src-buy').classList.toggle('on', miSrc === 'buy'); $('#mi-src-init').classList.toggle('on', miSrc !== 'buy');
+  $('#mi-price-wrap').classList.toggle('hidden', miSrc !== 'buy');
+  const it = editId && getItem(editId), lp = it && lastPrice(it.id);
+  $('#mi-price').placeholder = lp ? `¥ 总价（上次 ${money(lp.unit)}/${it.unit}）` : '¥ 这次买的总价';
+}
 function updateMode(){ const b = $('#mi-mode'); b.textContent = miAuto ? '🤖 自动' : '✋ 手动'; b.classList.toggle('manual', !miAuto); }
 function markUnits(){ const cur = $('#mi-unit').value.trim(); $('#mi-units').innerHTML = UNITS.map(u => `<button class="${u === cur ? 'on' : ''}" data-act="unit-pick" data-u="${u}">${u}</button>`).join(''); }
 function usageBox(i){
@@ -1301,7 +1592,8 @@ function usageBox(i){
     h += `<div>${rateText(u.rate, i.unit)}${f.daysOut !== null ? `，现有约够 <b>${daysText(f.daysOut)}</b>（${md(Date.now() + f.daysOut * 864e5)} 左右）` : '，记录再多几次就能预测用完时间'}</div>`;
     h += `<div>按 ${S.prefs.safeDays} 天安全期，建议水位 <b>${sugMinOf(i)}${esc(i.unit)}</b>${i.minAuto === false ? '（你设的是手动，不会自动改）' : u.conf < 1 ? '，正逐步向它靠拢' : ''}</div>`;
   } else h += `<div class="muted">最近 90 天没有消耗记录</div>`;
-  h += recent.map(e => `<div class="ev"><span>${md(e.t)} ${hm(e.t)} ${e.b ? esc(e.b) + ' ' : ''}${KIND[e.k][1]} ${e.d > 0 ? '+' : '−'}${fmt(Math.abs(e.d))}</span><span>剩 ${fmt(e.q)}</span></div>`).join('');
+  const lp = lastPrice(i.id); if (lp) h += `<div>🏷️ 上次买入 <b>${money(lp.unit)}</b>/${esc(i.unit)}（${md(lp.t)}）</div>`;
+  h += recent.map(e => `<div class="ev" data-act="ev-edit" data-id="${e.id}"><span>${md(e.t)} ${hm(e.t)} ${e.b ? esc(e.b) + ' ' : ''}${KIND[e.k][1]} ${e.d > 0 ? '+' : '−'}${fmt(Math.abs(e.d))}${e.p ? ' · ' + money(e.p) : ''}</span><span>剩 ${fmt(e.q)} ›</span></div>`).join('');
   return h + '</div>';
 }
 let prevCat = '', prevLoc = '';
@@ -1328,17 +1620,26 @@ function saveItem(){
   let category = $('#mi-cat').value; if (category === '__new') category = '';
   let location = $('#mi-loc').value; if (location === '__new') location = '';
   const data = {name, category, location, qty:num($('#mi-qty').value), unit:$('#mi-unit').value.trim() || '件', expiry:normDate($('#mi-exp').value), minQty:num($('#mi-min').value), minAuto:miAuto, note:$('#mi-note').value.trim()};
+  const price = miSrc === 'buy' ? Math.max(0, parseFloat($('#mi-price').value) || 0) : 0;
   if (editId && getItem(editId)) {
-    const it = getItem(editId), before = it.qty; Object.assign(it, data, {updatedAt:Date.now()}); if (it.qty !== before) logQty(it, 'edit', it.qty - before); toast('✅ 已保存');
+    const it = getItem(editId), before = it.qty; Object.assign(it, data, {updatedAt:Date.now()});
+    const d = Math.round((it.qty - before) * 100) / 100;
+    if (d > 0 && miSrc === 'buy') addPrice(logQty(it, 'buy', d), price); else if (d) logQty(it, 'edit', d);
+    toast('✅ 已保存');
   } else {
-    const dup = S.items.find(i => i.name === name && i.location === location);
-    if (dup && confirm(`「${location || '未设置位置'}」里已经有「${name}」（${fmt(dup.qty)}${dup.unit}）。\n\n确定：直接给它加上 ${fmt(data.qty)}${data.unit}${data.expiry ? '，并更新保质期' : ''}\n取消：另建一条`)) {
-      dup.qty = Math.round((dup.qty + data.qty) * 100) / 100; if (data.expiry) dup.expiry = data.expiry; dup.updatedAt = Date.now(); logQty(dup, 'buy', data.qty);
-      toast(`✅ ${name} +${fmt(data.qty)}`);
+    // 同名物品：优先同一位置；只有一处时也直接问要不要加到它上面（避免买入被记成另一件新物品）
+    const same = S.items.filter(i => i.name === name), dup = same.find(i => i.location === location) || (same.length === 1 ? same[0] : null);
+    const kind = miSrc === 'buy' ? 'buy' : 'init';
+    if (dup && confirm(`家里已经有「${name}」（${dup.location || '未设置位置'}，${fmt(dup.qty)}${dup.unit}）。\n\n确定：直接给它加上 ${fmt(data.qty)}${data.unit}${data.expiry ? '，并更新保质期' : ''}\n取消：另建一条`)) {
+      const before = dup.qty; dup.qty = Math.round((dup.qty + data.qty) * 100) / 100; dup.updatedAt = Date.now();
+      if (data.expiry) dup.expiry = (!dup.expiry || before <= 0 || daysLeft(dup.expiry) < 0 || data.expiry < dup.expiry) ? data.expiry : dup.expiry;
+      addPrice(logQty(dup, kind, data.qty), price);
+      toast(`✅ ${name} +${fmt(data.qty)}${price ? ' · 已记账 ' + money(price) : ''}`);
     } else {
-      const ni = {id:uid(), ...data, createdAt:Date.now(), updatedAt:Date.now()}; S.items.push(ni); logQty(ni, 'init', ni.qty); toast('✅ 已添加 ' + name);
+      const ni = {id:uid(), ...data, createdAt:Date.now(), updatedAt:Date.now()}; S.items.push(ni); addPrice(logQty(ni, kind, ni.qty), price);
+      toast(`✅ 已添加 ${name}${price ? ' · 已记账 ' + money(price) : ''}`);
     }
-    UI.lastCat = category; UI.lastLoc = location; saveUI();
+    UI.lastCat = category; UI.lastLoc = location; UI.addSrc = miSrc; saveUI();
   }
   save(); closeSheet(); refresh();
 }
@@ -1371,7 +1672,7 @@ function saveCat(){
 }
 
 /* ---------- 导入导出 ---------- */
-const backupObj = () => ({app:'home-stock', version:4, exportedAt:new Date().toISOString(), data:S});
+const backupObj = () => ({app:'home-stock', version:5, exportedAt:new Date().toISOString(), data:S});
 function deliver(name, text, mime){
   const blob = new Blob([text], {type:mime});
   if (matchMedia('(pointer:coarse)').matches && navigator.canShare) {
@@ -1535,7 +1836,7 @@ function safeRender(){
 // 与顺序无关的规范形式，用来判断两边是否真的不同
 function canon(x){
   const n = normalize(x), by = (a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
-  return JSON.stringify([n.items.sort(by), n.categories.sort(by), n.shopping.sort(by), n.locations.sort(), n.locTs, n.deleted, n.meta.lastStocktake, n.meta.logSince, n.prefs, n.log.sort(by)]);
+  return JSON.stringify([...COLS.map(([k]) => n[k].sort(by)), n.locations.sort(), n.locTs, n.deleted, n.meta.lastStocktake, n.meta.logSince, n.prefs, n.log.sort(by)]);
 }
 // 三方合并单条记录：o = 上次同步时的版本，x = 本机，y = 云端
 // 只有一边改了的字段取改的那边；两边都改了数量就把两边的增减都算上；其他字段两边都改了取较新的
@@ -1574,8 +1875,9 @@ function mergeState(a, b, base){
   const lm = new Map(); a.log.forEach(e => lm.set(e.id, e)); b.log.forEach(e => { const x = lm.get(e.id); if (!x || e.v > x.v) lm.set(e.id, e); });
   const log = [...lm.values()].filter(e => !del['e:' + e.id]);
   const ls = Math.min(a.meta.logSince || Infinity, b.meta.logSince || Infinity);
-  return normalize({items:list(a.items, b.items, 'i:', base && base.items), categories:list(a.categories, b.categories, 'c:', base && base.categories), shopping:list(a.shopping, b.shopping, 's:', base && base.shopping),
-    locations, locTs, deleted:del, prefs, log, meta:{lastStocktake:st, lastBackup:a.meta.lastBackup, logSince:isFinite(ls) ? ls : 0}});
+  const out = {locations, locTs, deleted:del, prefs, log, meta:{lastStocktake:st, lastBackup:a.meta.lastBackup, logSince:isFinite(ls) ? ls : 0}};
+  COLS.forEach(([k, p]) => { out[k] = list(a[k], b[k], p, base && base[k]); });
+  return normalize(out);
 }
 function mergeIn(ns){
   snapshot('合并同步码');
@@ -1609,7 +1911,7 @@ async function pullRemote(useEtag){
 }
 async function pushRemote(sha){
   const snap = JSON.parse(JSON.stringify(S));   // 推送的正是这一刻的数据；之后的改动下一轮再推
-  const body = {message:'更新 · ' + (cloudName() || '家人') + ' · ' + new Date().toLocaleString('zh-CN'), content:utf8b64(JSON.stringify({app:'home-stock', version:4, at:Date.now(), by:cloudName(), data:snap}))};
+  const body = {message:'更新 · ' + (cloudName() || '家人') + ' · ' + new Date().toLocaleString('zh-CN'), content:utf8b64(JSON.stringify({app:'home-stock', version:5, at:Date.now(), by:cloudName(), data:snap}))};
   if (sha) body.sha = sha;
   const res = await gh('PUT', '/contents/' + DATA_PATH, body);
   if (res.status === 409 || res.status === 422) return {conflict:true};
@@ -1755,6 +2057,337 @@ async function cloudConnect(){
   toast(ok ? (r.data ? '☁️ 已连接，和家人的数据同步好了' : '☁️ 家庭同步已开启，去邀请家人吧') : '⚠️ ' + ((cloud && cloud.lastError) || '连接失败'));
 }
 
+/* ---------- 首页：名言 / 提醒 / 日记 / 重要日子 ---------- */
+function renderQuote(){
+  const off = new Date().getTimezoneOffset() * 60000, slot = Math.floor((Date.now() - off) / 216e5);
+  const q = QUOTES[((slot * 23) % QUOTES.length + QUOTES.length) % QUOTES.length], next = (slot + 1) * 216e5 + off;
+  $('#h-quote').innerHTML = `<div class="en">“${esc(q[0])}”</div><div class="by">— ${esc(q[1])} <span class="tag">${esc(q[2])}</span><span class="tag">${UI.qzh ? '收起' : '中文'}</span></div>` +
+    (UI.qzh ? `<div class="zh">${esc(q[3])}<div style="font-size:12px;opacity:.8;margin-top:4px">每 6 小时换一句 · 下一句 ${hm(next)}</div></div>` : '');
+}
+function remindersCard(){
+  const R = [], now = new Date(), d = now.getDate();
+  const pm = new Date(now.getFullYear(), now.getMonth() - 1, 1), pk = mkey(pm.getFullYear(), pm.getMonth());
+  if (d <= 7 && UI.reportSeen !== pk) { const r = monthSum(pm.getFullYear(), pm.getMonth()); if (r.es.length) R.push(['📊', `${pm.getMonth() + 1} 月账单报告出来了：共支出 <b>${money(r.out)}</b>`, '查看', 'rem-report']); }
+  const k = mkey(now.getFullYear(), now.getMonth());
+  const pend = S.fixed.filter(f => f.on && f.amount > 0 && d > f.day && !S.bills.some(b => b.fixedId === f.id && b.date.slice(0, 7) === k));
+  if (pend.length) R.push(['🧾', `${pend.slice(0, 3).map(f => esc(f.name)).join('、')}${pend.length > 3 ? ' 等' : ''}本月还没记账`, '去记', 'rem-fixed']);
+  const ls = S.meta.lastStocktake ? -daysLeft(S.meta.lastStocktake) : null;
+  if (S.items.length >= 5 && (ls === null || ls > 30)) R.push(['📋', ls === null ? '还没做过盘点，清点一次让数字更准' : `已经 ${ls} 天没盘点了`, '去盘点', 'goto-st']);
+  const bd = S.meta.lastBackup ? -daysLeft(S.meta.lastBackup) : null;
+  if (!cloud && S.items.length && (bd === null || bd >= 30)) R.push(['💾', bd === null ? '还没导出过备份，换手机或清缓存会丢数据' : `已经 ${bd} 天没备份了`, '备份', 'exp-json']);
+  if (!R.length) return '';
+  return `<div class="card"><div class="sec-head" style="margin-bottom:2px"><h2>🔔 提醒</h2></div>${R.map(([ic, t, bt, a]) => `<div class="rem"><span>${ic}</span><div class="t">${t}</div><button data-act="${a}">${bt}</button></div>`).join('')}</div>`;
+}
+let dyMood = '', dyDraft = lsGet('hs_dy_draft') || '', dyEditId = null, dyeMood = '';
+const diaryRow = d => { const ty = d.date.slice(0, 4) === todayStr().slice(0, 4);
+  return `<div class="dy" data-act="dy-edit" data-id="${d.id}"><span class="mood">${esc(d.mood || '📝')}</span><div class="tx"><div class="body">${esc(d.text)}</div><small>${d.by ? esc(d.by) + ' · ' : ''}${d.date === todayStr() ? '今天' : (ty ? '' : d.date.slice(0, 4) + '/') + (+d.date.slice(5, 7)) + '/' + (+d.date.slice(8))}${d.createdAt && d.date === ymd(new Date(d.createdAt)) ? ' ' + hm(d.createdAt) : ''}</small></div></div>`; };
+function diaryCard(){
+  const list = [...S.diary].sort((a, b) => b.date.localeCompare(a.date) || b.createdAt - a.createdAt), today = todayStr();
+  const past = list.filter(d => d.date.slice(5) === today.slice(5) && d.date < today);
+  let h = `<div class="card"><div class="sec-head"><h2>📔 家庭日记</h2>${list.length ? `<button class="link" data-act="dy-all">全部 ${list.length} 篇 ›</button>` : ''}</div>
+    <div class="composer"><textarea id="dy-text" rows="2" maxlength="2000" placeholder="今天家里有什么值得记下的？"></textarea>
+    <div class="cmp-bar"><div class="moods">${MOODS.map(m => `<button data-act="dy-mood" data-m="${m}" class="${m === dyMood ? 'on' : ''}">${m}</button>`).join('')}</div><button class="btn main sm" data-act="dy-post">发布</button></div></div>`;
+  h += past.map(d => `<div class="memory" data-act="dy-edit" data-id="${d.id}">📅 ${+today.slice(0, 4) - +d.date.slice(0, 4)} 年前的今天 · ${esc(d.mood)} ${esc(d.text.slice(0, 50))}${d.text.length > 50 ? '…' : ''}</div>`).join('');
+  h += list.filter(d => !past.includes(d)).slice(0, 3).map(diaryRow).join('') || (past.length ? '' : '<div class="muted" style="padding:4px 2px">还没有日记。孩子的一句话、一顿好饭、一次出游……都值得记下来。</div>');
+  return h + '</div>';
+}
+function restoreDraft(){ const t = $('#dy-text'); if (t && document.activeElement !== t) t.value = dyDraft; }
+function postDiary(){
+  const text = ($('#dy-text').value || '').trim(); if (!text) { toast('先写点什么吧'); return; }
+  S.diary.push({id:uid(), date:todayStr(), text, mood:dyMood, by:cloudName(), createdAt:Date.now()});
+  dyDraft = ''; dyMood = ''; lsDel('hs_dy_draft'); save(); renderHome(); toast('📔 已记下');
+}
+function openDiary(id){
+  const d = S.diary.find(x => x.id === id); if (!d) return;
+  dyEditId = id; dyeMood = d.mood; $('#dye-text').value = d.text; $('#dye-date').value = d.date; $('#dye-by').value = d.by; drawDyeMoods(); openSheet('m-dy');
+}
+function drawDyeMoods(){ $('#dye-moods').innerHTML = MOODS.map(m => `<button data-act="dye-mood" data-m="${m}" class="${m === dyeMood ? 'on' : ''}">${m}</button>`).join(''); }
+function afterDiary(){ renderHome(); if ($('#m-diary').classList.contains('show')) renderDiaryAll(); }
+function saveDiary(){
+  const d = S.diary.find(x => x.id === dyEditId), text = $('#dye-text').value.trim();
+  if (!d) { closeSheet(); return; } if (!text) { toast('内容不能为空'); return; }
+  Object.assign(d, {text, mood:dyeMood, date:normDate($('#dye-date').value) || d.date, by:$('#dye-by').value.trim()}); save(); closeSheet(); afterDiary(); toast('✅ 已保存');
+}
+function delDiary(){ if (!confirm('删除这篇日记？')) return; snapshot('删除日记'); S.diary = S.diary.filter(x => x.id !== dyEditId); save(); closeSheet(); afterDiary(); toast('已删除', true); }
+function renderDiaryAll(){
+  const q = ($('#dya-q').value || '').trim().toLowerCase();
+  const list = S.diary.filter(d => !q || (d.text + ' ' + d.by).toLowerCase().includes(q)).sort((a, b) => b.date.localeCompare(a.date) || b.createdAt - a.createdAt);
+  let h = '', last = '';
+  list.forEach(d => { const mk = d.date.slice(0, 7); if (mk !== last) { h += `<div class="day-h"><span>${+mk.slice(0, 4)} 年 ${+mk.slice(5)} 月</span><span>${list.filter(x => x.date.startsWith(mk)).length} 篇</span></div>`; last = mk; } h += diaryRow(d); });
+  $('#dya-list').innerHTML = h || '<div class="empty">没有找到</div>';
+}
+let dayEdit = null;
+function nextOcc(x){
+  const t = new Date(); t.setHours(0, 0, 0, 0);
+  const [y, m, d] = x.date.split('-').map(Number), at = yy => new Date(yy, m - 1, Math.min(d, new Date(yy, m, 0).getDate()));
+  if (x.repeat === 'none') { const w = new Date(y, m - 1, d); return {days:Math.round((w - t) / 864e5), when:w, n:null}; }
+  let w = at(t.getFullYear()); if (w < t) w = at(t.getFullYear() + 1);
+  return {days:Math.round((w - t) / 864e5), when:w, n:w.getFullYear() - y};
+}
+function daysCard(){
+  let h = `<div class="card"><div class="sec-head"><h2>📅 重要日子</h2><button class="link" data-act="day-add">＋ 添加</button></div>`;
+  if (!S.days.length) return h + `<div class="muted">生日、结婚纪念日、车险 / 证件到期……提前提醒，不再错过。</div></div>`;
+  const list = S.days.map(x => ({x, o:nextOcc(x)})).filter(z => z.o.days >= 0).sort((a, b) => a.o.days - b.o.days);
+  const show = UI.daysAll ? list : list.slice(0, 3);
+  h += show.map(({x, o}) => { const nth = o.n > 0 ? (x.type === 'birthday' ? `${o.n} 岁生日` : x.type === 'anniv' ? `${o.n} 周年` : '') : '';
+    return `<div class="dd ${o.days <= 7 ? 'near' : ''}" data-act="day-edit" data-id="${x.id}"><span class="e">${esc(x.emoji)}</span><div class="nm">${esc(x.name)}<small>${o.when.getMonth() + 1}/${o.when.getDate()} 周${'日一二三四五六'[o.when.getDay()]}${nth ? ' · ' + nth : ''}${x.note ? ' · ' + esc(x.note) : ''}</small></div>
+      <div class="cd">${o.days === 0 ? '<b>今天</b>🎉' : o.days === 1 ? '<b>明天</b>' : `<b>${o.days}</b>天后`}</div></div>`; }).join('');
+  if (list.length > 3) h += `<div style="text-align:center;padding-top:8px"><button class="link" data-act="days-all">${UI.daysAll ? '收起' : `展开全部 ${list.length} 个`}</button></div>`;
+  if (!list.length) h += `<div class="muted">没有即将到来的日子</div>`;
+  return h + '</div>';
+}
+function openDay(id){
+  const x = id ? S.days.find(d => d.id === id) : null;
+  dayEdit = {id:x ? x.id : null, type:x ? x.type : 'birthday', repeat:x ? x.repeat : 'year'};
+  $('#da-title').textContent = x ? '✏️ 编辑日子' : '📅 添加重要日子';
+  $('#da-name').value = x ? x.name : ''; $('#da-emoji').value = x ? x.emoji : '🎂'; $('#da-date').value = x ? x.date : ''; $('#da-note').value = x ? x.note : '';
+  $('#da-del').classList.toggle('hidden', !x); drawDay(); openSheet('m-day');
+}
+function drawDay(){
+  $('#da-type').innerHTML = DAY_TYPES.map(([k, l]) => `<button class="${dayEdit.type === k ? 'on' : ''}" data-act="day-type" data-k="${k}">${l}</button>`).join('');
+  $('#da-rep').innerHTML = [['year', '每年'], ['none', '只一次']].map(([k, l]) => `<button class="${dayEdit.repeat === k ? 'on' : ''}" data-act="day-rep" data-k="${k}">${l}</button>`).join('');
+  $('#da-emojis').innerHTML = DAY_EMOJI.map(e => `<button data-act="day-emoji" data-e="${e}">${e}</button>`).join('');
+  $('#da-date-l').textContent = dayEdit.type === 'birthday' ? '出生日期' : dayEdit.type === 'anniv' ? '开始的那天' : '日期';
+}
+function saveDay(){
+  const name = $('#da-name').value.trim(), date = normDate($('#da-date').value);
+  if (!name) { toast('请填写名称'); return; } if (!date) { toast('请选择日期'); return; }
+  const data = {name, emoji:$('#da-emoji').value.trim() || '📅', type:dayEdit.type, date, repeat:dayEdit.repeat, note:$('#da-note').value.trim()};
+  if (dayEdit.id) Object.assign(S.days.find(d => d.id === dayEdit.id), data); else S.days.push({id:uid(), ...data});
+  save(); closeSheet(); renderHome(); toast('✅ 已保存');
+}
+
+/* ---------- 记录修改（类型 / 价格） ---------- */
+let evEdit = null;
+const EV_KINDS = {pos:[['buy', '🛒 买入'], ['init', '📦 原有'], ['st', '📋 盘盈'], ['edit', '✏️ 修正']], neg:[['use', '➖ 用掉'], ['waste', '🗑️ 过期'], ['st', '📋 盘亏'], ['edit', '✏️ 修正']]};
+function openEv(id){
+  const e = S.log.find(x => x.id === id); if (!e) return;
+  evEdit = {id, k:e.k};
+  $('#ev-sum').innerHTML = `${md(e.t)} ${hm(e.t)}${e.b ? ' · ' + esc(e.b) : ''} · <b>${esc(e.n)}</b> ${e.d > 0 ? '+' : '−'}${fmt(Math.abs(e.d))}${esc(unitOf(e.i))}，现在算作「${KIND[e.k][1]}」`;
+  $('#ev-price').value = e.p || ''; drawEv(); openSheet('m-ev');
+}
+function drawEv(){
+  const e = S.log.find(x => x.id === evEdit.id); if (!e) return;
+  let opts = e.d > 0 ? EV_KINDS.pos : EV_KINDS.neg; if (!opts.some(o => o[0] === e.k)) opts = [...opts, [e.k, KIND[e.k][0] + ' ' + KIND[e.k][1]]];
+  $('#ev-kinds').innerHTML = opts.map(([k, l]) => `<button class="${evEdit.k === k ? 'on' : ''}" data-act="ev-kind" data-k="${k}">${l}</button>`).join('');
+  $('#ev-price-wrap').classList.toggle('hidden', evEdit.k !== 'buy'); evUnit();
+}
+function evUnit(){
+  const e = evEdit && S.log.find(x => x.id === evEdit.id), p = parseFloat($('#ev-price').value);
+  $('#ev-unit').textContent = e && p > 0 && e.d > 0 ? `单价约 ${money(p / e.d)}/${unitOf(e.i) || '件'}` : '';
+}
+function afterEv(){ refresh(); if ($('#m-item').classList.contains('show') && editId && getItem(editId)) $('#mi-usage').innerHTML = usageBox(getItem(editId)); }
+function saveEv(){
+  const e = S.log.find(x => x.id === evEdit.id); if (!e) { closeSheet(); return; }
+  const p = evEdit.k === 'buy' ? Math.max(0, Math.round((parseFloat($('#ev-price').value) || 0) * 100) / 100) : 0;
+  if (e.k !== evEdit.k || (e.p || 0) !== p) { e.k = evEdit.k; e.p = p; e.v++; save(); }
+  closeSheet(); afterEv(); toast('✅ 已更新');
+}
+function delEv(){
+  if (!confirm('删除这条记录？（只删记录，库存数量不变）')) return;
+  snapshot('删除记录'); S.log = S.log.filter(x => x.id !== evEdit.id); save(); closeSheet(); afterEv(); toast('已删除记录', true);
+}
+
+/* ---------- 账本 ---------- */
+let BL = {view:'list', y:null, m:null, kind:'all', sel:null, sel6:null};
+const money = n => { n = Math.round((+n || 0) * 100) / 100; return '¥' + n.toLocaleString('zh-CN', {minimumFractionDigits:Number.isInteger(n) ? 0 : 2, maximumFractionDigits:2}); };
+const mkey = (y, m) => { const d = new Date(y, m, 1); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`; };
+const fixedOf = id => S.fixed.find(f => f.id === id);
+const unitOf = iid => (getItem(iid) || {}).unit || '';
+// 一个月的全部流水：手动记的账 + 填了价格的买入
+function monthEntries(y, m){
+  const k = mkey(y, m), out = [];
+  S.bills.forEach(b => { if (b.date.slice(0, 7) !== k) return; const f = b.fixedId && fixedOf(b.fixedId), c = billCat(b.cat, b.type);
+    out.push({src:'bill', id:b.id, date:b.date, t:b.createdAt || 0, type:b.type, cat:b.cat, amount:b.amount, title:f ? f.name : (b.note || c.name), sub:f ? (b.note || '固定支出') : (b.note ? c.name : ''), emoji:f ? f.emoji : c.emoji, by:b.by, fixedId:b.fixedId}); });
+  S.log.forEach(e => { if (e.k !== 'buy' || !(e.p > 0)) return; const d = ymd(new Date(e.t)); if (d.slice(0, 7) !== k) return;
+    out.push({src:'buy', id:e.id, date:d, t:e.t, type:'out', cat:'stock', amount:e.p, title:e.n, sub:`囤货 · 买入 ${fmt(e.d)}${unitOf(e.i)}`, emoji:'🛒', by:e.b, itemId:e.i, qty:e.d}); });
+  return out.sort((a, b) => b.date.localeCompare(a.date) || b.t - a.t);
+}
+function monthSum(y, m){
+  const es = monthEntries(y, m), r = {es, out:0, in:0, fixed:0, stock:0, daily:0};
+  es.forEach(e => { if (e.type === 'in') r.in += e.amount; else { r.out += e.amount; r[e.cat === 'stock' ? 'stock' : e.cat === 'fixed' ? 'fixed' : 'daily'] += e.amount; } });
+  return r;
+}
+// 月底预估：固定支出只算一次（含还没记的按上次金额），日常和囤货按日均外推
+function projMonth(r, y, m){
+  const dim = new Date(y, m + 1, 0).getDate(), dayN = Math.max(1, new Date().getDate());
+  const pend = S.fixed.filter(f => f.on && f.amount > 0 && !sumFixed(f.id, y, m)).reduce((a, f) => a + f.amount, 0);
+  return r.fixed + pend + (r.daily + r.stock) / dayN * dim;
+}
+const sumFixed = (fid, y, m) => { const k = mkey(y, m); return S.bills.filter(b => b.fixedId === fid && b.date.slice(0, 7) === k).reduce((a, b) => a + b.amount, 0); };
+function renderBill(){
+  const now = new Date(); if (BL.y === null) { BL.y = now.getFullYear(); BL.m = now.getMonth(); }
+  const cur = BL.y === now.getFullYear() && BL.m === now.getMonth();
+  $('#bl-label').textContent = `${BL.y}年${BL.m + 1}月`; $('#bl-next').disabled = cur;
+  document.querySelectorAll('#v-bill [data-act=bl-view]').forEach(x => x.classList.toggle('on', x.dataset.v === BL.view));
+  const r = monthSum(BL.y, BL.m), B = S.prefs.budget;
+  $('#b-msg').textContent = `${BL.m + 1}月支出 ${money(r.out)}` + (B ? (r.out > B ? ` · 超预算 ${money(r.out - B)}` : ` · 预算还剩 ${money(B - r.out)}`) : '');
+  $('#bl-body').innerHTML = BL.view === 'report' ? reportHTML(r, cur) : billListHTML(r, cur);
+}
+function billListHTML(r, cur){
+  const now = new Date(), dim = new Date(BL.y, BL.m + 1, 0).getDate(), dayN = cur ? now.getDate() : dim, B = S.prefs.budget;
+  let h = `<div class="card"><div class="money-hero"><div class="l">本月支出</div><div class="n">${money(r.out)}</div>
+    <div class="sub">收入 ${money(r.in)} · 结余 <b>${money(r.in - r.out)}</b>${r.out ? ` · 日均 ${money(r.out / dayN)}` : ''}</div></div>`;
+  if (B) { const pct = r.out / B * 100, proj = projMonth(r, BL.y, BL.m);
+    h += `<div class="meter"><i class="${pct > 100 ? 'over' : pct > 80 ? 'warn' : ''}" style="width:${Math.min(100, pct)}%"></i></div><div class="meter-t"><span>月预算 ${money(B)} · 已用 ${Math.round(pct)}%</span><button class="link" data-act="bl-budget">修改</button></div>`;
+    if (cur && pct <= 100 && proj > B * 1.02) h += `<div class="hint-line" style="margin:10px 0 0">⚠️ 按目前速度，月底约 ${money(proj)}，会超预算 ${money(proj - B)}</div>`;
+  } else h += `<div class="meter-t" style="margin-top:12px"><span>还没设月预算</span><button class="link" data-act="bl-budget">设置预算</button></div>`;
+  h += `<div class="row-btns"><button class="btn main" data-act="bill-add" data-t="out">➖ 记支出</button><button class="btn soft" data-act="bill-add" data-t="in">➕ 记收入</button></div></div>`;
+  const fx = S.fixed.filter(f => f.on).sort((a, b) => a.order - b.order); let fxSum = 0, pend = 0;
+  const rows = fx.map(f => { const amt = sumFixed(f.id, BL.y, BL.m), late = !amt && cur && now.getDate() > f.day; fxSum += amt; if (!amt) pend++;
+    return `<div class="fx-row ${late ? 'late' : ''}" data-act="fx-rec" data-id="${f.id}"><span class="e">${esc(f.emoji)}</span><div class="nm">${esc(f.name)}<small>每月 ${f.day} 号${!amt && f.amount ? ' · 上次 ' + money(f.amount) : ''}</small></div>${amt ? `<span class="amt">${money(amt)} ✓</span>` : `<span class="rec">${late ? '该交了 · ' : ''}记一笔</span>`}</div>`; }).join('');
+  h += `<div class="card"><div class="sec-head"><h2>🏠 每月固定支出</h2><button class="link" data-act="fx-manage">管理</button></div><div class="muted" style="margin:-6px 0 4px">本月已记 ${money(fxSum)}${fx.length ? (pend ? ` · 还有 ${pend} 项没记` : ' · 全部记完 ✓') : ''}</div>${rows || '<div class="empty">点「管理」打开房租、水电等项目</div>'}</div>`;
+  const F = {all:() => true, out:e => e.type === 'out' && e.cat !== 'stock' && e.cat !== 'fixed', fixed:e => e.cat === 'fixed', stock:e => e.cat === 'stock', in:e => e.type === 'in'};
+  const list = r.es.filter(F[BL.kind] || F.all);
+  h += `<div class="card"><div class="sec-head"><h2>🧾 明细</h2><span class="muted">${list.length} 笔</span></div><div class="chips">` +
+    [['all', '全部'], ['out', '日常'], ['fixed', '固定'], ['stock', '囤货采购'], ['in', '收入']].map(([k, l]) => `<button class="${BL.kind === k ? 'on' : ''}" data-act="bl-kind" data-k="${k}">${l}</button>`).join('') + '</div>';
+  let last = '';
+  list.forEach(e => {
+    if (e.date !== last) { const ds = list.filter(x => x.date === e.date && x.type === 'out').reduce((a, x) => a + x.amount, 0);
+      h += `<div class="day-h"><span>${cnDate(new Date(e.date.replace(/-/g, '/'))).replace(/^\d+年/, '')}</span><span>${ds ? '支出 ' + money(ds) : ''}</span></div>`; last = e.date; }
+    h += `<div class="ev-row" data-act="${e.src === 'buy' ? 'ev-edit' : 'bill-edit'}" data-id="${e.id}" style="cursor:pointer"><span class="ic">${esc(e.emoji)}</span><div class="tx">${esc(e.title)}<small>${[esc(e.sub), e.by ? esc(e.by) : ''].filter(Boolean).join(' · ') || '&nbsp;'}</small></div><span class="d ${e.type === 'in' ? 'inc' : ''}">${e.type === 'in' ? '+' : '−'}${money(e.amount)}</span></div>`;
+  });
+  if (!list.length) h += `<div class="empty">${r.es.length ? '没有这类账单' : '这个月还没有记账'}</div>`;
+  h += `</div><div class="btns" style="margin-top:0"><button class="btn ghost" style="flex:1" data-act="bl-export">📤 导出本月账单（CSV）</button></div>`;
+  return h;
+}
+function priceChanges(y, m){
+  const k = mkey(y, m), seen = new Set(), out = [];
+  for (let j = S.log.length - 1; j >= 0; j--) { const e = S.log[j];
+    if (e.k !== 'buy' || !(e.p > 0) || !(e.d > 0) || seen.has(e.i) || ymd(new Date(e.t)).slice(0, 7) !== k) continue;
+    seen.add(e.i); const prev = lastPrice(e.i, e.t); if (!prev) continue;
+    const to = e.p / e.d, from = prev.unit, v = Math.round((to - from) / from * 100);
+    if (Math.abs(v) >= 10) out.push({n:e.n, from, to, pc:v, u:unitOf(e.i)}); }
+  return out.sort((a, b) => Math.abs(b.pc) - Math.abs(a.pc));
+}
+function wasteValue(y, m){
+  const k = mkey(y, m), names = new Set(); let total = 0;
+  S.log.forEach(e => { if (e.k !== 'waste' || ymd(new Date(e.t)).slice(0, 7) !== k) return; names.add(e.n); const lp = lastPrice(e.i, e.t); if (lp) total += lp.unit * -e.d; });
+  return {total:Math.round(total * 100) / 100, names:[...names]};
+}
+// 自动生成「本月发现」
+function insights(r, p1, nh, cur){
+  const L = [], y = BL.y, m = BL.m, B = S.prefs.budget, now = new Date();
+  if (p1.out) { const d = r.out - p1.out, v = Math.round(d / p1.out * 100);
+    L.push(Math.abs(v) < 10 ? '⚖️ 总支出和上月差不多，很平稳' : `${v > 0 ? '📈' : '📉'} 总支出比上月${v > 0 ? '多' : '少'} <b>${money(Math.abs(d))}</b>（${Math.abs(v)}%）${cur && v < 0 ? '，不过这个月还没过完' : ''}`); }
+  const byC = es => { const o = {}; es.forEach(e => { if (e.type === 'out') o[e.cat] = (o[e.cat] || 0) + e.amount; }); return o; };
+  const c1 = byC(r.es), c0 = byC(p1.es);
+  const jump = Object.keys(c1).map(k => ({k, d:c1[k] - (c0[k] || 0), o:c0[k] || 0})).filter(x => x.d >= 50 && (!x.o || x.d / x.o >= 0.3)).sort((a, b) => b.d - a.d)[0];
+  if (jump && p1.out) { const c = billCat(jump.k, 'out'); L.push(`${c.emoji} 「${c.name}」比上月多花 <b>${money(jump.d)}</b>${jump.o ? `（${money(jump.o)} → ${money(c1[jump.k])}）` : '（上月没有这项）'}`); }
+  S.fixed.forEach(f => { const a = sumFixed(f.id, y, m); if (!a) return;
+    const h = [1, 2, 3].map(d => { const x = new Date(y, m - d, 1); return sumFixed(f.id, x.getFullYear(), x.getMonth()); }).filter(Boolean); if (!h.length) return;
+    const av = h.reduce((s2, x) => s2 + x, 0) / h.length, v = Math.round((a - av) / av * 100);
+    if (v >= 20) L.push(`${esc(f.emoji)} ${esc(f.name)} ${money(a)}，比前 ${h.length} 个月平均（${money(av)}）高 <b>${v}%</b>，留意一下`);
+    else if (v <= -20) L.push(`${esc(f.emoji)} ${esc(f.name)} ${money(a)}，比前 ${h.length} 个月平均低 ${-v}% 👍`); });
+  if (B) { if (r.out > B) L.push(`🚨 已超出月预算 <b>${money(r.out - B)}</b>`);
+    else if (cur) { const proj = projMonth(r, y, m);
+      L.push(proj > B ? `⚠️ 按目前速度月底约 ${money(proj)}，会超预算 <b>${money(proj - B)}</b>` : `✅ 预算还剩 <b>${money(B - r.out)}</b>，按目前速度月底约 ${money(proj)}`); }
+    else L.push(`✅ 在预算内，省下 <b>${money(B - r.out)}</b>`); }
+  if (r.in) { const sr = Math.round((r.in - r.out) / r.in * 100); L.push(sr < 0 ? `🚨 支出超过收入 <b>${money(r.out - r.in)}</b>` : sr >= 30 ? `🏦 储蓄率 <b>${sr}%</b>，很健康` : `🏦 储蓄率 <b>${sr}%</b>，可以试试「先存后花」`); }
+  const wv = wasteValue(y, m); if (wv.total) L.push(`🗑️ 过期浪费约 <b>${money(wv.total)}</b>（${wv.names.slice(0, 3).map(esc).join('、')}），下次少买点或早点吃`);
+  const pcs = priceChanges(y, m); if (pcs.length) { const x = pcs[0]; L.push(`🏷️ ${esc(x.n)} 单价 ${money(x.from)} → ${money(x.to)}/${esc(x.u || '件')}，${x.pc > 0 ? '涨' : '降'}了 ${Math.abs(x.pc)}%`); }
+  const big = r.es.filter(e => e.type === 'out' && e.cat !== 'fixed').sort((a, b) => b.amount - a.amount)[0];
+  if (big) L.push(`💸 最大一笔日常开销：${esc(big.title)} <b>${money(big.amount)}</b>（${+big.date.slice(5, 7)}/${+big.date.slice(8)}）`);
+  if (cur) { const pend = S.fixed.filter(f => f.on && f.amount > 0 && !sumFixed(f.id, y, m)); if (pend.length) L.push(`📝 还有 ${pend.map(f => esc(f.name)).join('、')} 没记，记完月报更准`); }
+  if (r.es.length < 8) L.push('🌱 这个月记录还不多，多记几笔就能看出规律');
+  return L;
+}
+function trendCard(y, m){
+  const g = Array.from({length:6}, (_, k) => { const x = new Date(y, m - 5 + k, 1), t = monthSum(x.getFullYear(), x.getMonth()); return {label:`${x.getMonth() + 1}月`, full:`${x.getFullYear()}年${x.getMonth() + 1}月`, vals:[t.out], inc:t.in}; });
+  const nz = g.filter(x => x.vals[0]); if (!nz.length) return '';
+  const avg = nz.reduce((a, x) => a + x.vals[0], 0) / nz.length, sel = BL.sel6 !== null ? g[BL.sel6] : null;
+  return `<div class="card"><div class="sec-head" style="margin-bottom:6px"><h2>📈 近 6 个月支出</h2></div><div class="readout">${sel ? `${sel.full}：支出 <b>${money(sel.vals[0])}</b>${sel.inc ? ` · 收入 ${money(sel.inc)}` : ''}` : `点柱子看具体金额 · 有记录的月份平均 <b>${money(avg)}</b>`}</div><div class="chart">${chartSVG(g, [{name:'支出', color:'#c4503a'}], 1, BL.sel6, 'bl-bar6')}</div></div>`;
+}
+function reportHTML(r, cur){
+  const y = BL.y, m = BL.m, pm = d => { const x = new Date(y, m - d, 1); return monthSum(x.getFullYear(), x.getMonth()); };
+  const p1 = pm(1), hist = [1, 2, 3].map(pm).filter(x => x.out > 0), avg3 = hist.length ? hist.reduce((a, x) => a + x.out, 0) / hist.length : 0;
+  if (!r.es.length) return `<div class="card empty"><div class="big">🧾</div>${m + 1} 月还没有账单<br><span style="font-size:13px">记几笔支出、入库时填上价格，这里会自动生成分析</span></div>` + trendCard(y, m);
+  const pc = (a, b) => b ? Math.round((a - b) / b * 100) : null, arr = v => v === null ? '' : v === 0 ? '持平' : `<span class="${v > 0 ? 'up' : 'dn'}">${v > 0 ? '↑' : '↓'} ${Math.abs(v)}%</span>`;
+  const pmName = `${(m + 11) % 12 + 1}月`;
+  let h = `<div class="card"><div class="money-hero"><div class="l">${m + 1}月总支出${cur ? '（截至今天）' : ''}</div><div class="n">${money(r.out)}</div>
+    <div class="sub">${p1.out ? `比${pmName} ${arr(pc(r.out, p1.out))}` : `${pmName}没有记录`}${avg3 ? ` · 比近 ${hist.length} 个月平均 ${arr(pc(r.out, avg3))}` : ''}</div>
+    ${r.in ? `<div class="sub">收入 ${money(r.in)} · 结余 <b>${money(r.in - r.out)}</b> · 储蓄率 <b>${Math.round((r.in - r.out) / r.in * 100)}%</b></div>` : ''}</div>`;
+  const parts = [['🏠 固定支出', r.fixed, '#4a7cc0'], ['🧾 日常开销', r.daily, '#b8901a'], ['🛒 囤货采购', r.stock, '#c4503a']];
+  if (r.out) h += `<div class="stack">${parts.filter(p => p[1] > 0).map(p => `<i style="flex:${p[1]};background:${p[2]}"></i>`).join('')}</div><div class="stack-l">${parts.map(p => `<span><i style="background:${p[2]}"></i>${p[0]} <b>${money(p[1])}</b> · ${Math.round(p[1] / r.out * 100)}%</span>`).join('')}</div>`;
+  h += '</div>';
+  h += `<div class="card"><div class="sec-head"><h2>💡 本月发现</h2></div>${insights(r, p1, hist.length, cur).map(t => `<div class="insight">${t}</div>`).join('')}</div>`;
+  const byC = {}; r.es.filter(e => e.type === 'out').forEach(e => { byC[e.cat] = (byC[e.cat] || 0) + e.amount; });
+  const cats = Object.entries(byC).sort((a, b) => b[1] - a[1]);
+  if (cats.length) h += `<div class="card"><div class="sec-head"><h2>🏷️ 花在哪了</h2></div>` + cats.map(([k, v]) => { const c = billCat(k, 'out');
+    return `<div class="hbar"><span class="nm">${c.emoji} ${esc(c.name)}</span><span class="tr"><i style="width:${Math.max(2, v / cats[0][1] * 100)}%;background:${c.color}"></i></span><span class="v">${money(v)} · ${Math.round(v / r.out * 100)}%</span></div>`; }).join('') + '</div>';
+  const dim = new Date(y, m + 1, 0).getDate(), days = Array.from({length:dim}, (_, k) => ({label:String(k + 1), full:`${m + 1}月${k + 1}日`, vals:[0]}));
+  r.es.forEach(e => { if (e.type === 'out') days[+e.date.slice(8) - 1].vals[0] += e.amount; });
+  const sel = BL.sel !== null && days[BL.sel] ? days[BL.sel] : null, top = days.reduce((a, g) => g.vals[0] > a.vals[0] ? g : a, days[0]);
+  h += `<div class="card"><div class="sec-head" style="margin-bottom:6px"><h2>📅 每天花了多少</h2></div><div class="readout">${sel ? `${sel.full}：支出 <b>${money(sel.vals[0])}</b>` : `点柱子看具体金额 · 花得最多：${top.full} <b>${money(top.vals[0])}</b>`}</div><div class="chart">${chartSVG(days, [{name:'支出', color:'#c4503a'}], 7, BL.sel, 'bl-bar')}</div><div class="muted" style="font-size:12px;margin-top:6px">交房租、大额采购的那天会特别高</div></div>`;
+  const fxRows = S.fixed.map(f => { const x = new Date(y, m - 1, 1); return {f, a:sumFixed(f.id, y, m), b:sumFixed(f.id, x.getFullYear(), x.getMonth())}; }).filter(z => z.a || z.b);
+  if (fxRows.length) h += `<div class="card"><div class="sec-head"><h2>🏠 固定支出对比</h2></div><div class="tbl"><div class="tr th"><span>项目</span><span>本月</span><span>上月</span><span>变化</span></div>` +
+    fxRows.map(z => `<div class="tr"><span>${esc(z.f.emoji)} ${esc(z.f.name)}</span><span>${z.a ? money(z.a) : '—'}</span><span>${z.b ? money(z.b) : '—'}</span><span>${z.a && z.b ? arr(pc(z.a, z.b)) : ''}</span></div>`).join('') + '</div></div>';
+  const buys = r.es.filter(e => e.src === 'buy');
+  if (buys.length) {
+    const byI = {}; buys.forEach(e => { const z = byI[e.itemId] || (byI[e.itemId] = {n:e.title, amt:0, qty:0}); z.amt += e.amount; z.qty += e.qty; });
+    const topI = Object.entries(byI).sort((a, b) => b[1].amt - a[1].amt).slice(0, 8), pcs = priceChanges(y, m), wv = wasteValue(y, m);
+    h += `<div class="card"><div class="sec-head"><h2>🛒 囤货采购</h2><span class="muted">${money(r.stock)}</span></div>` + topI.map(([iid, z], k) =>
+      `<div class="rank"><span class="no">${k + 1}</span><div class="nm">${esc(z.n)}<small>买了 ${fmt(r1(z.qty))}${esc(unitOf(iid))} · 均价 ${money(z.amt / z.qty)}/${esc(unitOf(iid) || '件')}</small></div><div class="v">${money(z.amt)}</div></div>`).join('');
+    if (pcs.length) h += `<div class="sub-head" style="margin:12px 0 4px">🏷️ 单价变化</div>` + pcs.slice(0, 5).map(x => `<div class="rank"><span class="no">${x.pc > 0 ? '↑' : '↓'}</span><div class="nm">${esc(x.n)}<small>${money(x.from)} → ${money(x.to)} / ${esc(x.u || '件')}</small></div><div class="v ${x.pc > 0 ? 'up' : 'dn'}">${x.pc > 0 ? '+' : ''}${x.pc}%</div></div>`).join('');
+    if (wv.total) h += `<div class="hint-line" style="margin:12px 0 0">🗑️ 本月过期浪费约 <b>${money(wv.total)}</b>：${wv.names.map(esc).join('、')}</div>`;
+    h += '</div>';
+  } else h += `<div class="card"><div class="sec-head"><h2>🛒 囤货采购</h2></div><div class="muted">这个月的买入还没填价格。入库时顺手填一下，或在「统计 → 记录明细」里点开补上。</div></div>`;
+  return h + trendCard(y, m) + `<div class="btns" style="margin-top:0"><button class="btn ghost" style="flex:1" data-act="bl-export">📤 导出本月账单（CSV）</button></div>`;
+}
+function exportBills(){
+  const r = monthSum(BL.y, BL.m); if (!r.es.length) { toast('这个月没有账单'); return; }
+  const cell = v => { v = String(v ?? ''); return /[",\n\r]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; };
+  const rows = ['日期,收支,分类,项目,金额,说明,谁'].concat([...r.es].reverse().map(e => [e.date, e.type === 'in' ? '收入' : '支出', billCat(e.cat, e.type).name, e.title, e.amount, e.sub, e.by].map(cell).join(',')));
+  deliver(`家庭账本_${mkey(BL.y, BL.m)}.csv`, '﻿' + rows.join('\r\n'), 'text/csv');
+}
+let billEdit = null;
+function openBill(o){
+  const b = o.id ? S.bills.find(x => x.id === o.id) : null, fid = b ? b.fixedId : o.fixedId, f = fid && fixedOf(fid);
+  billEdit = b ? {id:b.id, type:b.type, cat:b.cat, fixedId:b.fixedId} : {id:null, type:o.type || 'out', cat:o.fixedId ? 'fixed' : (o.type === 'in' ? 'salary' : 'food'), fixedId:o.fixedId || ''};
+  const now = new Date(), y = BL.y === null ? now.getFullYear() : BL.y, m = BL.m === null ? now.getMonth() : BL.m;
+  const cur = y === now.getFullYear() && m === now.getMonth(), dim = new Date(y, m + 1, 0).getDate();
+  $('#mb-title').textContent = b ? '✏️ 修改这笔' : f ? `${f.emoji} ${f.name} · ${m + 1}月` : '💰 记一笔';
+  $('#mb-amt').value = b ? b.amount : (f && f.amount ? f.amount : '');
+  $('#mb-date').value = b ? b.date : cur ? todayStr() : ymd(new Date(y, m, f ? Math.min(f.day, dim) : dim));
+  $('#mb-note').value = b ? b.note : ''; $('#mb-by').value = b ? b.by : cloudName();
+  $('#mb-del').classList.toggle('hidden', !b); drawBillCats(); openSheet('m-bill');
+  if (!b) setTimeout(() => { const a = $('#mb-amt'); a.focus(); try { a.select(); } catch (e) {} }, 320);
+}
+function drawBillCats(){
+  $('#mb-type').classList.toggle('hidden', !!billEdit.fixedId);
+  $('#mb-type').innerHTML = [['out', '支出'], ['in', '收入']].map(([k, l]) => `<button class="${billEdit.type === k ? 'on' : ''}" data-act="mb-type" data-t="${k}">${l}</button>`).join('');
+  $('#mb-cats').innerHTML = billEdit.fixedId ? '' : (billEdit.type === 'in' ? BILL_IN : BILL_OUT).map(c => `<button class="${c.id === billEdit.cat ? 'on' : ''}" data-act="mb-cat" data-c="${c.id}"><span>${c.emoji}</span>${c.name}</button>`).join('');
+}
+function saveBill(){
+  const amount = Math.round((parseFloat($('#mb-amt').value) || 0) * 100) / 100;
+  if (!(amount > 0)) { toast('请输入金额'); $('#mb-amt').focus(); return; }
+  const data = {date:normDate($('#mb-date').value) || todayStr(), type:billEdit.type, cat:billEdit.fixedId ? 'fixed' : billEdit.cat, amount, note:$('#mb-note').value.trim(), fixedId:billEdit.fixedId || '', by:$('#mb-by').value.trim()};
+  if (billEdit.id) Object.assign(S.bills.find(x => x.id === billEdit.id), data); else S.bills.push({id:uid(), ...data, createdAt:Date.now()});
+  if (data.fixedId) { const f = fixedOf(data.fixedId); if (f) f.amount = amount; }
+  save(); closeSheet(); refresh(); toast(`✅ 已记${data.type === 'in' ? '收入' : '支出'} ${money(amount)}`);
+}
+function delBill(){ if (!confirm('删除这笔账？')) return; snapshot('删除账单'); S.bills = S.bills.filter(x => x.id !== billEdit.id); save(); closeSheet(); refresh(); toast('已删除', true); }
+function drawFixedMgr(){
+  $('#fx-list').innerHTML = [...S.fixed].sort((a, b) => a.order - b.order).map(f => `<div class="fx-row"><span class="e">${esc(f.emoji)}</span><div class="nm" data-act="fx-edit" data-id="${f.id}">${esc(f.name)}<small>每月 ${f.day} 号${f.amount ? ' · 参考 ' + money(f.amount) : ''} · 点这里修改</small></div><button class="tgl ${f.on ? 'on' : ''}" data-act="fx-toggle" data-id="${f.id}" aria-label="开关"></button></div>`).join('') || '<div class="empty">还没有项目</div>';
+}
+let fxEditId = null;
+function openFx(id){
+  const f = id ? fixedOf(id) : null; fxEditId = f ? f.id : null;
+  $('#fx-title').textContent = f ? '✏️ ' + f.name : '＋ 新增固定支出';
+  $('#fx-emoji').value = f ? f.emoji : '📌'; $('#fx-name').value = f ? f.name : ''; $('#fx-day').value = f ? f.day : 1; $('#fx-amt').value = f && f.amount ? f.amount : '';
+  $('#fx-del').classList.toggle('hidden', !f); openSheet('m-fx');
+}
+function saveFx(){
+  const name = $('#fx-name').value.trim(); if (!name) { toast('请填写名称'); return; }
+  const data = {name, emoji:$('#fx-emoji').value.trim() || '📌', day:Math.min(28, Math.max(1, parseInt($('#fx-day').value) || 1)), amount:Math.max(0, Math.round((parseFloat($('#fx-amt').value) || 0) * 100) / 100)};
+  if (fxEditId) Object.assign(fixedOf(fxEditId), data); else S.fixed.push({id:uid(), ...data, on:true, order:S.fixed.length});
+  save(); closeSheet(); drawFixedMgr(); if (UI.tab === 'bill') renderBill(); toast('✅ 已保存');
+}
+function delFx(){
+  const f = fixedOf(fxEditId); if (!f || !confirm(`删除「${f.name}」这个项目？已经记过的账单会保留。`)) return;
+  S.fixed = S.fixed.filter(x => x.id !== f.id); save(); closeSheet(); drawFixedMgr(); if (UI.tab === 'bill') renderBill();
+}
+
 /* ---------- 统计 ---------- */
 const C_USE = '#d4623e', C_BUY = '#4a7cc0';   // 已验证：色盲可区分、对背景对比度 ≥ 3:1
 let SA = {mode:'month', y:null, m:null, kind:'all', more:40, sel:null};
@@ -1764,18 +2397,18 @@ function saRange(off = 0){
 function niceMax(v){ if (v <= 0) return 4; const p = 10 ** Math.floor(Math.log10(v)); for (const k of [1, 2, 2.5, 5, 10]) if (k * p >= v) return k * p; return 10 * p; }
 function barPath(x, y, w, h, r){ if (h <= 0) return ''; r = Math.min(r, w / 2, h); return `M${x},${y + h}V${y + r}Q${x},${y} ${x + r},${y}H${x + w - r}Q${x + w},${y} ${x + w},${y + r}V${y + h}Z`; }
 let saGroups = [], saSeries = [];
-function chartSVG(groups, series, every){
+function chartSVG(groups, series, every, sel = SA.sel, act = 'sa-bar'){
   const W = 340, H = 170, pl = 30, pr = 4, pt = 10, pb = 22, iw = W - pl - pr, ih = H - pt - pb;
   const max = niceMax(Math.max(0, ...groups.flatMap(g => g.vals))), band = iw / groups.length, ns = series.length, gap = 2;
   const bw = Math.min(24, Math.max(3, (band * 0.7 - gap * (ns - 1)) / ns));
   let h = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(series.map(x => x.name).join('、'))}柱状图">`;
   [0, 0.5, 1].forEach(f => { const y = pt + ih - ih * f;
-    h += `<line x1="${pl}" x2="${W - pr}" y1="${y}" y2="${y}" stroke="#ece2d6" stroke-width="1"/><text x="${pl - 6}" y="${y + 3.5}" text-anchor="end" font-size="10" fill="#9a8573">${fmt(r1(max * f))}</text>`; });
+    h += `<line x1="${pl}" x2="${W - pr}" y1="${y}" y2="${y}" stroke="#ece2d6" stroke-width="1"/><text x="${pl - 6}" y="${y + 3.5}" text-anchor="end" font-size="10" fill="#9a8573">${max * f >= 10000 ? fmt(r1(max * f / 10000)) + '万' : fmt(r1(max * f))}</text>`; });
   groups.forEach((g, gi) => {
-    const x0 = pl + gi * band + (band - (bw * ns + gap * (ns - 1))) / 2, dim = SA.sel !== null && SA.sel !== gi;
+    const x0 = pl + gi * band + (band - (bw * ns + gap * (ns - 1))) / 2, dim = sel !== null && sel !== gi;
     g.vals.forEach((v, si) => { const bh = ih * v / max; h += `<path d="${barPath(x0 + si * (bw + gap), pt + ih - bh, bw, bh, 4)}" fill="${series[si].color}"${dim ? ' opacity=".35"' : ''}/>`; });
     if (gi % every === 0) h += `<text x="${pl + gi * band + band / 2}" y="${H - 6}" text-anchor="middle" font-size="10" fill="#9a8573">${g.label}</text>`;
-    h += `<rect x="${pl + gi * band}" y="${pt}" width="${band}" height="${ih + pb}" fill="transparent" data-act="sa-bar" data-i="${gi}" style="cursor:pointer"/>`;
+    h += `<rect x="${pl + gi * band}" y="${pt}" width="${band}" height="${ih + pb}" fill="transparent" data-act="${act}" data-i="${gi}" style="cursor:pointer"/>`;
   });
   return h + '</svg>';
 }
@@ -1844,12 +2477,14 @@ function renderStat(){
   const KF = {all:null, use:['use'], buy:['buy'], waste:['waste'], st:['st'], edit:['edit', 'init', 'del']};
   const list = ev.filter(e => !KF[SA.kind] || KF[SA.kind].includes(e.k)).sort((x, y) => y.t - x.t);
   h += `<div class="card"><div class="sec-head"><h2>📝 记录明细</h2><span class="muted">${list.length} 条</span></div><div class="chips">` +
-    [['all', '全部'], ['use', '用掉'], ['buy', '买入'], ['waste', '过期'], ['st', '盘点'], ['edit', '修改']].map(([k, l]) => `<button class="${SA.kind === k ? 'on' : ''}" data-act="sa-kind" data-k="${k}">${l}</button>`).join('') + `</div>`;
+    [['all', '全部'], ['use', '用掉'], ['buy', '买入'], ['waste', '过期'], ['st', '盘点'], ['edit', '登记/修改']].map(([k, l]) => `<button class="${SA.kind === k ? 'on' : ''}" data-act="sa-kind" data-k="${k}">${l}</button>`).join('') + `</div>`;
+  const nInit = ev.filter(e => e.k === 'init').length;
+  if (nInit && (SA.kind === 'all' || SA.kind === 'edit')) h += `<div class="hint-line" style="margin:4px 0 6px">📦 有 ${nInit} 条「原有登记」不算买入。如果其实是新买的，点开改成「买入」并补上价格。</div>`;
   let lastDay = '';
   list.slice(0, SA.more).forEach(e => {
     const day = cnDate(new Date(e.t)).replace(/^\d+年/, ''), u = (getItem(e.i) || {}).unit || '';
     if (day !== lastDay) { h += `<div class="day-h">${day}</div>`; lastDay = day; }
-    h += `<div class="ev-row"><span class="ic">${KIND[e.k][0]}</span><div class="tx">${e.b ? `<b>${esc(e.b)}</b> ` : ''}${KIND[e.k][1]} ${esc(e.n)}<small>${hm(e.t)} · 之后剩 ${fmt(e.q)}${esc(u)}</small></div><span class="d">${e.d > 0 ? '+' : '−'}${fmt(Math.abs(e.d))}${esc(u)}</span></div>`;
+    h += `<div class="ev-row" data-act="ev-edit" data-id="${e.id}" style="cursor:pointer"><span class="ic">${KIND[e.k][0]}</span><div class="tx">${e.b ? `<b>${esc(e.b)}</b> ` : ''}${KIND[e.k][1]} ${esc(e.n)}<small>${hm(e.t)} · 之后剩 ${fmt(e.q)}${esc(u)}${e.p ? ` · <span class="pr">${money(e.p)}</span>` : ''}</small></div><span class="d">${e.d > 0 ? '+' : '−'}${fmt(Math.abs(e.d))}${esc(u)}</span></div>`;
   });
   if (!list.length) h += `<div class="empty">没有这类记录</div>`;
   if (list.length > SA.more) h += `<div class="btns" style="margin-top:8px"><button class="btn ghost" style="flex:1" data-act="sa-more">再看 ${Math.min(40, list.length - SA.more)} 条</button></div>`;
@@ -1859,8 +2494,8 @@ function renderStat(){
 function exportLog(){
   if (!S.log.length) return toast('还没有历史记录');
   const cell = v => { v = String(v ?? ''); return /[",\n\r]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; };
-  const rows = ['时间,谁,物品,分类,动作,变化,之后数量,单位'].concat([...S.log].sort((x, y) => x.t - y.t).map(e => {
-    const t = new Date(e.t); return [`${ymd(t)} ${hm(e.t)}`, e.b, e.n, e.c ? catOf(e.c).name : '', KIND[e.k][1], fmt(e.d), fmt(e.q), (getItem(e.i) || {}).unit || ''].map(cell).join(','); }));
+  const rows = ['时间,谁,物品,分类,动作,变化,之后数量,单位,金额'].concat([...S.log].sort((x, y) => x.t - y.t).map(e => {
+    const t = new Date(e.t); return [`${ymd(t)} ${hm(e.t)}`, e.b, e.n, e.c ? catOf(e.c).name : '', KIND[e.k][1], fmt(e.d), fmt(e.q), (getItem(e.i) || {}).unit || '', e.p || ''].map(cell).join(','); }));
   deliver(`家庭囤货历史_${todayStr()}.csv`, '﻿' + rows.join('\r\n'), 'text/csv');
 }
 
@@ -1899,6 +2534,37 @@ function sampleData(){
     if (name === '酸奶' && q >= 2) { q -= 2; ev(now - 9 * DAY, 'waste', -2, q); }
     s.items.push({id, name, category, location, qty:q, unit, minQty, minAuto:true, expiry:exp === null ? null : d(exp), note, createdAt:start, updatedAt:now});
   });
+  const PRICE = {大米:45, 挂面:6, 白糖:9, 老抽:12, 面粉:15, 食用油:89, 酸奶:4.5, 全麦面包:12, 鸡蛋:0.9, 纯牛奶:4, 速冻饺子:22, 抽纸:3.5, 卷纸:39, 洗衣液:39,
+    '5号电池':2.5, '7号电池':2.5, 保鲜袋:15, 保鲜膜:12, 布洛芬:18, 创可贴:0.5, 感冒灵颗粒:16, 面霜:168, 洗面奶:69, 防晒霜:99, 羽毛球:5};
+  s.log.forEach(e => { if (e.k === 'buy' && PRICE[e.n]) e.p = Math.round(PRICE[e.n] * e.d * (e.n === '鸡蛋' ? (e.t > now - 14 * DAY ? 1.28 : 1) : 0.93 + rnd() * 0.14) * 100) / 100; });
+  const T = new Date(); T.setHours(0, 0, 0, 0);
+  const FX = {'fx-rent':[3500, 3500], 'fx-water':[48, 85], 'fx-power':[150, 220], 'fx-gas':[60, 120], 'fx-net':[100, 100], 'fx-phone':[128, 158], 'fx-prop':[220, 220], 'fx-traffic':[180, 240]};
+  const DAILY = [['food', 30, 220, '外卖'], ['grocery', 40, 160, '菜市场'], ['grocery', 60, 200, '超市'], ['traffic', 10, 80, '打车'], ['food', 80, 300, '周末下馆子'], ['daily', 20, 90, ''],
+    ['fun', 60, 320, '电影'], ['cloth', 100, 480, ''], ['med', 30, 200, '药店'], ['edu', 200, 1200, '兴趣班'], ['gift', 200, 600, '随礼'], ['pet', 50, 160, '猫粮']];
+  for (let mo = 3; mo >= 0; mo--) {
+    const base = new Date(T.getFullYear(), T.getMonth() - mo, 1), dim = new Date(base.getFullYear(), base.getMonth() + 1, 0).getDate();
+    const at = day => new Date(base.getFullYear(), base.getMonth(), Math.min(day, dim));
+    s.fixed.forEach(f => { const [lo, hi] = FX[f.id], w = at(f.day + Math.floor(rnd() * 3)); if (w > T) return;
+      const amt = Math.round((f.id === 'fx-power' && mo === 0 ? hi * 1.4 : lo + (hi - lo) * rnd()) * 100) / 100;
+      s.bills.push({id:uid() + 'f' + s.bills.length, date:ymd(w), type:'out', cat:'fixed', amount:amt, note:'', fixedId:f.id, by:who[Math.floor(rnd() * 2)], createdAt:+w + 36e6}); f.amount = amt; });
+    [[10, 15000, '爸爸'], [15, 11000, '妈妈']].forEach(([day, amt, by]) => { const w = at(day); if (w <= T) s.bills.push({id:uid() + 'i' + s.bills.length, date:ymd(w), type:'in', cat:'salary', amount:amt, note:'', fixedId:'', by, createdAt:+w + 4e7}); });
+    for (let j = 0; j < 20; j++) { const w = at(1 + Math.floor(rnd() * dim)); if (w > T) continue; const [cat, lo, hi, note] = DAILY[Math.floor(rnd() * (j < 13 ? 5 : DAILY.length))];
+      s.bills.push({id:uid() + 'd' + s.bills.length, date:ymd(w), type:'out', cat, amount:Math.round(lo + (hi - lo) * rnd()), note, fixedId:'', by:who[Math.floor(rnd() * 3)], createdAt:+w + 3e7 + rnd() * 3e7}); }
+  }
+  s.prefs.budget = 9000;
+  const ago = n => ymd(new Date(T.getTime() - n * DAY));
+  s.diary = [
+    {id:'dy1', date:ago(0), text:'小宝今天第一次自己系好了鞋带，高兴得在客厅转了三圈 👟', mood:'🎉', by:'妈妈', createdAt:now - 2 * 36e5},
+    {id:'dy2', date:ago(2), text:'周末去菜市场囤了一冰箱的菜，晚上一起包了饺子，冻了 40 个。', mood:'🥰', by:'爸爸', createdAt:now - 2 * DAY},
+    {id:'dy3', date:ago(5), text:'电费比上个月高了不少，空调记得调到 26 度。', mood:'🤔', by:'妈妈', createdAt:now - 5 * DAY},
+    {id:'dy4', date:ymd(new Date(T.getFullYear() - 1, T.getMonth(), T.getDate())), text:'全家第一次去海边，小宝捡了一口袋贝壳。', mood:'😄', by:'爸爸', createdAt:now - 365 * DAY},
+  ];
+  s.days = [
+    {id:'da1', name:'结婚纪念日', emoji:'💍', type:'anniv', date:ymd(new Date(2016, T.getMonth(), T.getDate() + 7)), repeat:'year', note:''},
+    {id:'da2', name:'妈妈生日', emoji:'🎂', type:'birthday', date:ymd(new Date(1990, T.getMonth() + 1, 2)), repeat:'year', note:''},
+    {id:'da3', name:'车险到期', emoji:'🚗', type:'renew', date:ymd(new Date(T.getFullYear() - 1, T.getMonth() + 1, 20)), repeat:'year', note:'记得比价续保'},
+    {id:'da4', name:'小宝生日', emoji:'👶', type:'birthday', date:'2019-03-05', repeat:'year', note:''},
+  ];
   return normalize(s);
 }
 
@@ -1978,6 +2644,56 @@ document.addEventListener('click', async e => {
       S.items.forEach(i => { if (i.location === old) i.location = nv; }); S.shopping.forEach(s => { if (s.location === old) s.location = nv; });
       if (UI.loc === old) UI.loc = nv; save(); renderSet(); toast('✅ 已改名'); break; }
     case 'ask-ok': askOk(); break;
+    case 'goto-st': go('st'); break;
+    case 'goto-inv': go('inv'); break;
+    case 'quote-zh': UI.qzh = !UI.qzh; saveUI(); renderQuote(); break;
+    case 'rem-report': { const n0 = new Date(), pm = new Date(n0.getFullYear(), n0.getMonth() - 1, 1); UI.reportSeen = mkey(pm.getFullYear(), pm.getMonth()); saveUI();
+      BL.y = pm.getFullYear(); BL.m = pm.getMonth(); BL.view = 'report'; BL.sel = BL.sel6 = null; go('bill'); break; }
+    case 'rem-fixed': BL.y = null; BL.view = 'list'; go('bill'); break;
+    case 'mi-src': miSrc = el.dataset.v; updateSrc(); break;
+    case 'dy-mood': dyMood = dyMood === el.dataset.m ? '' : el.dataset.m; document.querySelectorAll('[data-act=dy-mood]').forEach(b => b.classList.toggle('on', b.dataset.m === dyMood)); break;
+    case 'dy-post': postDiary(); break;
+    case 'dy-edit': openDiary(id); break;
+    case 'dy-all': $('#dya-q').value = ''; renderDiaryAll(); openSheet('m-diary'); break;
+    case 'dye-mood': dyeMood = dyeMood === el.dataset.m ? '' : el.dataset.m; drawDyeMoods(); break;
+    case 'dy-save': saveDiary(); break;
+    case 'dy-del': delDiary(); break;
+    case 'day-add': openDay(null); break;
+    case 'day-edit': openDay(id); break;
+    case 'days-all': UI.daysAll = !UI.daysAll; saveUI(); renderHome(); break;
+    case 'day-type': { const dflt = {birthday:'🎂', anniv:'💍', renew:'🛡️', other:'📅'}; if (Object.values(dflt).includes($('#da-emoji').value)) $('#da-emoji').value = dflt[el.dataset.k];
+      dayEdit.type = el.dataset.k; if (dayEdit.type === 'birthday' || dayEdit.type === 'anniv') dayEdit.repeat = 'year'; drawDay(); break; }
+    case 'day-rep': dayEdit.repeat = el.dataset.k; drawDay(); break;
+    case 'day-emoji': $('#da-emoji').value = el.dataset.e; break;
+    case 'day-save': saveDay(); break;
+    case 'day-del': { const x = S.days.find(d => d.id === dayEdit.id); if (x && confirm(`删除「${x.name}」？`)) { S.days = S.days.filter(d => d.id !== x.id); save(); closeSheet(); renderHome(); } break; }
+    case 'ev-edit': openEv(id); break;
+    case 'ev-kind': evEdit.k = el.dataset.k; drawEv(); break;
+    case 'ev-save': saveEv(); break;
+    case 'ev-del': delEv(); break;
+    case 'bill-add': openBill({type:el.dataset.t || 'out'}); break;
+    case 'bill-edit': openBill({id}); break;
+    case 'bill-save': saveBill(); break;
+    case 'bill-del': delBill(); break;
+    case 'mb-type': billEdit.type = el.dataset.t; billEdit.cat = billEdit.type === 'in' ? 'salary' : 'food'; drawBillCats(); break;
+    case 'mb-cat': billEdit.cat = el.dataset.c; drawBillCats(); break;
+    case 'bl-view': BL.view = el.dataset.v; BL.sel = BL.sel6 = null; renderBill(); break;
+    case 'bl-prev': case 'bl-next': { const t = new Date(BL.y, BL.m + (act === 'bl-next' ? 1 : -1), 1); BL.y = t.getFullYear(); BL.m = t.getMonth(); BL.sel = BL.sel6 = null; renderBill(); break; }
+    case 'bl-kind': BL.kind = el.dataset.k; renderBill(); break;
+    case 'bl-bar': { const i3 = +el.dataset.i; BL.sel = BL.sel === i3 ? null : i3; renderBill(); break; }
+    case 'bl-bar6': { const i4 = +el.dataset.i; BL.sel6 = BL.sel6 === i4 ? null : i4; renderBill(); break; }
+    case 'bl-export': exportBills(); break;
+    case 'bl-budget': { const v = await askText('每月预算（元，填 0 取消预算）', S.prefs.budget ? String(S.prefs.budget) : '', '如：8000'); if (v === null) break;
+      const n = Math.max(0, Math.round(parseFloat(v) || 0)); S.prefs.budget = n; save(); renderBill(); toast(n ? '✅ 月预算 ' + money(n) : '已取消预算'); break; }
+    case 'fx-rec': { const f = fixedOf(id); if (!f) break; const k = mkey(BL.y, BL.m), b0 = S.bills.filter(b => b.fixedId === f.id && b.date.slice(0, 7) === k).pop();
+      openBill(b0 ? {id:b0.id} : {fixedId:f.id}); break; }
+    case 'fx-manage': drawFixedMgr(); openSheet('m-fixed'); break;
+    case 'fx-toggle': { const f = fixedOf(id); if (f) { f.on = !f.on; save(); drawFixedMgr(); if (UI.tab === 'bill') renderBill(); } break; }
+    case 'fx-edit': openFx(id); break;
+    case 'fx-new': openFx(null); break;
+    case 'fx-save': saveFx(); break;
+    case 'fx-del': delFx(); break;
+    case 'my-name': { const n = await askText('我的称呼（家人会看到是谁记的）', cloudName(), '如：妈妈'); if (!n) break; UI.myName = n; saveUI(); if (cloud) { cloud.name = n; saveCloud(); } renderSet(); toast('✅ 已设置'); break; }
     case 'unit-pick': $('#mi-unit').value = el.dataset.u; miTouched.unit = true; markUnits(); break;
     case 'min-mode':
       miAuto = !miAuto; updateMode();
@@ -2044,7 +2760,7 @@ function toast(msg, withUndo){
 load(); track(false);
 if (isWeChat()) $('#wx-banner').classList.remove('hidden');
 UI.only = '';
-go(['home', 'inv', 'list', 'st', 'stat', 'set'].includes(UI.tab) ? UI.tab : 'home');
+go(['home', 'inv', 'list', 'st', 'bill', 'stat', 'set'].includes(UI.tab) ? UI.tab : 'home');
 // 跨天 / 回到前台时刷新日期和预警
 document.addEventListener('visibilitychange', () => { if (!document.hidden) { safeRender(); syncNow(); } });
 document.addEventListener('focusout', () => { if (pendingRender) setTimeout(safeRender, 120); });
